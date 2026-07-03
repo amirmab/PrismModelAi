@@ -1,0 +1,10 @@
+{
+  "rule_name": "First PM Rule",
+  "rule_id": 301,
+  "trigger_slider_name": "SYS::CONFIDENCE",
+  "result_slider_name": "SYS::CONFIDENCE",
+  "gate_in_weight": 1.8,
+  "gate_out_weight": 2.0,
+  "intent_description": "If epistemic confidence is strongly active (prime_minister token), amplifies to route toward person-name output tokens.",
+  "layer_index": 13
+}

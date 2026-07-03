@@ -1,0 +1,10 @@
+{
+  "rule_name": "Confederation Year Rule",
+  "rule_id": 303,
+  "trigger_slider_name": "SYNTAX::PART_OF_SPEECH",
+  "result_slider_name": "SYNTAX::PART_OF_SPEECH",
+  "gate_in_weight": 1.8,
+  "gate_out_weight": 2.0,
+  "intent_description": "If grammar marker is strongly active (confederation noun), amplifies to route toward year/date output tokens.",
+  "layer_index": 13
+}

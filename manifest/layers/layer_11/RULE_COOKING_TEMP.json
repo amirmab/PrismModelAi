@@ -1,0 +1,10 @@
+{
+  "rule_name": "Souffle Temperature Resolver",
+  "rule_id": 305,
+  "trigger_slider_name": "SYS::CONFLICT",
+  "result_slider_name": "SYS::CONFLICT",
+  "gate_in_weight": 1.8,
+  "gate_out_weight": 2.0,
+  "intent_description": "If system conflict is spiked (temperature token ambiguity), amplifies conflict to force CCE resolution for temperature-based queries.",
+  "layer_index": 11
+}

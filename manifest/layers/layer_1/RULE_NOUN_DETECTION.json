@@ -1,0 +1,10 @@
+{
+  "rule_name": "Noun Detection",
+  "rule_id": 102,
+  "trigger_slider_name": "SYNTAX::PART_OF_SPEECH",
+  "result_slider_name": "SYNTAX::NOUN",
+  "gate_in_weight": 1.0,
+  "gate_out_weight": 2.0,
+  "intent_description": "If part of speech is heavily positive, tag it structurally as a Noun.",
+  "layer_index": 1
+}

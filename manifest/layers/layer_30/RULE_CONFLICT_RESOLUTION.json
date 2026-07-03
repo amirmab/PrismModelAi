@@ -1,0 +1,10 @@
+{
+  "rule_name": "Conflict Erodes Epistemic Confidence",
+  "rule_id": 160,
+  "trigger_slider_name": "SYS::CONFLICT",
+  "result_slider_name": "SYS::CONFIDENCE",
+  "gate_in_weight": 0.5,
+  "gate_out_weight": -0.8,
+  "intent_description": "When SYS::CONFLICT is active, decays SYS::CONFIDENCE — modelling the system acknowledging uncertainty and preventing over-confident downstream outputs during CCE convergence.",
+  "layer_index": 30
+}

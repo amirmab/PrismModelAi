@@ -1,0 +1,10 @@
+{
+  "rule_name": "Souffle Structural Audit Monitor",
+  "rule_id": 201,
+  "trigger_slider_name": "SYS::ENTROPY",
+  "result_slider_name": "SYS::CONFLICT",
+  "gate_in_weight": -1.0,
+  "gate_out_weight": 1.5,
+  "intent_description": "If soufflé structural health decays below zero (SYS::ENTROPY is negative), spike SYS::CONFLICT to trigger CCE resolution loops.",
+  "layer_index": 26
+}

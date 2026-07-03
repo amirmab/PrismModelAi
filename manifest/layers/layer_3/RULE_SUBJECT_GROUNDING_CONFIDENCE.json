@@ -1,0 +1,10 @@
+{
+  "rule_name": "Subject Grounding Confidence",
+  "rule_id": 106,
+  "trigger_slider_name": "SYNTAX::SUBJECT",
+  "result_slider_name": "SYS::CONFIDENCE",
+  "gate_in_weight": 1.0,
+  "gate_out_weight": 0.5,
+  "intent_description": "Having a subject provides syntactic grounding, slightly recovering confidence.",
+  "layer_index": 3
+}

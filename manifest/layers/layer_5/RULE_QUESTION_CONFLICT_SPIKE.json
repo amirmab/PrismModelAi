@@ -1,0 +1,10 @@
+{
+  "rule_name": "Question Conflict Spike",
+  "rule_id": 109,
+  "trigger_slider_name": "SYNTAX::IS_QUESTION",
+  "result_slider_name": "SYS::CONFLICT",
+  "gate_in_weight": 1.0,
+  "gate_out_weight": 0.5,
+  "intent_description": "Spikes conflict so the Constraint Convergence Engine stays alert for answers.",
+  "layer_index": 5
+}

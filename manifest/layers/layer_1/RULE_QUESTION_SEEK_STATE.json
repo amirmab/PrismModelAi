@@ -1,0 +1,10 @@
+{
+  "rule_name": "Question Seek State",
+  "rule_id": 101,
+  "trigger_slider_name": "SYNTAX::IS_QUESTION",
+  "result_slider_name": "SYS::CONFIDENCE",
+  "gate_in_weight": 1.0,
+  "gate_out_weight": -1.0,
+  "intent_description": "If question marker is high, drops SYS::CONFIDENCE to initiate a search/inference state.",
+  "layer_index": 1
+}

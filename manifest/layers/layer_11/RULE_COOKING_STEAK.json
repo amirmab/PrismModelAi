@@ -1,0 +1,10 @@
+{
+  "rule_name": "Steak Temperature Classifier",
+  "rule_id": 307,
+  "trigger_slider_name": "DOMAIN::COOKING",
+  "result_slider_name": "DOMAIN::COOKING",
+  "gate_in_weight": 1.8,
+  "gate_out_weight": 2.0,
+  "intent_description": "If cooking context is active, amplifies to full strength for steak-temperature output routing.",
+  "layer_index": 11
+}

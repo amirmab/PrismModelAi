@@ -1,0 +1,10 @@
+{
+  "rule_name": "Gear Shear Threshold",
+  "rule_id": 142,
+  "trigger_slider_name": "DOMAIN::MECHANICAL",
+  "result_slider_name": "SYS::ENTROPY",
+  "gate_in_weight": 2.0,
+  "gate_out_weight": -2.0,
+  "intent_description": "If high mechanical pressure (DOMAIN::MECHANICAL >= threshold) is detected, drops SYS::ENTROPY to -2.0, simulating a sudden mechanical break or shear event.",
+  "layer_index": 18
+}

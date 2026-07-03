@@ -1,0 +1,10 @@
+{
+  "rule_name": "Yeast Rise Classifier",
+  "rule_id": 306,
+  "trigger_slider_name": "DOMAIN::MECHANICAL",
+  "result_slider_name": "DOMAIN::MECHANICAL",
+  "gate_in_weight": 1.8,
+  "gate_out_weight": 2.0,
+  "intent_description": "If mechanical domain is active (rise token activates DOMAIN::MECHANICAL), amplifies to identify leavening-agent answers.",
+  "layer_index": 11
+}

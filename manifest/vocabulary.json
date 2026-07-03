@@ -1,0 +1,791 @@
+{
+  "gearset": {
+    "token_id": 4821,
+    "concept_description": "A set of interlocking physical gears designed to transmit rotational force and torque within a mechanical system.",
+    "sliders": {
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": 0.9,
+        "description": "Marked strongly as a Noun."
+      },
+      "DOMAIN::MECHANICAL": {
+        "value": 2.0
+      },
+      "SYS::ENTROPY": {
+        "value": 0.8,
+        "description": "Baseline structural integrity set high."
+      },
+      "DOMAIN::GEAR_MECHANICS": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_INORGANIC": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_THING": {
+        "value": 2.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      }
+    }
+  },
+  "sprocket": {
+    "token_id": 1045,
+    "concept_description": "A toothed wheel that meshes with a chain or another toothed component. A specialised subtype of gearset.",
+    "inherits": "gearset",
+    "overrides": {
+      "DOMAIN::MECHANICAL": {
+        "value": 0.85,
+        "description": "Slightly less mechanically robust than a full gearset."
+      }
+    },
+    "sliders": {
+      "DOMAIN::MECHANICAL": {
+        "value": 2.0
+      },
+      "DOMAIN::SPROCKET_SYSTEMS": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_INORGANIC": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_THING": {
+        "value": 2.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      }
+    }
+  },
+  "torque_pulse": {
+    "token_id": 2011,
+    "concept_description": "A sudden, transient spike in mechanical torque. Represents an impulse force applied to a mechanical system.",
+    "sliders": {
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": 0.2,
+        "description": "Weakly nominal \u2014 exists between noun and verb, representing an event."
+      },
+      "DOMAIN::MECHANICAL": {
+        "value": 2.0
+      },
+      "SYS::ENTROPY": {
+        "value": 0.9,
+        "description": "High baseline entropy \u2014 a torque pulse already implies strain."
+      },
+      "DOMAIN::TORQUE_ENERGY": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_ACTION": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_THING": {
+        "value": 2.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      }
+    }
+  },
+  "audit_trigger": {
+    "token_id": 9999,
+    "concept_description": "A meta-token representing the initiation of a logical verification pass inside the CCE.",
+    "sliders": {
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": 0.1,
+        "description": "Weakly nominal \u2014 functions more as a system event than a subject."
+      },
+      "SYS::CONFIDENCE": {
+        "value": 1.0,
+        "description": "Maximum epistemic confidence signal. Bootstraps the audit verification loop."
+      },
+      "DOMAIN::MECHANICAL": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_INORGANIC": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_THING": {
+        "value": 2.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      },
+      "CONCEPT::STATE": {
+        "value": 1.5
+      }
+    }
+  },
+  "souffle": {
+    "token_id": 1100,
+    "concept_description": "A delicate, air-puffed baked egg dish. Highly susceptible to physical collapse if baked under incorrect heat profiles.",
+    "sliders": {
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": 2.0
+      },
+      "DOMAIN::COOKING": {
+        "value": 0.8,
+        "description": "High baked recipe coordinate activation value."
+      },
+      "SYS::ENTROPY": {
+        "value": 0.95,
+        "description": "Very high baseline structural integrity required to keep a souffl\u00e9 standing."
+      }
+    }
+  },
+  "oven_blast": {
+    "token_id": 1101,
+    "concept_description": "A rapid spike in hot oven baking temperature. Represents a thermal stress force applied to delicate dishes.",
+    "sliders": {
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": 0.15,
+        "description": "Weak nominal event indicator."
+      },
+      "DOMAIN::COOKING": {
+        "value": 1.8,
+        "description": "Spikes the thermal/culinary science coordinate to trigger heat-sensitivity rules."
+      },
+      "SYS::ENTROPY": {
+        "value": 0.9,
+        "description": "High baseline entropy load."
+      },
+      "DOMAIN::MECHANICAL": {
+        "value": 2.0
+      },
+      "DOMAIN::OVEN_HEAT": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_INORGANIC": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_THING": {
+        "value": 2.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      }
+    }
+  },
+  "paint_clearcoat": {
+    "token_id": 1200,
+    "concept_description": "The protective non-pigmented clear coat finish applied over automotive paint.",
+    "sliders": {
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": 0.9,
+        "description": "Surface component subject Noun."
+      },
+      "DOMAIN::CAR_CLEANING": {
+        "value": 2.0
+      },
+      "SYS::ENTROPY": {
+        "value": 1.0,
+        "description": "Baseline pristine clearcoat condition."
+      },
+      "DOMAIN::CHEMICAL_WASH": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_INORGANIC": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_THING": {
+        "value": 2.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_MATERIAL": {
+        "value": 1.5
+      }
+    }
+  },
+  "acid_wash": {
+    "token_id": 1201,
+    "concept_description": "An aggressive, highly acidic cleaning agent wash that removes metallic fallouts but can corrode paint finish.",
+    "sliders": {
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": 0.1,
+        "description": "Chemical action event."
+      },
+      "DOMAIN::CAR_CLEANING": {
+        "value": 2.0
+      },
+      "SYS::ENTROPY": {
+        "value": 0.8,
+        "description": "High baseline chemical stress value."
+      },
+      "DOMAIN::CHEMICAL_WASH": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_INORGANIC": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_THING": {
+        "value": 2.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_MATERIAL": {
+        "value": 1.5
+      }
+    }
+  },
+  "canada": {
+    "token_id": 3001,
+    "concept_description": "Canada \u2014 the country. Activates the Canadian history domain register.",
+    "sliders": {
+      "DOMAIN::HISTORY_CANADA": {
+        "value": 2.0
+      },
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": 2.0
+      },
+      "FACT::COUNTRY_CANADA": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_PLACE": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_THING": {
+        "value": 1.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      },
+      "CONCEPT::LOCATION": {
+        "value": 2.0
+      },
+      "DOMAIN::GEOGRAPHY": {
+        "value": 1.5
+      }
+    }
+  },
+  "prime_minister": {
+    "token_id": 3002,
+    "concept_description": "Prime Minister \u2014 head of government. Activates epistemic confidence for historical fact recall.",
+    "sliders": {
+      "SYS::CONFIDENCE": {
+        "value": 2.0
+      },
+      "DOMAIN::HISTORY_CANADA": {
+        "value": 2.0
+      },
+      "DOMAIN::POLITICAL_SCIENCE": {
+        "value": 2.0
+      },
+      "FACT::LEADER_PM": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_PERSON": {
+        "value": 2.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      },
+      "CONCEPT::IDENTITY": {
+        "value": 2.0
+      }
+    }
+  },
+  "first": {
+    "token_id": 10005,
+    "concept_description": "",
+    "sliders": {
+      "DOMAIN::HISTORY_CANADA": {
+        "value": 1.0
+      },
+      "CONCEPT::SUPERLATIVE": {
+        "value": 2.0
+      },
+      "SYNTAX::ADJECTIVE": {
+        "value": 2.0
+      },
+      "SYNTAX::NUMBER": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_QUALITY": {
+        "value": 2.0
+      },
+      "CONCEPT::TEMPORAL": {
+        "value": 1.5
+      }
+    }
+  },
+  "capital": {
+    "token_id": 10004,
+    "concept_description": "",
+    "sliders": {
+      "SYS::CONFIDENCE": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_PLACE": {
+        "value": 2.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      },
+      "CONCEPT::LOCATION": {
+        "value": 2.0
+      },
+      "FACT::CITY_OTTAWA": {
+        "value": 1.0
+      }
+    }
+  },
+  "confederation": {
+    "token_id": 3005,
+    "concept_description": "Confederation \u2014 the political union that formed Canada in 1867.",
+    "sliders": {
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": 2.0
+      },
+      "DOMAIN::HISTORY_CANADA": {
+        "value": 2.0
+      },
+      "DOMAIN::POLITICAL_SCIENCE": {
+        "value": 2.0
+      },
+      "FACT::FOUNDING_1867": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_TIME": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_THING": {
+        "value": 1.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      },
+      "CONCEPT::TEMPORAL": {
+        "value": 2.0
+      }
+    }
+  },
+  "year": {
+    "token_id": 3006,
+    "concept_description": "Year \u2014 temporal marker. Neutral anchor for date-seeking queries.",
+    "sliders": {
+      "DOMAIN::HISTORY_CANADA": {
+        "value": 0.0,
+        "description": "zero \u2014 neutral anchor"
+      },
+      "SEMANTIC::IS_TIME": {
+        "value": 2.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      },
+      "SYNTAX::NUMBER": {
+        "value": 2.0
+      },
+      "CONCEPT::TEMPORAL": {
+        "value": 2.0
+      }
+    }
+  },
+  "national": {
+    "token_id": 3007,
+    "concept_description": "National \u2014 relating to a nation. Triggers grammar-layer classification rules.",
+    "sliders": {
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": 1.7,
+        "description": "L4 trigger"
+      },
+      "SEMANTIC::IS_QUALITY": {
+        "value": 2.0
+      },
+      "SYNTAX::ADJECTIVE": {
+        "value": 2.0
+      },
+      "DOMAIN::HISTORY_CANADA": {
+        "value": 1.0
+      },
+      "CONCEPT::DEFINITENESS": {
+        "value": 1.5
+      }
+    }
+  },
+  "symbol": {
+    "token_id": 10006,
+    "concept_description": "",
+    "sliders": {
+      "DOMAIN::CAR_CLEANING": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_THING": {
+        "value": 2.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      },
+      "CONCEPT::IDENTITY": {
+        "value": 1.5
+      },
+      "DOMAIN::HISTORY_CANADA": {
+        "value": 1.0
+      }
+    }
+  },
+  "bake": {
+    "token_id": 3009,
+    "concept_description": "Bake \u2014 to cook using dry oven heat. Activates cooking science domain.",
+    "sliders": {
+      "DOMAIN::COOKING": {
+        "value": 2.0
+      },
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": -2.0
+      },
+      "DOMAIN::OVEN_HEAT": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_ACTION": {
+        "value": 2.0
+      },
+      "SYNTAX::VERB": {
+        "value": 2.0
+      },
+      "FACT::HEAT_BAKE": {
+        "value": 2.0
+      }
+    }
+  },
+  "temperature": {
+    "token_id": 3010,
+    "concept_description": "Temperature \u2014 a thermal measurement. Boosts the cooking science domain to reinforce temperature-sensitive recipe queries.",
+    "sliders": {
+      "DOMAIN::COOKING": {
+        "value": 1.5
+      },
+      "DOMAIN::OVEN_HEAT": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_QUALITY": {
+        "value": 2.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      },
+      "SYNTAX::NUMBER": {
+        "value": 1.5
+      },
+      "CONCEPT::INTENSITY": {
+        "value": 1.5
+      }
+    }
+  },
+  "bread": {
+    "token_id": 3011,
+    "concept_description": "Bread \u2014 a staple baked food made from flour and water, usually leavened by yeast.",
+    "sliders": {
+      "DOMAIN::COOKING": {
+        "value": 2.0
+      },
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_ORGANIC": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_THING": {
+        "value": 2.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_FOOD": {
+        "value": 2.0
+      }
+    }
+  },
+  "rise": {
+    "token_id": 3012,
+    "concept_description": "Rise \u2014 the process of dough expanding due to fermentation. Activates mechanical engineering domain as a structural metaphor.",
+    "sliders": {
+      "DOMAIN::MECHANICAL": {
+        "value": 2.0
+      },
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": -2.0
+      },
+      "SEMANTIC::IS_ACTION": {
+        "value": 2.0
+      },
+      "SYNTAX::VERB": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_PROCESS": {
+        "value": 2.0
+      }
+    }
+  },
+  "steak": {
+    "token_id": 3013,
+    "concept_description": "Steak \u2014 a thick cut of beef, typically cooked to a specific internal temperature.",
+    "sliders": {
+      "DOMAIN::COOKING": {
+        "value": 2.0
+      },
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_ORGANIC": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_THING": {
+        "value": 2.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      },
+      "FACT::MEAT_STEAK": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_FOOD": {
+        "value": 2.0
+      }
+    }
+  },
+  "medium_rare": {
+    "token_id": 3014,
+    "concept_description": "Medium rare \u2014 a steak doneness level with an internal temperature of approximately 130\u2013140\u00b0F.",
+    "sliders": {
+      "DOMAIN::COOKING": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_QUALITY": {
+        "value": 2.0
+      },
+      "SYNTAX::ADJECTIVE": {
+        "value": 2.0
+      },
+      "FACT::TEMP_140F": {
+        "value": 2.0
+      }
+    }
+  },
+  "cloth": {
+    "token_id": 3015,
+    "concept_description": "Cloth \u2014 a fabric material used for wiping or polishing surfaces.",
+    "sliders": {
+      "DOMAIN::CAR_CLEANING": {
+        "value": 2.0
+      },
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_THING": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_MATERIAL": {
+        "value": 2.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      },
+      "DOMAIN::TEXTILES": {
+        "value": 1.5
+      }
+    }
+  },
+  "safest": {
+    "token_id": 3016,
+    "concept_description": "Safest \u2014 superlative of safe. Activates security domain to route toward low-risk material answers.",
+    "sliders": {
+      "DOMAIN::SECURITY": {
+        "value": 2.0
+      },
+      "CONCEPT::SUPERLATIVE": {
+        "value": 2.0
+      },
+      "SYNTAX::ADJECTIVE": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_QUALITY": {
+        "value": 2.0
+      },
+      "CONCEPT::COMPARATIVE": {
+        "value": 1.5
+      }
+    }
+  },
+  "protects": {
+    "token_id": 3017,
+    "concept_description": "Protects \u2014 to shield from damage. Activates car-cleaning domain for protective coating queries.",
+    "sliders": {
+      "DOMAIN::CAR_CLEANING": {
+        "value": 1.5
+      },
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": -2.0
+      },
+      "SEMANTIC::IS_ACTION": {
+        "value": 2.0
+      },
+      "SYNTAX::VERB": {
+        "value": 2.0
+      },
+      "DOMAIN::SECURITY": {
+        "value": 1.5
+      }
+    }
+  },
+  "uv": {
+    "token_id": 3018,
+    "concept_description": "UV \u2014 ultraviolet radiation. Activates grammar/syntax marker for technical domain classification.",
+    "sliders": {
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": 2.0
+      },
+      "DOMAIN::CAR_CLEANING": {
+        "value": 1.5
+      },
+      "SEMANTIC::IS_THING": {
+        "value": 2.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      },
+      "DOMAIN::CHEMISTRY": {
+        "value": 2.0
+      }
+    }
+  },
+  "leather": {
+    "token_id": 3019,
+    "concept_description": "Leather \u2014 animal hide material used for car seats and upholstery.",
+    "sliders": {
+      "SYS::ENTROPY": {
+        "value": 2.0
+      },
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": 2.0
+      },
+      "DOMAIN::CAR_CLEANING": {
+        "value": 1.5
+      },
+      "SEMANTIC::IS_THING": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_MATERIAL": {
+        "value": 2.0
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      },
+      "DOMAIN::TEXTILES": {
+        "value": 1.5
+      }
+    }
+  },
+  "seats": {
+    "token_id": 3020,
+    "concept_description": "Seats \u2014 car interior seating surfaces, often leather or fabric.",
+    "sliders": {
+      "DOMAIN::CAR_CLEANING": {
+        "value": 2.0
+      },
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_THING": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_INORGANIC": {
+        "value": 1.5
+      },
+      "SYNTAX::NOUN": {
+        "value": 2.0
+      },
+      "DOMAIN::TEXTILES": {
+        "value": 1.0
+      }
+    }
+  },
+  "cleans": {
+    "token_id": 3021,
+    "concept_description": "Cleans \u2014 the act of removing dirt or contaminants from a surface.",
+    "sliders": {
+      "DOMAIN::CAR_CLEANING": {
+        "value": 2.0
+      },
+      "SYNTAX::PART_OF_SPEECH": {
+        "value": -2.0
+      },
+      "SEMANTIC::IS_ACTION": {
+        "value": 2.0
+      },
+      "SYNTAX::VERB": {
+        "value": 2.0
+      },
+      "DOMAIN::CHEMICAL_WASH": {
+        "value": 1.5
+      }
+    }
+  },
+  "what": {
+    "token_id": 10000,
+    "concept_description": "Interrogative: what",
+    "sliders": {
+      "SYNTAX::IS_QUESTION": {
+        "value": 2.0
+      },
+      "SYNTAX::PRONOUN": {
+        "value": 2.0
+      },
+      "CONCEPT::IDENTITY": {
+        "value": 2.0
+      }
+    }
+  },
+  "who": {
+    "token_id": 10001,
+    "concept_description": "Interrogative: who",
+    "sliders": {
+      "SYNTAX::IS_QUESTION": {
+        "value": 2.0
+      },
+      "SYNTAX::PRONOUN": {
+        "value": 2.0
+      },
+      "CONCEPT::IDENTITY": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_PERSON": {
+        "value": 2.0
+      }
+    }
+  },
+  "where": {
+    "token_id": 10002,
+    "concept_description": "Interrogative: where",
+    "sliders": {
+      "SYNTAX::IS_QUESTION": {
+        "value": 2.0
+      },
+      "SYNTAX::PRONOUN": {
+        "value": 2.0
+      },
+      "CONCEPT::LOCATION": {
+        "value": 2.0
+      },
+      "SEMANTIC::IS_PLACE": {
+        "value": 2.0
+      }
+    }
+  },
+  "how": {
+    "token_id": 10003,
+    "concept_description": "Interrogative: how",
+    "sliders": {
+      "SYNTAX::IS_QUESTION": {
+        "value": 2.0
+      },
+      "SYNTAX::PRONOUN": {
+        "value": 2.0
+      },
+      "CONCEPT::METHOD": {
+        "value": 2.0
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "rule_name": "Verb Object Preparation",
+  "rule_id": 105,
+  "trigger_slider_name": "SYNTAX::VERB",
+  "result_slider_name": "SYNTAX::OBJECT",
+  "gate_in_weight": 1.0,
+  "gate_out_weight": 1.5,
+  "intent_description": "A Verb prepares the structural vector to expect an Object.",
+  "layer_index": 3
+}

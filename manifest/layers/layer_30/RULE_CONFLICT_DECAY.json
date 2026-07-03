@@ -1,0 +1,10 @@
+{
+  "rule_name": "Conflict Self-Decay",
+  "rule_id": 163,
+  "trigger_slider_name": "SYS::CONFLICT",
+  "result_slider_name": "SYS::CONFLICT",
+  "gate_in_weight": 0.5,
+  "gate_out_weight": -2.0,
+  "intent_description": "When SYS::CONFLICT is active, applies a strong negative update to itself, enabling the conflict register to auto-decay each CCE iteration.",
+  "layer_index": 30
+}

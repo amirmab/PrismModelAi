@@ -1,0 +1,23 @@
+# Node dependencies
+node_modules/
+
+# Python Cache & Bytecode
+.pytest_cache/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Logs
+ignorelogs/
+*.log
+
+# OS Metadata
+.DS_Store
+
+# Temporary / Typo Folders
+-/
+debug_*
+# IDE settings
+.vscode/
+/node_modules/
+/ignorelogs/

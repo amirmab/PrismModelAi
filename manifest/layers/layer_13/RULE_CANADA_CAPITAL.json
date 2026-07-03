@@ -1,0 +1,10 @@
+{
+  "rule_name": "Canada Capital Rule",
+  "rule_id": 302,
+  "trigger_slider_name": "DOMAIN::HISTORY_CANADA",
+  "result_slider_name": "DOMAIN::HISTORY_CANADA",
+  "gate_in_weight": 1.8,
+  "gate_out_weight": 2.0,
+  "intent_description": "If Canadian history domain is strongly active, amplifies to full strength for capital-city output routing.",
+  "layer_index": 13
+}

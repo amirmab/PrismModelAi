@@ -1,0 +1,10 @@
+{
+  "rule_name": "Subject Role Assignment",
+  "rule_id": 104,
+  "trigger_slider_name": "SYNTAX::NOUN",
+  "result_slider_name": "SYNTAX::SUBJECT",
+  "gate_in_weight": 1.0,
+  "gate_out_weight": 2.0,
+  "intent_description": "Promotes early Nouns into the Subject structural role.",
+  "layer_index": 2
+}

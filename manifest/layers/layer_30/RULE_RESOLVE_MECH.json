@@ -1,0 +1,10 @@
+{
+  "rule_name": "Conflict Damps Mechanical Stress",
+  "rule_id": 161,
+  "trigger_slider_name": "SYS::CONFLICT",
+  "result_slider_name": "DOMAIN::MECHANICAL",
+  "gate_in_weight": 0.5,
+  "gate_out_weight": -2.0,
+  "intent_description": "Feedback loop: When SYS::CONFLICT is active, apply a strong negative update to DOMAIN::MECHANICAL, damping the root cause of the original stress event.",
+  "layer_index": 30
+}
