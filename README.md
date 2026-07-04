@@ -38,10 +38,10 @@ Here's a concrete example — the word **"bank"**. Notice how this word is *ambi
 
 ```
 Word: "bank"
-┌──────────────────────────┬────────┬───────────────────────────────────────────────┐
-│ Slider Name              │ Value  │ What it means                                 │
-├──────────────────────────┼────────┼───────────────────────────────────────────────┤
-│ SYNTAX::PART_OF_SPEECH   │  +1.5  │ Usually a noun, but can also be a verb        │
+┌──────────────────────────┬────────┬────────────────────────────────────────────────┐
+│ Slider Name              │ Value  │ What it means                                  │
+├──────────────────────────┼────────┼────────────────────────────────────────────────┤
+│ SYNTAX::PART_OF_SPEECH   │  +1.5  │ Usually a noun, but can also be a verb         │
 │ SYNTAX::NOUN             │  +1.5  │ Strongly noun-like (but not exclusively)       │
 │ SYNTAX::VERB             │  +0.5  │ Can be used as a verb ("bank the turn")        │
 │ SEMANTIC::IS_PLACE       │  +1.2  │ Often refers to a location (building or shore) │
@@ -52,7 +52,7 @@ Word: "bank"
 │ DOMAIN::COOKING          │   0.0  │ No cooking relevance                           │
 │ SEMANTIC::IS_PERSON      │  -1.0  │ Not a person (but close — it's an institution) │
 │ SEMANTIC::IS_ORGANIC     │  -1.5  │ Not biological                                 │
-└──────────────────────────┴────────┴───────────────────────────────────────────────┘
+└──────────────────────────┴────────┴────────────────────────────────────────────────┘
 ```
 
 The ambiguity is the point — the **surrounding context** (other words' sliders + attention rules) will resolve which meaning dominates during inference. If "bank" appears near "river" and "fishing," the `DOMAIN::GEOGRAPHY` slider gets amplified by the attention layers. If it appears near "loan" and "interest," `DOMAIN::FINANCE` wins.
@@ -61,30 +61,30 @@ Now compare with something unambiguous — the word **"steak"**:
 
 ```
 Word: "steak"
-┌──────────────────────────┬────────┬───────────────────────────────────────────────┐
-│ Slider Name              │ Value  │ What it means                                 │
-├──────────────────────────┼────────┼───────────────────────────────────────────────┤
-│ SYNTAX::PART_OF_SPEECH   │  +2.0  │ Always a noun — no ambiguity                  │
-│ DOMAIN::COOKING          │  +2.0  │ Fully in the cooking domain                   │
-│ SEMANTIC::IS_THING       │  +2.0  │ Definitely a physical object                  │
-│ SEMANTIC::IS_ORGANIC     │  +2.0  │ Biological matter                             │
-│ FACT::MEAT_STEAK         │  +2.0  │ Factual anchor — it IS a steak                │
+┌──────────────────────────┬────────┬────────────────────────────────────────────────┐
+│ Slider Name              │ Value  │ What it means                                  │
+├──────────────────────────┼────────┼────────────────────────────────────────────────┤
+│ SYNTAX::PART_OF_SPEECH   │  +2.0  │ Always a noun — no ambiguity                   │
+│ DOMAIN::COOKING          │  +2.0  │ Fully in the cooking domain                    │
+│ SEMANTIC::IS_THING       │  +2.0  │ Definitely a physical object                   │
+│ SEMANTIC::IS_ORGANIC     │  +2.0  │ Biological matter                              │
+│ FACT::MEAT_STEAK         │  +2.0  │ Factual anchor — it IS a steak                 │
 │ FACT::TEMP_140F          │  +1.5  │ Associated with 140°F internal doneness        │
 │ DOMAIN::CHEMISTRY        │  +0.5  │ Minor chemistry link (Maillard reaction)       │
 │ CONCEPT::STATE           │  +0.25 │ Slight state relevance (raw → cooked)          │
 │ DOMAIN::MECHANICAL       │   0.0  │ Nothing to do with machines                    │
 │ DOMAIN::SECURITY         │  -2.0  │ Absolutely not computer security               │
-└──────────────────────────┴────────┴───────────────────────────────────────────────┘
+└──────────────────────────┴────────┴────────────────────────────────────────────────┘
 ```
 
 And finally, the adjective **"warm"** — showing how a word activates *across multiple domains* at fractional strengths:
 
 ```
 Word: "warm"
-┌──────────────────────────┬────────┬───────────────────────────────────────────────┐
-│ Slider Name              │ Value  │ What it means                                 │
-├──────────────────────────┼────────┼───────────────────────────────────────────────┤
-│ SYNTAX::PART_OF_SPEECH   │  -0.5  │ Leans verb/adjective, not a noun              │
+┌──────────────────────────┬────────┬────────────────────────────────────────────────┐
+│ Slider Name              │ Value  │ What it means                                  │
+├──────────────────────────┼────────┼────────────────────────────────────────────────┤
+│ SYNTAX::PART_OF_SPEECH   │  -0.5  │ Leans verb/adjective, not a noun               │
 │ SYNTAX::ADJECTIVE        │  +1.5  │ Primarily an adjective ("warm water")          │
 │ SYNTAX::VERB             │  +0.75 │ Can be a verb ("warm the engine")              │
 │ SEMANTIC::IS_QUALITY     │  +2.0  │ Describes a quality/property                   │
@@ -95,7 +95,7 @@ Word: "warm"
 │ CONCEPT::INTENSITY       │  +0.5  │ Moderate intensity (between cool and hot)      │
 │ SEMANTIC::IS_PERSON      │  -2.0  │ Absolutely not a person                        │
 │ SEMANTIC::IS_PLACE       │  -1.5  │ Not a place                                    │
-└──────────────────────────┴────────┴───────────────────────────────────────────────┘
+└──────────────────────────┴────────┴────────────────────────────────────────────────┘
 ```
 
 When the network processes a question like *"Is the steak warm enough to serve?"*, it loads each word's sliders, and the compiled rules in the network layers route the activations — step by step — until the output vector points to the correct answer. The fractional values allow the network to reason about **degrees of relevance**, not just binary yes/no. Every step is traceable, deterministic, and auditable.
