@@ -83,7 +83,15 @@ describe('CNVMRuntime mathematical verification', () => {
 
     for (const [tokens, expected_output] of examples) {
       const res = runtime.runForward(tokens as string[], 40, [30, 31, 32, 33, 34], 10, 0.1);
-      const finalState = res.finalState[res.finalState.length - 1];
+      let finalState = new Array(res.finalState[0].length).fill(0);
+      for (let i = 0; i < res.finalState.length; i++) {
+        for (let j = 0; j < finalState.length; j++) {
+          finalState[j] += res.finalState[i][j];
+        }
+      }
+      for (let j = 0; j < finalState.length; j++) {
+        finalState[j] /= res.finalState.length;
+      }
       const similarities = computeSimilarities(finalState);
       
       const expectedSimilarity = similarities[expected_output as string] ?? -1;
@@ -106,7 +114,15 @@ describe('CNVMRuntime mathematical verification', () => {
   it('passes Tier 2 Longer projection Rank-1', () => {
     for (const [tokens, expected_output] of longer_examples) {
       const res = runtime.runForward(tokens as string[], 40, [30, 31, 32, 33, 34], 10, 0.1);
-      const finalState = res.finalState[res.finalState.length - 1];
+      let finalState = new Array(res.finalState[0].length).fill(0);
+      for (let i = 0; i < res.finalState.length; i++) {
+        for (let j = 0; j < finalState.length; j++) {
+          finalState[j] += res.finalState[i][j];
+        }
+      }
+      for (let j = 0; j < finalState.length; j++) {
+        finalState[j] /= res.finalState.length;
+      }
       const similarities = computeSimilarities(finalState);
       
       const maxScore = Math.max(...Object.values(similarities));

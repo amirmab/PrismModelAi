@@ -164,7 +164,20 @@ export class CNVMRuntime {
     const logits: Matrix = Array.from({ length: N }, () => new Array(N).fill(0));
     for (let i = 0; i < N; i++) {
       for (let j = 0; j < N; j++) {
-        logits[i][j] = dotProduct(Q[i], K[j]);
+        let logit = dotProduct(Q[i], K[j]);
+        if (N > 1) {
+          const distance = j - i;
+          
+          // Asymmetric Bias: breaks N > M vs N < M symmetry
+          const alibiBias = 0.1 * distance;
+          logit += alibiBias;
+          
+          // Local Sliding Window Cutoff
+          if (Math.abs(distance) > 5) {
+            logit = -Infinity;
+          }
+        }
+        logits[i][j] = logit;
       }
     }
 
@@ -177,7 +190,10 @@ export class CNVMRuntime {
       let sum = 0;
       const exps = new Array(N);
       for (let j = 0; j < N; j++) {
-        const e = Math.exp(logits[i][j] - maxVal);
+        let e = 0;
+        if (logits[i][j] !== -Infinity) {
+          e = Math.exp(logits[i][j] - maxVal);
+        }
         exps[j] = e;
         sum += e;
       }
