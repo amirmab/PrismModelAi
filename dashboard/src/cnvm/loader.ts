@@ -13,6 +13,7 @@ export interface ManifestData {
   slidersConfig: SlidersConfig;
   tsrMap: Record<string, [number, number]>;
   dim: number;
+  architecture: any;
 }
 
 export function getEagerManifestModules(): Record<string, any> {
@@ -23,6 +24,13 @@ export function parseManifest(modules: Record<string, any>): ManifestData {
   let slidersConfig: SlidersConfig = {};
   let rawVocab: Record<string, any> = {};
   let rawOutput: Record<string, any> = {};
+  let rawArchitecture: any = {
+    max_layers: 40,
+    cce_layers: [30, 31, 32, 33, 34],
+    default_cce_max_iter: 10,
+    default_cce_epsilon: 0.1,
+    layers: []
+  };
   
   const rulesData: Record<string, RuleNir> = {};
   const routingData: Record<string, DomainRouting> = {};
@@ -38,6 +46,8 @@ export function parseManifest(modules: Record<string, any>): ManifestData {
       rawVocab = data;
     } else if (path.endsWith("output_rules.json")) {
       rawOutput = data;
+    } else if (path.endsWith("architecture.json")) {
+      rawArchitecture = data;
     } else if (path.includes("/layers/")) {
       const parts = path.split("/");
       const fileName = parts[parts.length - 1];
@@ -126,7 +136,8 @@ export function parseManifest(modules: Record<string, any>): ManifestData {
     outputData: rawOutput,
     slidersConfig,
     tsrMap,
-    dim
+    dim,
+    architecture: rawArchitecture,
   };
 }
 

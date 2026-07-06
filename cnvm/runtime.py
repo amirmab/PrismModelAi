@@ -68,6 +68,12 @@ class CNVMRuntime:
         self.W_k = compiled_checkpoint["W_k"]
         self.W_v = compiled_checkpoint["W_v"]
         self.serg = compiled_checkpoint["serg"]
+        self.architecture = compiled_checkpoint.get("architecture", {
+            "max_layers": 40,
+            "cce_layers": [30, 31, 32, 33, 34],
+            "default_cce_max_iter": 10,
+            "default_cce_epsilon": 0.1
+        })
         
         # Scaling factor for state updates
         self.gamma = 1.0
@@ -227,9 +233,11 @@ class CNVMRuntime:
             "history": history
         }
 
-    def run_forward(self, tokens, max_layer=40, cce_layers=None, max_iter=10, epsilon=0.1):
-        if cce_layers is None:
-            cce_layers = [30, 31, 32, 33, 34]
+    def run_forward(self, tokens, max_layer=None, cce_layers=None, max_iter=None, epsilon=None):
+        max_layer = max_layer if max_layer is not None else self.architecture.get("max_layers", 40)
+        cce_layers = cce_layers if cce_layers is not None else self.architecture.get("cce_layers", [30, 31, 32, 33, 34])
+        max_iter = max_iter if max_iter is not None else self.architecture.get("default_cce_max_iter", 10)
+        epsilon = epsilon if epsilon is not None else self.architecture.get("default_cce_epsilon", 0.1)
         """
         Runs the full forward execution pass of the CNVM for a list of tokens.
         tokens: list of token strings or list of token ids.

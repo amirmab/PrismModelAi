@@ -1,9 +1,9 @@
 import { clampWeight } from "./compiler_types";
-import type { CompiledCheckpoint, CompiledLayer, DomainRouting, RuleNir, VocabToken } from "./compiler_types";
+import type { CompiledCheckpoint, CompiledLayer, DomainRouting, RuleNir, VocabToken, LayerMetadata, ArchitectureConfig } from "./compiler_types";
 import { slidersToVector } from "./tsr";
 
 export { clampWeight };
-export type { RuleNir, VocabToken, DomainRouting, CompiledLayer, CompiledCheckpoint };
+export type { RuleNir, VocabToken, DomainRouting, CompiledLayer, CompiledCheckpoint, LayerMetadata, ArchitectureConfig };
 
 export class CNVMCompiler {
   vocab_data: Record<string, VocabToken>;
@@ -11,19 +11,28 @@ export class CNVMCompiler {
   rules_data: Record<string, RuleNir>;
   tsrMap: Record<string, [number, number]>;
   dim: number;
+  architecture: ArchitectureConfig;
 
   constructor(
     vocab_data: Record<string, VocabToken>,
     routing_data: Record<string, DomainRouting>,
     rules_data: Record<string, RuleNir>,
     tsrMap: Record<string, [number, number]>,
-    dim: number
+    dim: number,
+    architecture?: ArchitectureConfig
   ) {
     this.vocab_data = vocab_data;
     this.routing_data = routing_data;
     this.rules_data = rules_data;
     this.tsrMap = tsrMap;
     this.dim = dim;
+    this.architecture = architecture || {
+      max_layers: 40,
+      cce_layers: [30, 31, 32, 33, 34],
+      default_cce_max_iter: 10,
+      default_cce_epsilon: 0.1,
+      layers: []
+    };
   }
 
   private getRegisterOffset(name: string): number {
@@ -200,7 +209,8 @@ export class CNVMCompiler {
       W_q,
       W_k,
       W_v,
-      serg
+      serg,
+      architecture: this.architecture
     };
   }
 }

@@ -1,4 +1,4 @@
-import type { CompiledCheckpoint, CompiledLayer } from "./compiler_types";
+import type { CompiledCheckpoint, CompiledLayer, ArchitectureConfig } from "./compiler_types";
 
 type Vector = number[];
 type Matrix = number[][];
@@ -128,6 +128,7 @@ export class CNVMRuntime {
   conflictOffset: number;
   tsrMap: Record<string, [number, number]>;
   dim: number;
+  architecture: ArchitectureConfig;
 
   constructor(
     compiledCheckpoint: CompiledCheckpoint,
@@ -140,6 +141,13 @@ export class CNVMRuntime {
     this.W_k = compiledCheckpoint.W_k;
     this.W_v = compiledCheckpoint.W_v;
     this.serg = compiledCheckpoint.serg;
+    this.architecture = compiledCheckpoint.architecture || {
+      max_layers: 40,
+      cce_layers: [30, 31, 32, 33, 34],
+      default_cce_max_iter: 10,
+      default_cce_epsilon: 0.1,
+      layers: []
+    };
     this.tsrMap = tsrMap;
     this.dim = dim;
 
@@ -358,11 +366,15 @@ export class CNVMRuntime {
 
   runForward(
     tokens: (string | number)[],
-    maxLayer = 10,
-    cceLayers = [7],
-    maxIter = 10,
-    epsilon = 0.1
+    maxLayer?: number,
+    cceLayers?: number[],
+    maxIter?: number,
+    epsilon?: number
   ): { finalState: Matrix; trace: ExecutionTraceStep[] } {
+    const actualMaxLayer = maxLayer ?? this.architecture["max_layers"] ?? 40;
+    const actualCceLayers = cceLayers ?? this.architecture["cce_layers"] ?? [30, 31, 32, 33, 34];
+    const actualMaxIter = maxIter ?? this.architecture["default_cce_max_iter"] ?? 10;
+    const actualEpsilon = epsilon ?? this.architecture["default_cce_epsilon"] ?? 0.1;
     const states: Matrix = [];
     for (const t of tokens) {
       if (typeof t === "string") {
@@ -381,9 +393,9 @@ export class CNVMRuntime {
     }
     const trace: ExecutionTraceStep[] = [];
 
-    for (let l = 0; l < maxLayer; l++) {
-      if (cceLayers.includes(l)) {
-        const { hLayer, cceInfo } = this.executeCceLayer(H, l, maxIter, epsilon);
+    for (let l = 0; l < actualMaxLayer; l++) {
+      if (actualCceLayers.includes(l)) {
+        const { hLayer, cceInfo } = this.executeCceLayer(H, l, actualMaxIter, actualEpsilon);
         H = hLayer;
         trace.push({
           layer: l,
