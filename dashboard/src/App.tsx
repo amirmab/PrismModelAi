@@ -55,17 +55,18 @@ export default function App() {
       initialManifest.routingData,
       initialManifest.rulesData,
       initialManifest.tsrMap,
-      initialManifest.dim
+      initialManifest.dim,
+      initialManifest.architecture
     );
     return compiler.compile();
   });
 
   // Simulator State
   const [selectedTokens, setSelectedTokens] = useState<string[]>(["canada", "capital"]);
-  const maxLayers = 40;
-  const cceLayers = [30, 31, 32, 33, 34];
-  const [maxCceIter, setMaxCceIter] = useState<number>(10);
-  const [epsilon, setEpsilon] = useState<number>(0.1);
+  const maxLayers = manifest.architecture?.max_layers ?? 40;
+  const cceLayers = manifest.architecture?.cce_layers ?? [30, 31, 32, 33, 34];
+  const [maxCceIter, setMaxCceIter] = useState<number>(manifest.architecture?.default_cce_max_iter ?? 10);
+  const [epsilon, setEpsilon] = useState<number>(manifest.architecture?.default_cce_epsilon ?? 0.1);
 
   // Simulation execution outcome
   const simulationResult = useMemo(() => {
@@ -122,7 +123,8 @@ export default function App() {
         newManifest.routingData,
         newManifest.rulesData,
         newManifest.tsrMap,
-        newManifest.dim
+        newManifest.dim,
+        newManifest.architecture
       );
       const newCheckpoint = compiler.compile();
 
@@ -472,9 +474,10 @@ export default function App() {
                 {simulationResult ? (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     {simulationResult.trace.map((step, idx) => {
-                      const isActive = selectedStepIdx === idx;
+                      const isActive = idx === selectedStepIdx;
                       const isCce = step.type === 'CCE';
-
+                      const layerMetadata = manifest.architecture?.layers?.find((l: any) => l.layer_id === step.layer);
+                      
                       return (
                         <div 
                           key={idx}
@@ -509,18 +512,32 @@ export default function App() {
 
                             <div>
                               <div style={{ fontWeight: 600, fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                Layer {step.layer}
+                                Layer {step.layer}: {layerMetadata?.name || 'Unknown Layer'}
                                 <span className={`badge ${isCce ? 'badge-rose' : 'badge-cyan'}`}>
-                                  {step.type} Block
+                                  {layerMetadata?.type || step.type}
                                 </span>
                               </div>
-                              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
-                                {isCce ? (
-                                  <span>Cognitive loop run: {step.cce_info?.iterations} steps. {step.cce_info?.converged ? 'Resolved below threshold.' : 'Halted at iterations ceiling.'}</span>
-                                ) : (
-                                  <span>Standard feedforward rules evaluation pass.</span>
-                                )}
+                              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '2px', fontStyle: 'italic' }}>
+                                {layerMetadata?.mechanism}
                               </div>
+                              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px', lineHeight: '1.4' }}>
+                                {layerMetadata?.description}
+                              </div>
+                              {isCce && (
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-rose)', marginTop: '4px' }}>
+                                  Cognitive loop run: {step.cce_info?.iterations} steps. {step.cce_info?.converged ? 'Resolved below threshold.' : 'Halted at iterations ceiling.'}
+                                </div>
+                              )}
+                              {isActive && layerMetadata?.prompt && (
+                                <div style={{ marginTop: '8px', padding: '8px', background: 'rgba(255,255,255,0.03)', borderRadius: '6px', fontSize: '0.8rem', borderLeft: '3px solid var(--accent-purple)' }}>
+                                  <strong>Prompt:</strong> <em>{layerMetadata.prompt}</em>
+                                </div>
+                              )}
+                              {isActive && layerMetadata?.matrix_example && (
+                                <div style={{ marginTop: '4px', padding: '8px', background: 'rgba(255,255,255,0.03)', borderRadius: '6px', fontSize: '0.75rem', fontFamily: 'monospace', whiteSpace: 'pre-wrap', color: 'var(--text-secondary)' }}>
+                                  {layerMetadata.matrix_example}
+                                </div>
+                              )}
                             </div>
                           </div>
 

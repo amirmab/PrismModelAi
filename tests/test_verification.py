@@ -7,6 +7,7 @@ manifest = load_manifest("manifest")
 DEFAULT_VOCAB = manifest.vocab_data
 DEFAULT_ROUTING = manifest.routing_data
 DEFAULT_RULES = manifest.rules_data
+DEFAULT_ARCHITECTURE = manifest.architecture
 from cnvm.compiler import CNVMCompiler
 from cnvm.runtime import CNVMRuntime
 
@@ -16,7 +17,7 @@ def test_determinism():
     Given identical token input and compiled weight state, the execution path
     and output vector are 100% deterministic.
     """
-    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES)
+    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES, DEFAULT_ARCHITECTURE)
     compiled = compiler.compile()
     
     runtime1 = CNVMRuntime(compiled)
@@ -44,7 +45,7 @@ def test_locality_of_updates():
     representations or execution paths of unrelated rules.
     """
     # 1. Compile original model
-    compiler_orig = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES)
+    compiler_orig = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES, DEFAULT_ARCHITECTURE)
     compiled_orig = compiler_orig.compile()
     
     # 2. Modify only one rule (RULE_GEAR_SHEAR) in rules schema
@@ -52,7 +53,7 @@ def test_locality_of_updates():
     modified_rules["RULE_GEAR_SHEAR"] = DEFAULT_RULES["RULE_GEAR_SHEAR"].copy()
     modified_rules["RULE_GEAR_SHEAR"]["gate_out_weight"] = -1.8 # originally -2.0
     
-    compiler_mod = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, modified_rules)
+    compiler_mod = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, modified_rules, DEFAULT_ARCHITECTURE)
     compiled_mod = compiler_mod.compile()
     
     # 3. Check parameters
@@ -102,7 +103,7 @@ def test_cce_convergence():
     negative entropy), registering the conflict. The CCE loop at layer 30
     executes, detects the conflict state (SYS::CONFLICT), and converges.
     """
-    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES)
+    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES, DEFAULT_ARCHITECTURE)
     compiled = compiler.compile()
     runtime = CNVMRuntime(compiled)
 
@@ -150,7 +151,7 @@ def test_bounded_activations():
     such that the L2 norm of any hidden state never exceeds the pre-calculated limits.
     In our case, we clamp every register to the range [-2.0, 2.0].
     """
-    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES)
+    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES, DEFAULT_ARCHITECTURE)
     compiled = compiler.compile()
     
     # Assert weight parameters are strictly clamped in compilation
@@ -193,7 +194,7 @@ def test_auto_complete_projections():
     Formally verifies the data generation examples and rules matching the output criteria.
     Simulates the forward pass and computes similarity against output_rules exactly like the UI.
     """
-    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES)
+    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES, DEFAULT_ARCHITECTURE)
     compiled = compiler.compile()
     runtime = CNVMRuntime(compiled)
 
@@ -291,7 +292,7 @@ def test_grammar_parsing():
     Formally verifies that the 10 grammar parsing rules correctly structure
     the state vector in Zone 1 (Layers 1-5).
     """
-    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES)
+    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES, DEFAULT_ARCHITECTURE)
     compiled = compiler.compile()
     runtime = CNVMRuntime(compiled)
 
@@ -342,7 +343,7 @@ def test_position_encoding():
     Formally verifies that CNVM absolute position encoding is correctly injected
     into sequence tokens at runtime.
     """
-    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES)
+    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES, DEFAULT_ARCHITECTURE)
     compiled = compiler.compile()
     runtime = CNVMRuntime(compiled)
 
@@ -362,7 +363,7 @@ def test_alibi_bias_asymmetry():
     Formally verifies that the ALiBi Relative Positional Bias successfully breaks
     attention symmetry, allowing the model to distinguish N > M from N < M.
     """
-    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES)
+    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES, DEFAULT_ARCHITECTURE)
     compiled = compiler.compile()
     runtime = CNVMRuntime(compiled)
 
@@ -436,7 +437,7 @@ def test_pure_alibi_order_bias():
     out_data["neg_winner"]["target_sliders"]["META::RESERVED_A"] = {"weight": 0.0}
     out_data["neg_winner"]["target_sliders"]["META::RESERVED_B"] = {"weight": 2.0}
     
-    compiler = CNVMCompiler(vocab_data, manifest.routing_data, manifest.rules_data)
+    compiler = CNVMCompiler(vocab_data, manifest.routing_data, manifest.rules_data, DEFAULT_ARCHITECTURE)
     compiled = compiler.compile()
     runtime = CNVMRuntime(compiled)
 
@@ -479,7 +480,7 @@ def test_order_sensitivity():
     Verifies that changing token order yields different positional rule firings
     and final state representations.
     """
-    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES)
+    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES, DEFAULT_ARCHITECTURE)
     compiled = compiler.compile()
     runtime = CNVMRuntime(compiled)
 

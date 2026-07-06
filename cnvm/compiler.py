@@ -8,10 +8,16 @@ def clamp_weight(val: float, limit: float = 2.0) -> float:
 
 
 class CNVMCompiler:
-    def __init__(self, vocab_data: dict, routing_data: dict, rules_data: dict):
+    def __init__(self, vocab_data: dict, routing_data: dict, rules_data: dict, architecture_data: dict = None):
         self.vocab_data = vocab_data
         self.routing_data = routing_data
         self.rules_data = rules_data
+        self.architecture_data = architecture_data or {
+            "max_layers": 40,
+            "cce_layers": [30, 31, 32, 33, 34],
+            "default_cce_max_iter": 10,
+            "default_cce_epsilon": 0.1
+        }
 
     def compile_embedding(self) -> tuple[np.ndarray, dict]:
         """
@@ -167,4 +173,5 @@ class CNVMCompiler:
             "W_k":  W_k,
             "W_v":  W_v,
             "serg": serg_layers,
+            "architecture": self.architecture_data,
         }

@@ -129,6 +129,7 @@ class ManifestData:
     rules_data: dict = field(default_factory=dict)      # rule_name -> rule dict (with layer_index)
     output_data: dict = field(default_factory=dict)
     tsr_map: dict = field(default_factory=dict)
+    architecture: dict = field(default_factory=dict)
 
 
 def load_manifest(manifest_dir: str = "manifest") -> ManifestData:
@@ -238,10 +239,20 @@ def load_manifest(manifest_dir: str = "manifest") -> ManifestData:
     output_path = os.path.join(manifest_dir, "output_rules.json")
     output_data = _load_json(output_path) if os.path.exists(output_path) else {}
 
+    # Step 5: Architecture Config
+    architecture_path = os.path.join(manifest_dir, "architecture.json")
+    architecture_data = _load_json(architecture_path) if os.path.exists(architecture_path) else {
+        "max_layers": 40,
+        "cce_layers": [30, 31, 32, 33, 34],
+        "default_cce_max_iter": 10,
+        "default_cce_epsilon": 0.1
+    }
+
     return ManifestData(
         vocab_data=flat_vocab,
         routing_data=routing_data,
         rules_data=rules_data,
         output_data=output_data,
         tsr_map=tsr_map,
+        architecture=architecture_data,
     )

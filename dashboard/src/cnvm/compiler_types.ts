@@ -31,6 +31,24 @@ export interface CompiledLayer {
   rule_ids: number[];
 }
 
+export interface LayerMetadata {
+  layer_id: number;
+  name: string;
+  mechanism: string;
+  type: string;
+  description: string;
+  prompt: string;
+  matrix_example: string;
+}
+
+export interface ArchitectureConfig {
+  max_layers: number;
+  cce_layers: number[];
+  default_cce_max_iter: number;
+  default_cce_epsilon: number;
+  layers: LayerMetadata[];
+}
+
 export interface CompiledCheckpoint {
   embedding: number[][]; // (V, DIM)
   token_to_id: Record<string, number>;
@@ -39,4 +57,5 @@ export interface CompiledCheckpoint {
   W_k: number[][]; // (DIM, DIM)
   W_v: number[][]; // (DIM, DIM)
   serg: Record<number, CompiledLayer>;
+  architecture: ArchitectureConfig;
 }
