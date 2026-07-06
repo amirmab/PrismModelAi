@@ -151,4 +151,55 @@ describe('CNVMRuntime mathematical verification', () => {
     expect(findRuleV(103)).toBe(true);
     expect(findRuleV(108)).toBe(true);
   });
+
+  it('verifies dynamic position encoding injection', () => {
+    const tokens = ["first", "prime_minister", "canada"];
+    const res = runtime.runForward(tokens, 0);
+    
+    const posOffset = manifest.tsrMap["SYNTAX::POSITION_INDEX"]?.[0];
+    expect(posOffset).toBeDefined();
+    
+    for (let idx = 0; idx < tokens.length; idx++) {
+      expect(res.finalState[idx][posOffset!]).toBe(idx);
+    }
+  });
+
+  it('verifies order sensitivity and positional rule triggers', () => {
+    // 1. Forward order: "first" at index 0, "prime_minister" at index 1, "canada" at index 2
+    const resA = runtime.runForward(["first", "prime_minister", "canada"], 40, [30, 31, 32, 33, 34], 10, 0.1);
+    
+    // 2. Reverse order: "canada" at index 0, "prime_minister" at index 1, "first" at index 2
+    const resB = runtime.runForward(["canada", "prime_minister", "first"], 40, [30, 31, 32, 33, 34], 10, 0.1);
+
+    const getFiredRule0 = (trace: typeof resA.trace) => {
+      const layerTrace = trace.find(t => t.layer === 2);
+      expect(layerTrace).toBeDefined();
+      return layerTrace!.active_rules!.map(tokenRules => 
+        tokenRules.some(r => r.rule_id === 0)
+      );
+    };
+
+    const firedA = getFiredRule0(resA.trace);
+    const firedB = getFiredRule0(resB.trace);
+
+    // First element in sequence (index 0) must NOT fire rule 0 (since position value < 0.5 threshold)
+    // Later elements (index 1 & 2) MUST fire rule 0 (since position values >= 1.0 & 2.0 respectively)
+    expect(firedA).toEqual([false, true, true]);
+    expect(firedB).toEqual([false, true, true]);
+
+    // Compare final vectors: states must be mathematically order-dependent
+    const stateA = resA.finalState;
+    const stateB = resB.finalState;
+
+    let isDifferent = false;
+    for (let i = 0; i < stateA.length; i++) {
+      for (let j = 0; j < stateA[i].length; j++) {
+        if (stateA[i][j] !== stateB[i][j]) {
+          isDifferent = true;
+          break;
+        }
+      }
+    }
+    expect(isDifferent).toBe(true);
+  });
 });

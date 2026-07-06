@@ -11,15 +11,20 @@ def _get_semantic_indices():
     This mirrors getSemanticIndices() in the TypeScript runtime.
     """
     tsr_map = get_tsr_map()
-    dim = get_dim()
+    dim = 94  # Lock to baseline semantic dimension
 
-    metadata_names = {"META::PROVENANCE", "META::EVIDENCE", "RESERVED"}
+    metadata_names = {
+        "META::PROVENANCE",
+        "META::EVIDENCE",
+        "RESERVED",
+    }
     metadata_indices = set()
     for name in metadata_names:
         if name in tsr_map:
             start, end = tsr_map[name]
             for i in range(start, end + 1):
-                metadata_indices.add(i)
+                if i < dim:
+                    metadata_indices.add(i)
 
     return sorted(i for i in range(dim) if i not in metadata_indices)
 
@@ -220,8 +225,13 @@ class CNVMRuntime:
             else:
                 states.append(self.embedding[t].copy())
                 
-        H = np.array(states, dtype=np.float32)  # shape (N, 100)
+        H = np.array(states, dtype=np.float32)  # shape (N, dim)
         
+        # Inject positional encoding (0, 1, 2, ... sequence indices)
+        pos_offset = get_register_offset("SYNTAX::POSITION_INDEX")
+        for idx in range(H.shape[0]):
+            H[idx, pos_offset] = float(idx)
+            
         trace = []
         for l in range(max_layer):
             if l in cce_layers:
@@ -244,7 +254,17 @@ class CNVMRuntime:
                 
                 # Regular layer forward pass (executed only if rules are present)
                 H_norm = layer_norm(H)
-                routed = H + self.execute_attention(H_norm)
+                # Compute attention manually to intercept attn_weights and V
+                Q = np.dot(H_norm, self.W_q)
+                K = np.dot(H_norm, self.W_k)
+                V = np.dot(H_norm, self.W_v)
+                logits = np.dot(Q, K.T)
+                max_logits = np.max(logits, axis=-1, keepdims=True)
+                exp_logits = np.exp(logits - max_logits)
+                attn_weights = exp_logits / np.sum(exp_logits, axis=-1, keepdims=True)
+                O = np.dot(attn_weights, V)
+                
+                routed = H + O
                 routed = clip_state(routed)
                 
                 routed_norm = layer_norm(routed)

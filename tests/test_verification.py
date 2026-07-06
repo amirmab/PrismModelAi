@@ -114,6 +114,9 @@ def test_cce_convergence():
     out_state, trace = runtime.run_forward(["sprocket", "torque_pulse"], cce_layers=[30, 31, 32, 33, 34], max_iter=10)
 
     # Verify CCE block executed on layer 30
+    for t in trace:
+        if t["layer"] == 26 and t["type"] == "STANDARD":
+            print(f"[pytest debug] Layer 26 active_rules: {t['active_rules']}")
     cce_trace = None
     for t in trace:
         if t["layer"] == 30 and t["type"] == "CCE":
@@ -325,3 +328,71 @@ def test_grammar_parsing():
                     
     assert 103 in fired_v, "RULE_VERB_DETECTION (103) did not fire on 'bake'"
     assert 105 in fired_v, "RULE_VERB_OBJECT_PREPARATION (105) did not fire on 'bake'"
+
+def test_position_encoding():
+    """
+    Formally verifies that CNVM absolute position encoding is correctly injected
+    into sequence tokens at runtime.
+    """
+    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES)
+    compiled = compiler.compile()
+    runtime = CNVMRuntime(compiled)
+
+    tokens = ["first", "prime_minister", "canada"]
+    out_state, _ = runtime.run_forward(tokens, max_layer=0)
+    
+    pos_offset = get_register_offset("SYNTAX::POSITION_INDEX")
+    
+    # Assert each token's position index slider matches its sequence index
+    for idx in range(len(tokens)):
+        assert out_state[idx, pos_offset] == float(idx), (
+            f"Expected token index {idx} to have positional slider value {float(idx)}, got {out_state[idx, pos_offset]}"
+        )
+
+def test_order_sensitivity():
+    """
+    Verifies that changing token order yields different positional rule firings
+    and final state representations.
+    """
+    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES)
+    compiled = compiler.compile()
+    runtime = CNVMRuntime(compiled)
+
+    # 1. Run forward order: ["first", "prime_minister", "canada"]
+    # "first" is at index 0, "prime_minister" is at index 1, "canada" is at index 2
+    out_a, trace_a = runtime.run_forward(["first", "prime_minister", "canada"])
+    
+    # 2. Run reverse order: ["canada", "prime_minister", "first"]
+    # "canada" is at index 0, "prime_minister" is at index 1, "first" is at index 2
+    out_b, trace_b = runtime.run_forward(["canada", "prime_minister", "first"])
+    
+    # 3. Check Layer 2 standard rules active on each token
+    # Extract fired rule 0 (Position One Confidence Boost) per token
+    def get_fired_tokens_for_rule_0(trace):
+        # Layer 2 is index 2
+        layer_trace = trace[2]
+        assert layer_trace["layer"] == 2
+        active_rules = layer_trace["active_rules"]
+        # returns a list of booleans indicating if rule 0 fired for each token
+        fired = []
+        for token_rules in active_rules:
+            fired.append(any(r["rule_id"] == 0 for r in token_rules))
+        return fired
+
+    fired_a = get_fired_tokens_for_rule_0(trace_a)
+    fired_b = get_fired_tokens_for_rule_0(trace_b)
+    
+    # In order A: ["first", "prime_minister", "canada"]
+    # - "first" (index 0) should NOT trigger rule 0
+    # - "prime_minister" (index 1) and "canada" (index 2) SHOULD trigger rule 0
+    assert fired_a == [False, True, True], f"Unexpected rule 0 firings in order A: {fired_a}"
+    
+    # In order B: ["canada", "prime_minister", "first"]
+    # - "canada" (index 0) should NOT trigger rule 0
+    # - "prime_minister" (index 1) and "first" (index 2) SHOULD trigger rule 0
+    assert fired_b == [False, True, True], f"Unexpected rule 0 firings in order B: {fired_b}"
+    
+    # Compare outputs: Since the positional encoding shifted, the final states of the words
+    # are completely different and order-dependent.
+    assert not np.array_equal(out_a, out_b), "Outputs must be different due to sequence ordering."
+

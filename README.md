@@ -100,6 +100,13 @@ Word: "warm"
 
 When the network processes a question like *"Is the steak warm enough to serve?"*, it loads each word's sliders, and the compiled rules in the network layers route the activations — step by step — until the output vector points to the correct answer. The fractional values allow the network to reason about **degrees of relevance**, not just binary yes/no. Every step is traceable, deterministic, and auditable.
 
+### How It Works: Position Encoding
+
+Word order is critical for resolving meaning (e.g., *"the dog bit the man"* vs. *"the man bit the dog"*). Traditional Transformers use sinusoidal position embeddings or Rotary Position Embeddings (RoPE) to mix positional context into vectors. 
+
+In CNVM, we use a simple, explicit approach matching the compiled slider design:
+1. **Dynamic Position Ingestion:** At runtime, the input loader automatically sets `SYNTAX::POSITION_INDEX` (coordinate `94`) for each token to its 0-based sequence index (e.g., first word = `0.0`, second word = `1.0`, third word = `2.0`, etc.).
+2. **Relative Distance Checks:** In Zone 1 (lexical parsing), we use Attention Bridges to compare these indices. For example, to bind a subject noun to its following verb, the subject binding attention layer queries tokens where the noun's position index is *less than* the verb's position index. This enables deterministic parsing of word order and active/passive agency.
 
 ### What It Will Be at Maturity
 At maturity, CNVM will serve as a **formally verifiable cognitive processor** for safety-critical systems. It is designed to be embedded in environments where stochastic failure is a liability — such as automated medical diagnostics, aerospace control loops, nuclear power management, and real-time compliance checking.

@@ -1,0 +1,10 @@
+{
+  "rule_name": "Position One Confidence Boost",
+  "rule_id": 0,
+  "trigger_slider_name": "SYNTAX::POSITION_INDEX",
+  "result_slider_name": "SYNTAX::POSITION_REL",
+  "gate_in_weight": 1.0,
+  "gate_out_weight": 0.5,
+  "intent_description": "Boosts relative position tracker dynamically for tokens located after the first position (index >= 1) to model sequence maturity.",
+  "layer_index": 2
+}

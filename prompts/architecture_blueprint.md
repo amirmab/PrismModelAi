@@ -259,9 +259,41 @@ Before reading the layer blueprint, it is critical to understand the two primary
 * **Teacher Extraction Prompt:** *"Does this action violate environmental, legal, or warranty compliance?"*
 * **Matrix Example:** Trigger: `ACTION_REMOVE_CATALYTIC` $\to$ Gate Out: `LOGICAL_CONFLICT: +2.0` (Emissions violation).
 
-#### Layers 30-34: The CCE Paradox Loop
-* **Mechanism:** Internal Routing Loop.
-* **Detailed Description:** This zone does not have fixed weights. If the `LOGICAL_CONFLICT` register exceeds `0.1`, the Constraint Convergence Engine (CCE) intercepts the forward pass. It loops the state back to Zone 3 (Layer 11), adjusting parameters and applying correction values until the conflict is resolved below the convergence threshold $\epsilon$, or halts to flag a contradiction.
+#### Layer 30: CCE Conflict Detection
+* **Mechanism:** SERG (FFN) / Internal Router.
+* **Detailed Description:** This is the entry point of the Constraint Convergence Engine (CCE). It evaluates the `LOGICAL_CONFLICT` register. If the conflict value exceeds the threshold (e.g., `0.1`), this layer interrupts the forward pass and triggers a routing loop back to an earlier layer to attempt to resolve the paradox.
+* **Teacher Extraction Prompt:** *"Identify if a safety, logical, or physical paradox exists that prevents the action from proceeding."*
+* **Matrix Example:** Trigger: `LOGICAL_CONFLICT > 0.1` $\to$ Route state back to Zone 3.
+
+#### Layer 31: CCE Hypothesis Generation
+* **Mechanism:** DRF (QKV Attention).
+* **Detailed Description:** When looping to resolve a conflict, this layer generates alternative actions or states that might avoid the conflict. It queries the vocabulary for actions that achieve the same goal without violating the triggered safety constraint.
+* **Teacher Extraction Prompt:** *"What alternative actions or parts can achieve the same goal safely?"*
+* **Matrix Example:**
+  * **Q (Conflict Resolver):** Queries for alternative paths (`SEEK_SAFE_PATH: 1.0`).
+  * **K (Alternative Actions):** Broadcasts safe properties (`SAFE_FOR_HEAT: 1.0`).
+  * **V (Payload):** Injects new proposed action into the state vector.
+
+#### Layer 32: CCE Cross-Domain Verification
+* **Mechanism:** SERG (FFN).
+* **Detailed Description:** Evaluates the newly proposed alternative action against the constraints of all domains (legal, physical, financial). This ensures the new solution doesn't just create a new, different conflict.
+* **Teacher Extraction Prompt:** *"Does this new proposed alternative violate any other known constraints?"*
+* **Matrix Example:** Trigger: `NEW_ACTION_COST > BUDGET` $\to$ Gate Out: `LOGICAL_CONFLICT: +1.0`.
+
+#### Layer 33: CCE Convergence State Update
+* **Mechanism:** DRF (QKV Attention).
+* **Detailed Description:** If an alternative is found that does not spike the conflict register, this layer updates the working memory to lock in the new action. It overwrites the old, dangerous action with the newly verified safe action.
+* **Teacher Extraction Prompt:** *"Update the plan to strictly use the safe alternative."*
+* **Matrix Example:**
+  * **Q (Memory Updater):** Queries for verified safe actions (`SEEK_VERIFIED_ACTION: 1.0`).
+  * **K (Alternative):** Broadcasts verified status (`VERIFIED_SAFE: 1.0`).
+  * **V (Payload):** Overwrites `PLANNED_ACTION` register.
+
+#### Layer 34: CCE Exit/Halt Condition Evaluation
+* **Mechanism:** SERG (FFN).
+* **Detailed Description:** The final check of the loop. If the `LOGICAL_CONFLICT` register has decayed below `0.1`, it allows the execution to exit the loop and proceed to Zone 7. If the loop has repeated too many times without convergence, it halts the system and prepares to output an "Impossible Action" error.
+* **Teacher Extraction Prompt:** *"Is the conflict resolved, or is this task genuinely impossible?"*
+* **Matrix Example:** Trigger: `ITERATION_COUNT > MAX_ITER` AND `LOGICAL_CONFLICT > 0.1` $\to$ Gate Out: `GOAL_STATE: IMPOSSIBLE_ERROR`.
 
 ---
 

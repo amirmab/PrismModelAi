@@ -76,10 +76,13 @@ class CNVMCompiler:
 
         # 1. Identity blocks for intra-domain routing isolation
         for domain, (start, end) in tsr_map.items():
+            if domain in {"SYNTAX::POSITION_INDEX", "SYNTAX::POSITION_REL", "RESERVED"}:
+                continue
             for i in range(start, end + 1):
                 W_q[i, i] = 1.0
                 W_k[i, i] = 1.0
-                W_v[i, i] = 1.0
+                if i < 94:
+                    W_v[i, i] = 1.0
 
         # 2. Compile Sparse Inter-Domain Bridges (SIDBs)
         for domain, config in self.routing_data.items():
@@ -93,8 +96,8 @@ class CNVMCompiler:
                 W_k[start_idx, target_idx] = clamped_w
                 W_v[start_idx, target_idx] = clamped_w
 
-        # 3. Normalise: divide Q and K by DIM^0.25 so Q K^T / sqrt(DIM) is stable
-        scaling_factor = float(DIM) ** 0.25
+        # 3. Normalise: divide Q and K by baseline_d^0.25 so Q K^T / sqrt(baseline_d) is stable
+        scaling_factor = 94.0 ** 0.25
         W_q_norm = W_q / scaling_factor
         W_k_norm = W_k / scaling_factor
 
