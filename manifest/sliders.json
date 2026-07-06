@@ -470,18 +470,28 @@
     "description": "Grade/magnitude modifier."
   },
   "SEMANTIC::IS_MATERIAL": {
-    "coordinate": 16,
+    "coordinate": 96,
     "name": "Semantic Material",
     "description": "Flag for surface materials, fabrics, or textiles."
   },
   "SEMANTIC::IS_FOOD": {
-    "coordinate": 17,
+    "coordinate": 97,
     "name": "Semantic Food",
     "description": "Flag for food, recipes, or ingredients."
   },
   "SEMANTIC::IS_PROCESS": {
-    "coordinate": 16,
+    "coordinate": 98,
     "name": "Semantic Process",
     "description": "Flag for evolving dynamic systems/processes."
+  },
+  "SYNTAX::POSITION_INDEX": {
+    "coordinate": 94,
+    "name": "Word Position Index",
+    "description": "Absolute index of the token in the input sequence."
+  },
+  "SYNTAX::POSITION_REL": {
+    "coordinate": 95,
+    "name": "Relative Position Tracker",
+    "description": "Tracker for relative distance filter query constraints."
   }
 }

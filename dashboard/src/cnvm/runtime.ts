@@ -62,11 +62,13 @@ export function getSemanticIndices(tsrMap: Record<string, [number, number]>, dim
   const evRange = tsrMap["META::EVIDENCE"];
   const resRange = tsrMap["RESERVED"];
 
+  const targetDim = 94; // Lock to baseline semantic dimension
+
   const isProv = (idx: number) => provRange && idx >= provRange[0] && idx <= provRange[1];
   const isEv = (idx: number) => evRange && idx >= evRange[0] && idx <= evRange[1];
   const isRes = (idx: number) => resRange && idx >= resRange[0] && idx <= resRange[1];
 
-  for (let i = 0; i < dim; i++) {
+  for (let i = 0; i < targetDim; i++) {
     if (!isProv(i) && !isEv(i) && !isRes(i)) {
       indices.push(i);
     }
@@ -355,6 +357,12 @@ export class CNVMRuntime {
     }
 
     let H = states;
+    const posOffset = this.tsrMap["SYNTAX::POSITION_INDEX"] ? this.tsrMap["SYNTAX::POSITION_INDEX"][0] : -1;
+    if (posOffset !== -1) {
+      for (let idx = 0; idx < H.length; idx++) {
+        H[idx][posOffset] = idx;
+      }
+    }
     const trace: ExecutionTraceStep[] = [];
 
     for (let l = 0; l < maxLayer; l++) {

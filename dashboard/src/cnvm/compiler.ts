@@ -89,11 +89,16 @@ export class CNVMCompiler {
     const W_v = Array.from({ length: this.dim }, () => new Array(this.dim).fill(0));
 
     // 1. Setup diagonal blocks (identity matrices) for domain isolation
-    for (const [start, end] of Object.values(this.tsrMap)) {
+    for (const [domain, [start, end]] of Object.entries(this.tsrMap)) {
+      if (domain === "SYNTAX::POSITION_INDEX" || domain === "SYNTAX::POSITION_REL" || domain === "RESERVED") {
+        continue;
+      }
       for (let i = start; i <= end; i++) {
         W_q[i][i] = 1.0;
         W_k[i][i] = 1.0;
-        W_v[i][i] = 1.0;
+        if (i < 94) {
+          W_v[i][i] = 1.0;
+        }
       }
     }
 
@@ -115,8 +120,8 @@ export class CNVMCompiler {
       }
     }
 
-    // 3. Normalize Q and K matrices by d^(1/4) so logits product Q K^T is scaled by sqrt(d)
-    const scalingFactor = Math.pow(this.dim, 0.25);
+    // 3. Normalize Q and K matrices by baseline_d^(1/4) so logits product Q K^T is scaled by sqrt(baseline_d)
+    const scalingFactor = Math.pow(94.0, 0.25);
     for (let i = 0; i < this.dim; i++) {
       for (let j = 0; j < this.dim; j++) {
         W_q[i][j] /= scalingFactor;

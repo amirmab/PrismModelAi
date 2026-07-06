@@ -3,7 +3,7 @@
   "rule_id": 150,
   "trigger_slider_name": "SYS::ENTROPY",
   "result_slider_name": "SYS::CONFLICT",
-  "gate_in_weight": -1.0,
+  "gate_in_weight": -2.0,
   "gate_out_weight": 1.2,
   "intent_description": "Audit rule: If SYS::ENTROPY has gone negative (structural failure state), spike SYS::CONFLICT. Negative gate_in_weight means the rule activates when entropy is below threshold — detecting failure rather than health.",
   "layer_index": 26

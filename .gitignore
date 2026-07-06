@@ -19,5 +19,7 @@ ignorelogs/
 debug_*
 # IDE settings
 .vscode/
+.claude/
+
 /node_modules/
 /ignorelogs/
