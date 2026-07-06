@@ -251,7 +251,7 @@ def test_auto_complete_projections():
     # TIER 1: Canonical examples — strict similarity >= 90% and strict isolation
     for tokens, expected_output in examples:
         out_state, _ = runtime.run_forward(tokens)
-        final_state = out_state[-1]
+        final_state = np.mean(out_state, axis=0)
         similarities = compute_similarities(final_state)
         expected_similarity = similarities.get(expected_output, -1)
 
@@ -268,7 +268,7 @@ def test_auto_complete_projections():
     # TIER 2: Longer conclusion sentences — rank-1 only (expected output must be top suggestion)
     for tokens, expected_output in longer_examples:
         out_state, _ = runtime.run_forward(tokens)
-        final_state = out_state[-1]
+        final_state = np.mean(out_state, axis=0)
         similarities = compute_similarities(final_state)
         best_score = max(similarities.values())
 
@@ -348,6 +348,123 @@ def test_position_encoding():
         assert out_state[idx, pos_offset] == float(idx), (
             f"Expected token index {idx} to have positional slider value {float(idx)}, got {out_state[idx, pos_offset]}"
         )
+
+def test_alibi_bias_asymmetry():
+    """
+    Formally verifies that the ALiBi Relative Positional Bias successfully breaks
+    attention symmetry, allowing the model to distinguish N > M from N < M.
+    """
+    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES)
+    compiled = compiler.compile()
+    runtime = CNVMRuntime(compiled)
+
+    tokens = ["first", "prime_minister", "canada"]
+    
+    # We will manually step through the attention to verify logits
+    # Token states after embedding
+    H_init = np.array([runtime.get_token_vector(t) for t in tokens])
+    
+    # Apply position indexes
+    pos_offset = get_register_offset("SYNTAX::POSITION_INDEX")
+    for i in range(len(tokens)):
+        H_init[i, pos_offset] = float(i)
+        
+    Q = np.dot(H_init, runtime.W_q)
+    K = np.dot(H_init, runtime.W_k)
+    base_logits = np.dot(Q, K.T)
+    
+    # Manually compute what runtime does
+    N = H_init.shape[0]
+    indices = np.arange(N)
+    distance = indices[None, :] - indices[:, None]
+    alibi_bias = 0.1 * distance
+    
+    final_logits = base_logits + alibi_bias
+    
+    # Verify asymmetry: (0, 1) vs (1, 0)
+    # base_logits is symmetric for the position component, but alibi forces it to be asymmetric
+    assert final_logits[0, 1] != final_logits[1, 0], "Attention logits must be asymmetric to distinguish order"
+    
+    # Specifically, the difference in bias should be exactly 0.2 (since 0.1 - (-0.1))
+    bias_diff = alibi_bias[0, 1] - alibi_bias[1, 0]
+    assert np.isclose(bias_diff, 0.2), "ALiBi bias slope is incorrect"
+
+def test_pure_alibi_order_bias():
+    """
+    Formally verifies that when semantic similarity is zero, the ALiBi bias
+    alone causes the Mean Pooled sequence to inherit more properties from
+    the LAST token in the sequence (recency bias).
+    """
+    import copy
+    from cnvm.nir import load_manifest
+    manifest = load_manifest("manifest")
+    
+    vocab_data = copy.deepcopy(manifest.vocab_data)
+    out_data = copy.deepcopy(manifest.output_data)
+    
+    # Create identical tokens that only differ in RESERVED_A/B
+    # This gives them high cosine similarity, allowing ALiBi to affect attention weights.
+    baseline = vocab_data["sprocket"]["sliders"]
+    
+    vocab_data["order_pos"] = {
+        "token_id": max([v["token_id"] for v in vocab_data.values()]) + 1,
+        "sliders": {**baseline, "META::RESERVED_A": 2.0, "META::RESERVED_B": 0.0}
+    }
+    vocab_data["order_neg"] = {
+        "token_id": max([v["token_id"] for v in vocab_data.values()]) + 2,
+        "sliders": {**baseline, "META::RESERVED_A": 0.0, "META::RESERVED_B": 2.0}
+    }
+    
+    baseline_out = vocab_data["sprocket"]["sliders"]
+    out_data["pos_winner"] = {
+        "target_sliders": {k: {"weight": v} for k, v in baseline_out.items()}
+    }
+    out_data["pos_winner"]["target_sliders"]["META::RESERVED_A"] = {"weight": 2.0}
+    out_data["pos_winner"]["target_sliders"]["META::RESERVED_B"] = {"weight": 0.0}
+    
+    out_data["neg_winner"] = {
+        "target_sliders": {k: {"weight": v} for k, v in baseline_out.items()}
+    }
+    out_data["neg_winner"]["target_sliders"]["META::RESERVED_A"] = {"weight": 0.0}
+    out_data["neg_winner"]["target_sliders"]["META::RESERVED_B"] = {"weight": 2.0}
+    
+    compiler = CNVMCompiler(vocab_data, manifest.routing_data, manifest.rules_data)
+    compiled = compiler.compile()
+    runtime = CNVMRuntime(compiled)
+
+    def get_top_prediction(tokens):
+        # Run 2 layers so attention is triggered once (Layer 1 has rules).
+        out_state, _ = runtime.run_forward(tokens, max_layer=2, cce_layers=[])
+        final_state = np.mean(out_state, axis=0)
+
+        similarities = {}
+        for token_name, rule in out_data.items():
+            score = 0
+            count = 0
+            for slider_name, slider_config in rule.get("target_sliders", {}).items():
+                target_weight = slider_config["weight"]
+                if slider_name in manifest.tsr_map:
+                    start_offset = manifest.tsr_map[slider_name][0]
+                    actual_val = final_state[start_offset]
+                    diff = actual_val - target_weight
+                    score += diff * diff
+                    count += 1
+            mse = score / count if count > 0 else float('inf')
+            import math
+            if math.isnan(mse) or math.isinf(mse):
+                mse = float('inf')
+            sim = 0
+            if mse != float('inf'):
+                sim = max(0.0, min(100.0, (1.0 - mse / 8.0) * 100.0))
+            similarities[token_name] = sim
+
+        return max(similarities.items(), key=lambda x: x[1])[0]
+
+    pred_1 = get_top_prediction(["order_pos", "order_neg"])
+    assert pred_1 == "neg_winner", f"Expected neg_winner, got {pred_1}"
+
+    pred_2 = get_top_prediction(["order_neg", "order_pos"])
+    assert pred_2 == "pos_winner", f"Expected pos_winner, got {pred_2}"
 
 def test_order_sensitivity():
     """

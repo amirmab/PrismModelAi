@@ -98,9 +98,26 @@ class CNVMRuntime:
         # Attention weights (using pre-scaled Q/K from compilation)
         logits = np.dot(Q, K.T)  # (N, N)
         
+        # Apply ALiBi Asymmetric Bias and Local Sliding Window Mask
+        N = H_seq.shape[0]
+        if N > 1:
+            indices = np.arange(N)
+            distance = indices[None, :] - indices[:, None]  # shape (N, N)
+            
+            # Asymmetric Bias: breaks N > M vs N < M symmetry
+            alibi_bias = 0.1 * distance
+            logits = logits + alibi_bias
+            
+            # Local Sliding Window Cutoff: hard constraint from engineering spec
+            mask = np.abs(distance) > 5
+            logits[mask] = -np.inf
+            
         # Softmax over last dimension for sequence attention routing
         max_logits = np.max(logits, axis=-1, keepdims=True)
+        # Avoid warnings with -inf by zeroing out the masked exp directly
         exp_logits = np.exp(logits - max_logits)
+        if N > 1:
+            exp_logits[mask] = 0.0
         attn_weights = exp_logits / np.sum(exp_logits, axis=-1, keepdims=True)
 
         O = np.dot(attn_weights, V)  # (N, 100)
@@ -259,8 +276,20 @@ class CNVMRuntime:
                 K = np.dot(H_norm, self.W_k)
                 V = np.dot(H_norm, self.W_v)
                 logits = np.dot(Q, K.T)
+                
+                N_seq = H_norm.shape[0]
+                if N_seq > 1:
+                    indices = np.arange(N_seq)
+                    distance = indices[None, :] - indices[:, None]
+                    alibi_bias = 0.1 * distance
+                    logits = logits + alibi_bias
+                    mask = np.abs(distance) > 5
+                    logits[mask] = -np.inf
+                    
                 max_logits = np.max(logits, axis=-1, keepdims=True)
                 exp_logits = np.exp(logits - max_logits)
+                if N_seq > 1:
+                    exp_logits[mask] = 0.0
                 attn_weights = exp_logits / np.sum(exp_logits, axis=-1, keepdims=True)
                 O = np.dot(attn_weights, V)
                 
