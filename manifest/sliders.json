@@ -1,497 +1,398 @@
 {
   "SYNTAX::PART_OF_SPEECH": {
-    "coordinate": 0,
     "name": "Grammatical Role",
     "description": "Part-of-speech marker. Positive = Noun, Negative = Verb. Determines how syntactic parsing layers treat this token."
   },
   "DOMAIN::SECURITY": {
-    "coordinate": 1,
     "name": "Computer Security",
     "description": "Tracks memory vulnerabilities, buffer overflows, and active malicious states like shellcode execution."
   },
   "DOMAIN::COOKING": {
-    "coordinate": 2,
     "name": "Cooking and Culinary Science",
     "description": "Tracks recipe ingredient stress, temperature spikes, pH balance, and structural integrity of foods."
   },
   "DOMAIN::CAR_CLEANING": {
-    "coordinate": 3,
     "name": "Car Cleaning and Surface Care",
     "description": "Tracks paint finish condition, surfactant density, chemical abrasiveness, clearcoat levels, and micro-scratch wear."
   },
   "DOMAIN::MECHANICAL": {
-    "coordinate": 4,
     "name": "Mechanical Engineering",
     "description": "Tracks physical mechanical systems, gear ratios, torque, friction, and kinetic forces."
   },
   "SYS::ENTROPY": {
-    "coordinate": 5,
     "name": "System Entropy and Resilience",
     "description": "Universal health metric. 1.0 = perfect structural integrity. -1.0 = catastrophic failure or collapse."
   },
   "SYS::CONFIDENCE": {
-    "coordinate": 6,
     "name": "Epistemic Confidence",
     "description": "Real-time reasoning confidence score. Decays when activations are built on conflicting or volatile state."
   },
   "META::PROVENANCE": {
-    "coordinate": 7,
     "name": "Rule Provenance ID",
     "description": "Integer register. Every time a SERG rule activates, it writes its own rule_id here. Provides full diagnostic traceability."
   },
   "META::EVIDENCE": {
-    "coordinate": 8,
     "name": "Evidence Source Trace",
     "description": "Enum register tracking whether state is from direct input (0), static facts (1), or logical inference (2)."
   },
   "SYS::CONFLICT": {
-    "coordinate": 9,
     "name": "System Conflict Monitor",
     "description": "Spiked by audit rules when a logical contradiction is detected. Monitored by the CCE halting condition."
   },
   "DOMAIN::HISTORY_CANADA": {
-    "coordinate": 10,
     "name": "History of Canada",
     "description": "Tracks historical events, figures, and concepts related to Canadian history."
   },
   "SYNTAX::NOUN": {
-    "coordinate": 11,
     "name": "Noun Marker",
     "description": "Syntactic role for physical or abstract entities."
   },
   "SYNTAX::VERB": {
-    "coordinate": 12,
     "name": "Verb Marker",
     "description": "Syntactic role for actions or states."
   },
   "SYNTAX::SUBJECT": {
-    "coordinate": 13,
     "name": "Subject Role",
     "description": "The active agent of the sentence."
   },
   "SYNTAX::OBJECT": {
-    "coordinate": 14,
     "name": "Object Role",
     "description": "The target of the action."
   },
   "SYNTAX::IS_QUESTION": {
-    "coordinate": 15,
     "name": "Interrogative Marker",
     "description": "Flag for open questions requiring answers."
   },
   "SEMANTIC::IS_PERSON": {
-    "coordinate": 16,
     "name": "Semantic Person/Agent",
     "description": "Flag for human beings, historic figures, or entities."
   },
   "SEMANTIC::IS_PLACE": {
-    "coordinate": 17,
     "name": "Semantic Place/Location",
     "description": "Flag for geographical entities, cities, countries, or regions."
   },
   "SEMANTIC::IS_THING": {
-    "coordinate": 18,
     "name": "Semantic Thing/Object",
     "description": "Flag for physical objects, materials, or artifacts."
   },
   "SEMANTIC::IS_TIME": {
-    "coordinate": 19,
     "name": "Semantic Time/Era",
     "description": "Flag for temporal markers, eras, or specific years."
   },
   "SEMANTIC::IS_ACTION": {
-    "coordinate": 20,
     "name": "Semantic Action/Event",
     "description": "Flag for active events, procedures, or verbs."
   },
   "SEMANTIC::IS_QUALITY": {
-    "coordinate": 21,
     "name": "Semantic Quality/Trait",
     "description": "Flag for qualitative characteristics, superlatives, or constraints."
   },
   "SEMANTIC::IS_ORGANIC": {
-    "coordinate": 22,
     "name": "Semantic Organic/Biotic",
     "description": "Flag for biotic matter, food, or natural substances."
   },
   "SEMANTIC::IS_INORGANIC": {
-    "coordinate": 23,
     "name": "Semantic Inorganic/Synthetic",
     "description": "Flag for mechanical components, machinery, synthetic items, or cleanroom assets."
   },
   "SYNTAX::ADJECTIVE": {
-    "coordinate": 24,
     "name": "Adjective Part of Speech",
     "description": "Part of speech flag for adjectives/modifiers."
   },
   "SYNTAX::ADVERB": {
-    "coordinate": 25,
     "name": "Adverb Part of Speech",
     "description": "Part of speech flag for adverbs."
   },
   "SYNTAX::PRONOUN": {
-    "coordinate": 26,
     "name": "Pronoun Part of Speech",
     "description": "Part of speech flag for pronouns."
   },
   "SYNTAX::PREPOSITION": {
-    "coordinate": 27,
     "name": "Preposition Part of Speech",
     "description": "Part of speech flag for prepositions/connectives."
   },
   "SYNTAX::CONJUNCTION": {
-    "coordinate": 28,
     "name": "Conjunction Part of Speech",
     "description": "Part of speech flag for conjunctions."
   },
   "SYNTAX::DETERMINER": {
-    "coordinate": 29,
     "name": "Determiner Part of Speech",
     "description": "Part of speech flag for determiners."
   },
   "SYNTAX::NUMBER": {
-    "coordinate": 30,
     "name": "Numeric value/number",
     "description": "Flag for numeric values, years, or temperatures."
   },
   "SYNTAX::TENSE_PAST": {
-    "coordinate": 31,
     "name": "Past Tense",
     "description": "Flag for past-tense actions."
   },
   "SYNTAX::TENSE_PRESENT": {
-    "coordinate": 32,
     "name": "Present Tense",
     "description": "Flag for present-tense actions."
   },
   "SYNTAX::PLURAL": {
-    "coordinate": 33,
     "name": "Plural Form",
     "description": "Flag for plural concepts/nouns."
   },
   "CONCEPT::IDENTITY": {
-    "coordinate": 34,
     "name": "Identity concept",
     "description": "Concept domain for identity queries (\"who\")."
   },
   "CONCEPT::LOCATION": {
-    "coordinate": 35,
     "name": "Location concept",
     "description": "Concept domain for spatial/location queries (\"where\")."
   },
   "CONCEPT::METHOD": {
-    "coordinate": 36,
     "name": "Method concept",
     "description": "Concept domain for procedural/method queries (\"how\")."
   },
   "CONCEPT::TEMPORAL": {
-    "coordinate": 37,
     "name": "Temporal concept",
     "description": "Concept domain for time-related queries (\"when\")."
   },
   "CONCEPT::SUPERLATIVE": {
-    "coordinate": 38,
     "name": "Superlative concept",
     "description": "Concept domain for superlatives (e.g., \"safest\", \"first\")."
   },
   "CONCEPT::STATE": {
-    "coordinate": 39,
     "name": "State concept",
     "description": "Concept domain representing physical/logical states."
   },
   "CONCEPT::AGENT": {
-    "coordinate": 40,
     "name": "Agent role",
     "description": "Conceptual agent performing an action."
   },
   "CONCEPT::PATIENT": {
-    "coordinate": 41,
     "name": "Patient role",
     "description": "Conceptual patient affected by an action."
   },
   "CONCEPT::INSTRUMENT": {
-    "coordinate": 42,
     "name": "Instrument role",
     "description": "Conceptual instrument/tool used in an action."
   },
   "CONCEPT::CAUSE": {
-    "coordinate": 43,
     "name": "Causality concept",
     "description": "Conceptual cause/reason for an event."
   },
   "FACT::COUNTRY_CANADA": {
-    "coordinate": 44,
     "name": "Canada FACT Anchor",
     "description": "Factual knowledge anchor for Canada."
   },
   "FACT::CITY_OTTAWA": {
-    "coordinate": 45,
     "name": "Ottawa FACT Anchor",
     "description": "Factual knowledge anchor for Ottawa."
   },
   "FACT::FOUNDING_1867": {
-    "coordinate": 46,
     "name": "1867 FACT Anchor",
     "description": "Factual knowledge anchor for the year 1867."
   },
   "FACT::PERSON_MACDONALD": {
-    "coordinate": 47,
     "name": "Macdonald FACT Anchor",
     "description": "Factual knowledge anchor for John A. Macdonald."
   },
   "FACT::LEADER_PM": {
-    "coordinate": 48,
     "name": "Prime Minister FACT Anchor",
     "description": "Factual knowledge anchor for Prime Ministers."
   },
   "FACT::SYMBOL_MAPLE": {
-    "coordinate": 49,
     "name": "Maple Leaf FACT Anchor",
     "description": "Factual knowledge anchor for the Maple Leaf."
   },
   "FACT::HEAT_BAKE": {
-    "coordinate": 50,
     "name": "Baking Knowledge Anchor",
     "description": "Process knowledge for baking conditions."
   },
   "FACT::DOUGH_YEAST": {
-    "coordinate": 51,
     "name": "Yeast Knowledge Anchor",
     "description": "Material knowledge for yeast and fermentation."
   },
   "FACT::MEAT_STEAK": {
-    "coordinate": 52,
     "name": "Steak Knowledge Anchor",
     "description": "Material knowledge for steak preparations."
   },
   "FACT::TEMP_140F": {
-    "coordinate": 53,
     "name": "140F Temp Knowledge Anchor",
     "description": "Target temperature knowledge for medium-rare."
   },
   "FACT::TEMP_375F": {
-    "coordinate": 54,
     "name": "375F Temp Knowledge Anchor",
     "description": "Target temperature knowledge for souffles."
   },
   "FACT::FABRIC_MICROFIBER": {
-    "coordinate": 55,
     "name": "Microfiber Knowledge Anchor",
     "description": "Material knowledge for microfiber textiles."
   },
   "FACT::PROTECT_WAX": {
-    "coordinate": 56,
     "name": "Carnauba Wax Knowledge Anchor",
     "description": "Coating knowledge for protective carnauba wax."
   },
   "FACT::CLEAN_LEATHER": {
-    "coordinate": 57,
     "name": "Leather Clean Knowledge Anchor",
     "description": "Cleanroom/surface knowledge for leather care."
   },
   "DOMAIN::GEAR_MECHANICS": {
-    "coordinate": 58,
     "name": "Gear Mechanics Domain",
     "description": "Mechanical concepts regarding gear dynamics."
   },
   "DOMAIN::SPROCKET_SYSTEMS": {
-    "coordinate": 59,
     "name": "Sprocket Systems Domain",
     "description": "Sprocket and drive chain domain."
   },
   "DOMAIN::TORQUE_ENERGY": {
-    "coordinate": 60,
     "name": "Torque Energy Domain",
     "description": "Dynamics of rotational force."
   },
   "DOMAIN::CHEMICAL_WASH": {
-    "coordinate": 61,
     "name": "Chemical Wash Domain",
     "description": "Cleansing solutions and clearcoat surfactants."
   },
   "DOMAIN::OVEN_HEAT": {
-    "coordinate": 62,
     "name": "Oven Heat Domain",
     "description": "Baking ovens and thermodynamics."
   },
   "DOMAIN::POLITICAL_SCIENCE": {
-    "coordinate": 63,
     "name": "Political Science Domain",
     "description": "Governance structures, political offices, and states."
   },
   "DOMAIN::GEOGRAPHY": {
-    "coordinate": 64,
     "name": "Geography Domain",
     "description": "Geospatial taxonomy and territorial coordinates."
   },
   "DOMAIN::BIOLOGY": {
-    "coordinate": 65,
     "name": "Biology Domain",
     "description": "Micro-organisms, organic development, culinary science."
   },
   "DOMAIN::TEXTILES": {
-    "coordinate": 66,
     "name": "Textiles Domain",
     "description": "Fabric types, microfiber structure, leather properties."
   },
   "DOMAIN::CHEMISTRY": {
-    "coordinate": 67,
     "name": "Chemistry Domain",
     "description": "Active cleaning agents, UV-protection waxes."
   },
   "META::CONFIDENCE_SPIKE": {
-    "coordinate": 68,
     "name": "Confidence Spike Tracker",
     "description": "Transients in Reasoning Confidence."
   },
   "META::CONFLICT_MONITOR": {
-    "coordinate": 69,
     "name": "Conflict Monitor Register",
     "description": "Extended contradiction levels tracker."
   },
   "META::REDUNDANCY": {
-    "coordinate": 70,
     "name": "Redundancy/Verification Register",
     "description": "Duplication/verification flags."
   },
   "META::ATTENTION_MASK": {
-    "coordinate": 71,
     "name": "Attention Mask Register",
     "description": "Masking configurations for self-attention maps."
   },
   "META::RESERVED_A": {
-    "coordinate": 72,
     "name": "Reserved Register A",
     "description": "Reserved register slot."
   },
   "META::RESERVED_B": {
-    "coordinate": 73,
     "name": "Reserved Register B",
     "description": "Reserved register slot."
   },
   "SYNTAX::GERUND": {
-    "coordinate": 74,
     "name": "Gerund Verb form",
     "description": "Verb form ending in -ing acting as noun."
   },
   "SYNTAX::PARTICIPLE": {
-    "coordinate": 75,
     "name": "Participle Verb form",
     "description": "Verb form ending in -ed acting as modifier."
   },
   "SYNTAX::INFINITIVE": {
-    "coordinate": 76,
     "name": "Infinitive Verb form",
     "description": "Base form of verb prefixed with 'to'."
   },
   "SYNTAX::COPULA": {
-    "coordinate": 77,
     "name": "Copula linking verb",
     "description": "Linking verb structures (e.g., 'is', 'was')."
   },
   "SYNTAX::NEGATION": {
-    "coordinate": 78,
     "name": "Syntactic Negation",
     "description": "Negation markers (e.g., 'not', 'no')."
   },
   "SYNTAX::INTERROGATIVE": {
-    "coordinate": 79,
     "name": "Interrogative type",
     "description": "Question format tag."
   },
   "SYNTAX::DECLARATIVE": {
-    "coordinate": 80,
     "name": "Declarative type",
     "description": "Statement format tag."
   },
   "SYNTAX::IMPERATIVE": {
-    "coordinate": 81,
     "name": "Imperative type",
     "description": "Command/Instruction format tag."
   },
   "SYNTAX::GENDER_MASCULINE": {
-    "coordinate": 82,
     "name": "Masculine Gender tag",
     "description": "Gender tag for masculine pronouns/nouns."
   },
   "SYNTAX::GENDER_FEMININE": {
-    "coordinate": 83,
     "name": "Feminine Gender tag",
     "description": "Gender tag for feminine pronouns/nouns."
   },
   "CONCEPT::POSSESSION": {
-    "coordinate": 84,
     "name": "Possession concept",
     "description": "Ownership/attribution concept (e.g., possessive 's)."
   },
   "CONCEPT::CAUSE_EFFECT": {
-    "coordinate": 85,
     "name": "Causality concept",
     "description": "Dynamic representation of causality."
   },
   "CONCEPT::QUANTIFIER": {
-    "coordinate": 86,
     "name": "Quantification concept",
     "description": "Concepts of volume/count (e.g., 'all', 'some')."
   },
   "CONCEPT::COMPARATIVE": {
-    "coordinate": 87,
     "name": "Comparative concept",
     "description": "Relative traits (e.g., 'safer', 'hotter')."
   },
   "CONCEPT::MODALITY": {
-    "coordinate": 88,
     "name": "Modality concept",
     "description": "Ability or obligation concepts ('can', 'must')."
   },
   "CONCEPT::NEGATION": {
-    "coordinate": 89,
     "name": "Conceptual Negation",
     "description": "Conceptual negation of states."
   },
   "CONCEPT::DEFINITENESS": {
-    "coordinate": 90,
     "name": "Definiteness concept",
     "description": "Conceptual reference specificity."
   },
   "CONCEPT::DURATION": {
-    "coordinate": 91,
     "name": "Duration concept",
     "description": "Span of events."
   },
   "CONCEPT::FREQUENCY": {
-    "coordinate": 92,
     "name": "Frequency concept",
     "description": "Rate of occurrence."
   },
   "CONCEPT::INTENSITY": {
-    "coordinate": 93,
     "name": "Intensity concept",
     "description": "Grade/magnitude modifier."
   },
-  "SEMANTIC::IS_MATERIAL": {
-    "coordinate": 96,
-    "name": "Semantic Material",
-    "description": "Flag for surface materials, fabrics, or textiles."
-  },
-  "SEMANTIC::IS_FOOD": {
-    "coordinate": 97,
-    "name": "Semantic Food",
-    "description": "Flag for food, recipes, or ingredients."
-  },
-  "SEMANTIC::IS_PROCESS": {
-    "coordinate": 98,
-    "name": "Semantic Process",
-    "description": "Flag for evolving dynamic systems/processes."
-  },
   "SYNTAX::POSITION_INDEX": {
-    "coordinate": 94,
     "name": "Word Position Index",
     "description": "Absolute index of the token in the input sequence."
   },
   "SYNTAX::POSITION_REL": {
-    "coordinate": 95,
     "name": "Relative Position Tracker",
     "description": "Tracker for relative distance filter query constraints."
+  },
+  "SEMANTIC::IS_MATERIAL": {
+    "name": "Semantic Material",
+    "description": "Flag for surface materials, fabrics, or textiles."
+  },
+  "SEMANTIC::IS_FOOD": {
+    "name": "Semantic Food",
+    "description": "Flag for food, recipes, or ingredients."
+  },
+  "SEMANTIC::IS_PROCESS": {
+    "name": "Semantic Process",
+    "description": "Flag for evolving dynamic systems/processes."
   }
 }

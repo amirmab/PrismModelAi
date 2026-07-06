@@ -28,16 +28,14 @@ def load_slider_map(manifest_dir: str = "manifest") -> dict[str, tuple[int, int]
         data = json.load(f)
 
     tsr_map: dict[str, tuple[int, int]] = {}
-    for name, entry in data.items():
-        coord = int(entry["coordinate"])
+    for coord, (name, entry) in enumerate(data.items()):
         # Each slider is a single slot: start == end == coord
         tsr_map[name] = (coord, coord)
 
     global _TSR_MAP, _DIM
     _TSR_MAP = tsr_map
-    # DIM = total number of addressable registers = max coordinate + 1
-    max_coord = max(int(e["coordinate"]) for e in data.values())
-    _DIM = max_coord + 1
+    # DIM = total number of addressable registers = length of map
+    _DIM = len(tsr_map)
 
     return tsr_map
 
