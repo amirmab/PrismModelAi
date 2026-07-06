@@ -1,5 +1,4 @@
 export interface SlidersConfigEntry {
-  coordinate: number;
   name: string;
   description: string;
   // block_size is intentionally removed — every slider is exactly one index
@@ -16,25 +15,22 @@ export interface TsrMapInfo {
  * Builds the flat TSR coordinate map from sliders.json.
  *
  * Flat single-slot design: every slider occupies exactly one index.
- *   index = entry.coordinate
- *   dim   = max(coordinate) + 1
+ *   index = order in slidersConfig
+ *   dim   = total number of entries
  *
  * No block_size, no stride, no padding. Adding a new concept = adding one entry.
  */
 export function loadSliderMap(slidersConfig: SlidersConfig): TsrMapInfo {
   const tsrMap: Record<string, [number, number]> = {};
-  let maxCoord = 0;
+  let coord = 0;
 
   for (const [name, entry] of Object.entries(slidersConfig)) {
-    const coord = entry.coordinate;
-    if (coord > maxCoord) {
-      maxCoord = coord;
-    }
     // Single slot: start == end == coordinate
     tsrMap[name] = [coord, coord];
+    coord++;
   }
 
-  const dim = maxCoord + 1;
+  const dim = coord;
   return { tsrMap, dim };
 }
 
