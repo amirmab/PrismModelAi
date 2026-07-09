@@ -19,10 +19,11 @@ import type { ManifestData } from './cnvm/loader';
 import { CNVMCompiler } from './cnvm/compiler';
 import type { CompiledCheckpoint } from './cnvm/compiler';
 import { CNVMRuntime } from './cnvm/runtime';
+import { ExecutionGraph } from './components/ExecutionGraph';
 
 export default function App() {
-  // Tabs: 'simulator' | 'editor' | 'weights'
-  const [activeTab, setActiveTab] = useState<'simulator' | 'editor' | 'weights' | 'knowledge'>('simulator');
+  // Tabs: 'simulator' | 'editor' | 'weights' | 'knowledge' | 'graph'
+  const [activeTab, setActiveTab] = useState<'simulator' | 'editor' | 'weights' | 'knowledge' | 'graph'>('simulator');
 
   // Load and compile initial manifest
   const [manifest, setManifest] = useState<ManifestData>(() => loadEagerManifest());
@@ -235,12 +236,22 @@ export default function App() {
     return results.sort((a, b) => b.similarity - a.similarity);
   }, [simulationResult, manifest, selectedTokens]);
 
-  // Hover cell description detail builder
   const getCellTooltip = (domain: string, offset: number, val: number): string => {
     const desc = manifest.slidersConfig[domain]?.description || "";
     const name = manifest.slidersConfig[domain]?.name || domain;
     return `${name} (Offset +${offset})\nValue: ${val.toFixed(6)}\n\n${desc}`;
   };
+
+  const ruleMap = useMemo(() => {
+    if (!manifest) return {};
+    const map: Record<number, any> = {};
+    for (const [name, rule] of Object.entries(manifest.rulesData)) {
+      if (rule.rule_id !== undefined) {
+        map[rule.rule_id] = { name, ...rule };
+      }
+    }
+    return map;
+  }, [manifest]);
 
   return (
     <div id="root">
@@ -324,6 +335,13 @@ export default function App() {
             style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
           >
             <BookOpen size={16} /> Knowledge Base
+          </button>
+          <button 
+            className={`tab-btn ${activeTab === 'graph' ? 'active' : ''}`}
+            onClick={() => setActiveTab('graph')}
+            style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+          >
+            <Layers size={16} /> Execution Graph Flow
           </button>
         </div>
       </div>
@@ -570,14 +588,15 @@ export default function App() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               
               <div className="glass-panel" style={{ padding: '20px', height: '100%', display: 'flex', flexDirection: 'column' }}>
-                <h3 style={{ marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Cpu size={18} color="var(--accent-cyan)" /> Register Grid Visualizer
+                <h3 style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Cpu size={18} color="var(--accent-cyan)" /> State Register Grid Visualizer
                 </h3>
+
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', marginBottom: '16px' }}>
                   Hidden state vector at the selected trace step. Hover cells to read coordinates.
                 </p>
 
-                {simulationResult && simulationResult.trace[selectedStepIdx]?.type === 'CCE' && (
+                    {simulationResult && simulationResult.trace[selectedStepIdx]?.type === 'CCE' && (
                   <div style={{ background: 'rgba(255,255,255,0.03)', padding: '12px', borderRadius: '8px', border: '1px solid var(--border-light)', marginBottom: '16px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', marginBottom: '6px' }}>
                       <span style={{ color: 'var(--text-secondary)' }}>CCE Iteration Loop:</span>
@@ -630,72 +649,100 @@ export default function App() {
                 {activeStateVector ? (
                   <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '16px' }}>
                     
-                    {/* Render grid row by row corresponding to coordinates */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxHeight: '420px', overflowY: 'auto', paddingRight: '4px' }}>
-                      {Object.entries(manifest.tsrMap).map(([domain, [start, end]]) => {
-                        const values = (activeStateVector[visualizedTokenIdx] || activeStateVector[0] || []).slice(start, end + 1);
-
-                        const isMetadata = domain === "PROVENANCE_ID" || domain === "EVIDENCE_TRACE";
-
-                        return (
-                          <div key={domain} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', fontWeight: 600 }}>
-                              <span style={{ color: 'var(--text-primary)' }}>{domain}</span>
-                              <span style={{ color: 'var(--text-muted)' }}>[{start}-{end}]</span>
-                            </div>
-                            
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
-                              {values.map((val, offsetIdx) => {
-                                const globalIdx = start + offsetIdx;
-                                const absVal = Math.abs(val);
-
-                                // Compute colors based on value sign and domain type
-                                let bgStyle = 'rgba(255, 255, 255, 0.02)';
-                                let textStyle = 'var(--text-muted)';
-                                if (absVal > 1e-4) {
-                                  if (isMetadata) {
-                                    bgStyle = `rgba(139, 92, 246, ${Math.min(1, absVal / 150)})`;
-                                    textStyle = 'white';
-                                  } else if (val > 0) {
-                                    bgStyle = `rgba(16, 185, 129, ${Math.min(1, absVal / 1.5)})`;
-                                    textStyle = 'white';
-                                  } else {
-                                    bgStyle = `rgba(244, 63, 94, ${Math.min(1, absVal / 1.5)})`;
-                                    textStyle = 'white';
-                                  }
-                                }
-
-                                return (
-                                  <div
-                                    key={offsetIdx}
-                                    title={getCellTooltip(domain, offsetIdx, val)}
-                                    onMouseEnter={() => setHoveredIdx(globalIdx)}
-                                    onMouseLeave={() => setHoveredIdx(null)}
-                                    style={{
-                                      width: '26px',
-                                      height: '26px',
-                                      borderRadius: '4px',
-                                      background: bgStyle,
-                                      border: hoveredIdx === globalIdx ? '1px solid white' : '1px solid rgba(255, 255, 255, 0.05)',
-                                      display: 'flex',
-                                      alignItems: 'center',
-                                      justifyContent: 'center',
-                                      fontFamily: 'var(--font-mono)',
-                                      fontSize: '0.65rem',
-                                      fontWeight: 700,
-                                      color: textStyle,
-                                      cursor: 'crosshair',
-                                      transition: 'all 0.1s'
-                                    }}
-                                  >
-                                    {isMetadata && absVal > 0 ? val.toFixed(0) : val === 0 ? '.' : val.toFixed(1)}
-                                  </div>
-                                );
-                              })}
-                            </div>
+                    {/* Execution Explanation Panel */}
+                    {(() => {
+                      const currentStepRules = simulationResult?.trace[selectedStepIdx]?.active_rules?.[visualizedTokenIdx] || [];
+                      if (currentStepRules.length === 0) return null;
+                      
+                      return (
+                        <div style={{ background: 'rgba(139, 92, 246, 0.05)', padding: '12px', borderRadius: '8px', border: '1px solid rgba(139, 92, 246, 0.3)' }}>
+                          <h4 style={{ fontSize: '0.85rem', color: 'var(--accent-purple)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <Info size={14} /> Execution Explanation (What Happened)
+                          </h4>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                            {currentStepRules.map(ar => {
+                              const ruleInfo = ruleMap[ar.rule_id];
+                              if (!ruleInfo) return null;
+                              return (
+                                <div key={ar.rule_id} style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+                                  <strong style={{ color: 'var(--text-primary)' }}>{ruleInfo.name}</strong> fired: 
+                                  triggered by <code style={{ color: 'var(--accent-emerald)' }}>{ruleInfo.trigger_slider_name}</code>, 
+                                  updated <code style={{ color: 'var(--accent-cyan)' }}>{ruleInfo.result_slider_name}</code>
+                                </div>
+                              );
+                            })}
                           </div>
-                        );
-                      })}
+                        </div>
+                      );
+                    })()}
+
+                    {/* Render grid of active sliders as chips */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '8px', maxHeight: '420px', overflowY: 'auto', paddingRight: '4px' }}>
+                      {Object.entries(manifest.tsrMap)
+                        .filter(([_, [start]]) => {
+                          const val = (activeStateVector[visualizedTokenIdx] || activeStateVector[0] || [])[start];
+                          return Math.abs(val || 0) > 1e-4 && Math.abs((val || 0) + 2) > 1e-4;
+                        })
+                        .map(([domain, [start]]) => {
+                          const val = (activeStateVector[visualizedTokenIdx] || activeStateVector[0] || [])[start];
+
+                          const isMetadata = domain === "PROVENANCE_ID" || domain === "EVIDENCE_TRACE";
+                          
+                          let bgStyle = 'rgba(30, 41, 59, 0.4)';
+                          let borderColor = 'rgba(255, 255, 255, 0.1)';
+                          let textColor = 'white';
+                          
+                          if (isMetadata) {
+                            borderColor = 'var(--accent-purple)';
+                            textColor = 'var(--accent-purple)';
+                          } else if (val > 0) {
+                            borderColor = 'var(--accent-emerald)';
+                            textColor = 'var(--accent-emerald)';
+                          } else {
+                            borderColor = 'var(--accent-rose)';
+                            textColor = 'var(--accent-rose)';
+                          }
+                          
+                          const sliderName = manifest.slidersConfig[domain]?.name || domain.split('::').pop() || domain;
+
+                          return (
+                            <div
+                              key={domain}
+                              title={getCellTooltip(domain, 0, val)}
+                              onMouseEnter={() => setHoveredIdx(start)}
+                              onMouseLeave={() => setHoveredIdx(null)}
+                              className="glass-card"
+                              style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                background: hoveredIdx === start ? 'rgba(255, 255, 255, 0.08)' : bgStyle,
+                                borderLeft: `3px solid ${borderColor}`,
+                                padding: '8px 12px',
+                                cursor: 'crosshair',
+                                transition: 'background 0.1s ease',
+                                gap: '4px'
+                              }}
+                            >
+                              <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+                                {domain}
+                              </div>
+                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <strong style={{ fontSize: '0.85rem', color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
+                                  {sliderName}
+                                </strong>
+                                <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color: textColor, marginLeft: '8px' }}>
+                                  {isMetadata ? val.toFixed(0) : (val > 0 ? '+' : '') + val.toFixed(2)}
+                                </span>
+                              </div>
+                            </div>
+                          );
+                        })}
+                        
+                      {Object.entries(manifest.tsrMap).every(([_, [start]]) => Math.abs((activeStateVector[visualizedTokenIdx] || activeStateVector[0] || [])[start] || 0) <= 1e-4) && (
+                        <div style={{ padding: '20px', gridColumn: '1 / -1', textAlign: 'center', color: 'var(--text-muted)' }}>
+                          No active registers (all values are 0) for this token at this step.
+                        </div>
+                      )}
                     </div>
 
                     {/* Selected Active cell details panel */}
@@ -704,7 +751,7 @@ export default function App() {
                         <div>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
                             <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--accent-cyan)' }}>
-                              {hoveredDetail.name} [Offset +{hoveredDetail.offset}]
+                              {hoveredDetail.name}
                             </span>
                             <span className="badge badge-purple" style={{ fontSize: '0.65rem' }}>
                               Index {hoveredIdx}
@@ -727,7 +774,7 @@ export default function App() {
                       ) : (
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.75rem' }}>
                           <Info size={16} />
-                          Hover over any register grid coordinate to inspect its mathematical definition and current state activation.
+                          Hover over any active register chip to inspect its mathematical definition and current state activation.
                         </div>
                       )}
                     </div>
@@ -737,8 +784,31 @@ export default function App() {
                     No state vector active. Run simulation first.
                   </div>
                 )}
-              </div>
             </div>
+          </div>
+        </div>
+      )}
+
+        {/* TAB 5: EXECUTION GRAPH */}
+        {activeTab === 'graph' && (
+          <div className="glass-panel" style={{ padding: '20px', height: 'calc(100vh - 180px)', display: 'flex', flexDirection: 'column' }}>
+            <h3 style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Layers size={18} color="var(--accent-purple)" /> Execution Graph
+            </h3>
+            {simulationResult && selectedTokens.length > 0 ? (
+              <ExecutionGraph 
+                checkpoint={checkpoint}
+                manifest={manifest}
+                tokens={selectedTokens}
+                cceLayers={cceLayers}
+                maxCceIter={maxCceIter}
+                epsilon={epsilon}
+              />
+            ) : (
+              <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>
+                Please run a simulation in the Simulator tab first to generate the execution graph.
+              </div>
+            )}
           </div>
         )}
 

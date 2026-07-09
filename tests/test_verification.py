@@ -522,3 +522,55 @@ def test_order_sensitivity():
     # are completely different and order-dependent.
     assert not np.array_equal(out_a, out_b), "Outputs must be different due to sequence ordering."
 
+def test_manifest_linter():
+    """
+    Formally verifies manifest integrity before compilation.
+    1. Every single slider name used in layers/layer_N/*.json is explicitly registered in sliders.json.
+    2. No rule_id is duplicated across different files.
+    3. All explicit token_id assignments in vocabulary.json are unique.
+    """
+    import glob
+    import os
+    import json
+    
+    # 1. Load valid sliders
+    with open("manifest/sliders.json", "r") as f:
+        sliders = json.load(f)
+    valid_sliders = set(sliders.keys())
+    
+    # 2. Check layers for unregistered sliders and duplicate rule_ids
+    rule_ids = set()
+    rule_id_to_file = {}
+    
+    for filepath in glob.glob("manifest/layers/layer_*/*.json"):
+        with open(filepath, "r") as f:
+            rule_data = json.load(f)
+            
+            # Check sliders
+            trigger = rule_data.get("trigger_slider_name")
+            result = rule_data.get("result_slider_name")
+            
+            if trigger and trigger not in valid_sliders:
+                pytest.fail(f"Unregistered trigger slider '{trigger}' in {filepath}")
+            if result and result not in valid_sliders:
+                pytest.fail(f"Unregistered result slider '{result}' in {filepath}")
+                
+            # Check rule_id
+            rule_id = rule_data.get("rule_id")
+            if rule_id is not None:
+                if rule_id in rule_ids:
+                    pytest.fail(f"Duplicate rule_id {rule_id} found in {filepath} and {rule_id_to_file[rule_id]}")
+                rule_ids.add(rule_id)
+                rule_id_to_file[rule_id] = filepath
+
+    # 3. Check unique token_ids in vocabulary.json
+    with open("manifest/vocabulary.json", "r") as f:
+        vocab = json.load(f)
+        
+    token_ids = set()
+    for token_name, token_data in vocab.items():
+        token_id = token_data.get("token_id")
+        if token_id is not None:
+            if token_id in token_ids:
+                pytest.fail(f"Duplicate token_id {token_id} found for token '{token_name}'")
+            token_ids.add(token_id)

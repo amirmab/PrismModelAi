@@ -27,6 +27,7 @@ export interface ExecutionTraceStep {
   type: "STANDARD" | "CCE";
   active_rules?: ActiveRule[][];
   cce_info?: CceInfo;
+  attn_weights?: Matrix;
 }
 
 export function dotProduct(v1: Vector, v2: Vector): number {
@@ -163,7 +164,7 @@ export class CNVMRuntime {
     return [...this.embedding[tokenId]];
   }
 
-  executeAttention(H: Matrix): Matrix {
+  executeAttention(H: Matrix): { O: Matrix; attnWeights: Matrix } {
     const N = H.length;
     const Q = matrixMatrixMul(H, this.W_q);
     const K = matrixMatrixMul(H, this.W_k);
@@ -221,7 +222,7 @@ export class CNVMRuntime {
       }
     }
 
-    return O;
+    return { O, attnWeights };
   }
 
   executeSergLayer(H: Matrix, layerIndex: number): { nextH: Matrix; activeRules: ActiveRule[][] } {
@@ -304,7 +305,7 @@ export class CNVMRuntime {
 
     while (iteration < maxIter) {
       const hNorm = layerNorm(hLayer, this.semanticIndices);
-      const attnOut = this.executeAttention(hNorm);
+      const { O: attnOut } = this.executeAttention(hNorm);
       
       let routed: Matrix = Array.from({ length: hLayer.length }, () => new Array(this.dim).fill(0));
       for (let i = 0; i < hLayer.length; i++) {
@@ -413,7 +414,7 @@ export class CNVMRuntime {
         }
 
         const hNorm = layerNorm(H, this.semanticIndices);
-        const attnOut = this.executeAttention(hNorm);
+        const { O: attnOut, attnWeights } = this.executeAttention(hNorm);
         
         let routed: Matrix = Array.from({ length: H.length }, () => new Array(this.dim).fill(0));
         for (let i = 0; i < H.length; i++) {
@@ -437,7 +438,8 @@ export class CNVMRuntime {
         trace.push({
           layer: l,
           type: "STANDARD",
-          active_rules: activeRules
+          active_rules: activeRules,
+          attn_weights: attnWeights
         });
       }
     }
