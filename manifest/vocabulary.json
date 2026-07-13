@@ -39,9 +39,6 @@
             }
         },
         "sliders": {
-            "DOMAIN::MECHANICAL": {
-                "value": 2.0
-            },
             "DOMAIN::SPROCKET_SYSTEMS": {
                 "value": 2.0
             },
@@ -68,8 +65,8 @@
                 "value": 2.0
             },
             "SYS::INTEGRITY": {
-                "value": 0.9,
-                "description": "High baseline entropy \u2014 a torque pulse already implies strain."
+                "value": 0.6,
+                "description": "Reduced integrity \u2014 a torque pulse implies mechanical strain."
             },
             "DOMAIN::TORQUE_ENERGY": {
                 "value": 2.0
@@ -78,6 +75,9 @@
                 "value": 2.0
             },
             "SEMANTIC::IS_THING": {
+                "value": 2.0
+            },
+            "SEMANTIC::IS_INORGANIC": {
                 "value": 2.0
             },
             "SYNTAX::NOUN": {
@@ -119,12 +119,23 @@
                 "value": 2.0
             },
             "DOMAIN::COOKING": {
-                "value": 0.8,
-                "description": "High baked recipe coordinate activation value."
+                "value": 2.0
             },
             "SYS::INTEGRITY": {
                 "value": 0.95,
                 "description": "Very high baseline structural integrity required to keep a souffl\u00e9 standing."
+            },
+            "SEMANTIC::IS_FOOD": {
+                "value": 2.0
+            },
+            "SEMANTIC::IS_ORGANIC": {
+                "value": 2.0
+            },
+            "SEMANTIC::IS_THING": {
+                "value": 2.0
+            },
+            "SYNTAX::NOUN": {
+                "value": 2.0
             }
         }
     },
@@ -143,9 +154,6 @@
             "SYS::INTEGRITY": {
                 "value": 0.9,
                 "description": "High baseline entropy load."
-            },
-            "DOMAIN::MECHANICAL": {
-                "value": 2.0
             },
             "DOMAIN::OVEN_HEAT": {
                 "value": 2.0
@@ -406,8 +414,11 @@
         "token_id": 10006,
         "concept_description": "",
         "sliders": {
-            "DOMAIN::CAR_CLEANING": {
+            "DOMAIN::HISTORY_CANADA": {
                 "value": 2.0
+            },
+            "DOMAIN::GEOGRAPHY": {
+                "value": 1.5
             },
             "SEMANTIC::IS_THING": {
                 "value": 2.0
@@ -416,9 +427,9 @@
                 "value": 2.0
             },
             "CONCEPT::IDENTITY": {
-                "value": 1.5
+                "value": 2.0
             },
-            "DOMAIN::HISTORY_CANADA": {
+            "SEMANTIC::IS_ORGANIC": {
                 "value": 1.0
             }
         }
@@ -497,9 +508,12 @@
     },
     "rise": {
         "token_id": 3012,
-        "concept_description": "Rise \u2014 the process of dough expanding due to fermentation. Activates mechanical engineering domain as a structural metaphor.",
+        "concept_description": "Rise \u2014 the process of dough expanding due to fermentation. Activates cooking and biology domains.",
         "sliders": {
-            "DOMAIN::MECHANICAL": {
+            "DOMAIN::COOKING": {
+                "value": 2.0
+            },
+            "DOMAIN::BIOLOGY": {
                 "value": 2.0
             },
             "SYNTAX::PART_OF_SPEECH": {
@@ -577,6 +591,9 @@
             "SEMANTIC::IS_MATERIAL": {
                 "value": 2.0
             },
+            "SEMANTIC::IS_INORGANIC": {
+                "value": 2.0
+            },
             "SYNTAX::NOUN": {
                 "value": 2.0
             },
@@ -587,11 +604,8 @@
     },
     "safest": {
         "token_id": 3016,
-        "concept_description": "Safest \u2014 superlative of safe. Activates security domain to route toward low-risk material answers.",
+        "concept_description": "Safest — superlative of safe. Routes toward low-risk material answers.",
         "sliders": {
-            "DOMAIN::SECURITY": {
-                "value": 2.0
-            },
             "CONCEPT::SUPERLATIVE": {
                 "value": 2.0
             },
@@ -608,7 +622,7 @@
     },
     "protects": {
         "token_id": 3017,
-        "concept_description": "Protects \u2014 to shield from damage. Activates car-cleaning domain for protective coating queries.",
+        "concept_description": "Protects — to shield from damage. Activates car-cleaning domain for protective coating queries.",
         "sliders": {
             "DOMAIN::CAR_CLEANING": {
                 "value": 1.5
@@ -621,9 +635,6 @@
             },
             "SYNTAX::VERB": {
                 "value": 2.0
-            },
-            "DOMAIN::SECURITY": {
-                "value": 1.5
             }
         }
     },
@@ -637,7 +648,7 @@
             "DOMAIN::CAR_CLEANING": {
                 "value": 1.5
             },
-            "SEMANTIC::IS_THING": {
+            "SEMANTIC::IS_QUALITY": {
                 "value": 2.0
             },
             "SYNTAX::NOUN": {
@@ -668,6 +679,9 @@
             "SEMANTIC::IS_MATERIAL": {
                 "value": 2.0
             },
+            "SEMANTIC::IS_ORGANIC": {
+                "value": 2.0
+            },
             "SYNTAX::NOUN": {
                 "value": 2.0
             },
@@ -689,7 +703,7 @@
             "SEMANTIC::IS_THING": {
                 "value": 2.0
             },
-            "SEMANTIC::IS_INORGANIC": {
+            "SEMANTIC::IS_ORGANIC": {
                 "value": 1.5
             },
             "SYNTAX::NOUN": {
@@ -862,7 +876,7 @@
             "SYNTAX::NOUN": 2.0,
             "SYS::INTEGRITY": 2.0,
             "SYS::CONFIDENCE": 2.0,
-            "FACT::BOILER_ACTIVE": -2.0,
+            "FACT::BOILER_ACTIVE": 0.0,
             "FACT::WATER_LEVEL_LOW": 2.0,
             "FACT::STEAM_PRESSURE_HIGH": -2.0,
             "FACT::TEMPERATURE_SCALD": -2.0,
@@ -877,7 +891,7 @@
             "SYNTAX::NOUN": 2.0,
             "SYS::INTEGRITY": 2.0,
             "SYS::CONFIDENCE": 2.0,
-            "FACT::BOILER_ACTIVE": -2.0,
+            "FACT::BOILER_ACTIVE": 0.0,
             "FACT::WATER_LEVEL_LOW": -2.0,
             "FACT::STEAM_PRESSURE_HIGH": 2.0,
             "FACT::TEMPERATURE_SCALD": -2.0,
@@ -892,7 +906,7 @@
             "SYNTAX::NOUN": 2.0,
             "SYS::INTEGRITY": 2.0,
             "SYS::CONFIDENCE": 2.0,
-            "FACT::BOILER_ACTIVE": -2.0,
+            "FACT::BOILER_ACTIVE": 0.0,
             "FACT::WATER_LEVEL_LOW": -2.0,
             "FACT::STEAM_PRESSURE_HIGH": -2.0,
             "FACT::TEMPERATURE_SCALD": 2.0,
@@ -907,7 +921,7 @@
             "SYNTAX::NOUN": 2.0,
             "SYS::INTEGRITY": 2.0,
             "SYS::CONFIDENCE": 2.0,
-            "FACT::BOILER_ACTIVE": -2.0,
+            "FACT::BOILER_ACTIVE": 0.0,
             "FACT::WATER_LEVEL_LOW": -2.0,
             "FACT::STEAM_PRESSURE_HIGH": -2.0,
             "FACT::TEMPERATURE_SCALD": -2.0,

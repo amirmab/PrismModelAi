@@ -1,10 +1,10 @@
 {
   "rule_name": "Cloth Safety Amplifier",
   "rule_id": 308,
-  "trigger_slider_name": "DOMAIN::SECURITY",
-  "result_slider_name": "DOMAIN::SECURITY",
+  "trigger_slider_name": "DOMAIN::CAR_CLEANING",
+  "result_slider_name": "DOMAIN::CAR_CLEANING",
   "gate_in_weight": 1.8,
   "gate_out_weight": 2.0,
-  "intent_description": "If security/safety context is active, amplifies it to identify the safest material answer.",
+  "intent_description": "If car-cleaning context is active, amplifies it to identify the safest material answer.",
   "layer_index": 11
 }

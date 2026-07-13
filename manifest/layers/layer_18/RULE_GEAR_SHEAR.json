@@ -5,6 +5,6 @@
   "result_slider_name": "SYS::INTEGRITY",
   "gate_in_weight": 2.0,
   "gate_out_weight": -2.0,
-  "intent_description": "If high mechanical pressure (DOMAIN::MECHANICAL >= threshold) is detected, drops SYS::INTEGRITY to -2.0, simulating a sudden mechanical break or shear event.",
+  "intent_description": "If gear mechanics domain is strongly active, drops SYS::INTEGRITY to -2.0, simulating a sudden mechanical break or shear event.",
   "layer_index": 18
 }

@@ -1,10 +1,10 @@
 {
-  "rule_name": "Boiler Active Impact",
+  "rule_name": "Boiler Fault Confidence Drop",
   "rule_id": 401,
   "trigger_slider_name": "FACT::BOILER_ACTIVE",
   "result_slider_name": "SYS::CONFIDENCE",
   "gate_in_weight": 1.0,
   "gate_out_weight": -0.50,
-  "intent_description": "If boiler is active, drop confidence.",
+  "intent_description": "If boiler is active, apply baseline confidence signal for fault propagation.",
   "layer_index": 26
 }

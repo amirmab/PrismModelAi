@@ -1,10 +1,10 @@
 {
   "rule_name": "National Symbol Rule",
   "rule_id": 304,
-  "trigger_slider_name": "DOMAIN::CAR_CLEANING",
-  "result_slider_name": "DOMAIN::CAR_CLEANING",
+  "trigger_slider_name": "DOMAIN::HISTORY_CANADA",
+  "result_slider_name": "DOMAIN::HISTORY_CANADA",
   "gate_in_weight": 1.8,
   "gate_out_weight": 2.0,
-  "intent_description": "If car-cleaning domain is strongly active (symbol token uses DOMAIN::CAR_CLEANING as signal carrier), amplifies to route toward national-symbol output tokens.",
+  "intent_description": "If Canadian history domain is strongly active, amplifies to route toward national-symbol output tokens.",
   "layer_index": 13
 }

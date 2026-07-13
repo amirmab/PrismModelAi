@@ -7,11 +7,27 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SYS::CONFIDENCE": {
-                "weight": 2.0,
+            "DOMAIN::SECURITY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::COOKING": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CAR_CLEANING": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::MECHANICAL": {
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "SYS::INTEGRITY": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYS::CONFIDENCE": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
@@ -23,8 +39,24 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "SYNTAX::VERB": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "SYNTAX::SUBJECT": {
                 "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::OBJECT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::IS_QUESTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_PERSON": {
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "SEMANTIC::IS_PLACE": {
@@ -35,20 +67,152 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "CONCEPT::LOCATION": {
+            "SEMANTIC::IS_TIME": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_ACTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_QUALITY": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "FACT::COUNTRY_CANADA": {
+            "SEMANTIC::IS_ORGANIC": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_INORGANIC": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::ADJECTIVE": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "FACT::CITY_OTTAWA": {
+            "SYNTAX::ADVERB": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PRONOUN": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PREPOSITION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::CONJUNCTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DETERMINER": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NUMBER": {
                 "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::TENSE_PAST": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::TENSE_PRESENT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PLURAL": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEAR_MECHANICS": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::SPROCKET_SYSTEMS": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TORQUE_ENERGY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMICAL_WASH": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::OVEN_HEAT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::POLITICAL_SCIENCE": {
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "DOMAIN::GEOGRAPHY": {
                 "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::BIOLOGY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TEXTILES": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMISTRY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GERUND": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PARTICIPLE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INFINITIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::COPULA": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NEGATION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INTERROGATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DECLARATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::IMPERATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_MASCULINE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_FEMININE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_INDEX": {
+                "weight": 1.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_REL": {
+                "weight": 0.5673733502818765,
                 "description": "Auto-calibrated"
             }
         }
@@ -61,72 +225,26 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SYS::CONFIDENCE": {
-                "weight": 2.0,
+            "DOMAIN::SECURITY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::COOKING": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CAR_CLEANING": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::MECHANICAL": {
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "SYS::INTEGRITY": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "DOMAIN::HISTORY_CANADA": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SYNTAX::NOUN": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SYNTAX::SUBJECT": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SEMANTIC::IS_PERSON": {
-                "weight": 2.0,
-                "description": "Macdonald is a human person"
-            },
-            "CONCEPT::IDENTITY": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "DOMAIN::POLITICAL_SCIENCE": {
-                "weight": 2.0,
-                "description": "Prime Minister is a political role"
-            },
-            "SEMANTIC::IS_QUALITY": {
-                "weight": 2.0,
-                "description": "First is a quality/ordinal"
-            },
-            "SYNTAX::ADJECTIVE": {
-                "weight": 2.0,
-                "description": "First is an adjective"
-            },
-            "SYNTAX::NUMBER": {
-                "weight": 2.0,
-                "description": "First represents first number index"
-            },
-            "SEMANTIC::IS_PLACE": {
-                "weight": 0.0,
-                "description": "Associated with Canada as place"
-            },
-            "SEMANTIC::IS_THING": {
-                "weight": 0.0,
-                "description": "Associated with Canada as thing"
-            },
-            "DOMAIN::GEOGRAPHY": {
-                "weight": 0.0,
-                "description": "Associated with Canada geography"
-            }
-        }
-    },
-    "1867": {
-        "token_id": 3103,
-        "intent_description": "Year of Confederation",
-        "target_sliders": {
-            "SYNTAX::PART_OF_SPEECH": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
             "SYS::CONFIDENCE": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
@@ -139,7 +257,27 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "SYNTAX::VERB": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "SYNTAX::SUBJECT": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::OBJECT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::IS_QUESTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_PERSON": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_PLACE": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
@@ -151,20 +289,366 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "SEMANTIC::IS_ACTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_QUALITY": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_ORGANIC": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_INORGANIC": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::ADJECTIVE": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::ADVERB": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PRONOUN": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PREPOSITION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::CONJUNCTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DETERMINER": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "SYNTAX::NUMBER": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "CONCEPT::TEMPORAL": {
-                "weight": 2.0,
+            "SYNTAX::TENSE_PAST": {
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
-            "FACT::FOUNDING_1867": {
-                "weight": 2.0,
+            "SYNTAX::TENSE_PRESENT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PLURAL": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEAR_MECHANICS": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::SPROCKET_SYSTEMS": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TORQUE_ENERGY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMICAL_WASH": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::OVEN_HEAT": {
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "DOMAIN::POLITICAL_SCIENCE": {
                 "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEOGRAPHY": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::BIOLOGY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TEXTILES": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMISTRY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GERUND": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PARTICIPLE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INFINITIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::COPULA": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NEGATION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INTERROGATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DECLARATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::IMPERATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_MASCULINE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_FEMININE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_INDEX": {
+                "weight": 1.25,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_REL": {
+                "weight": 0.719732413866973,
+                "description": "Auto-calibrated"
+            }
+        }
+    },
+    "1867": {
+        "token_id": 3103,
+        "intent_description": "Year of Confederation",
+        "target_sliders": {
+            "SYNTAX::PART_OF_SPEECH": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::SECURITY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::COOKING": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CAR_CLEANING": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::MECHANICAL": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYS::INTEGRITY": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYS::CONFIDENCE": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::HISTORY_CANADA": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NOUN": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::VERB": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::SUBJECT": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::OBJECT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::IS_QUESTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_PERSON": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_PLACE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_THING": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_TIME": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_ACTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_QUALITY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_ORGANIC": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_INORGANIC": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::ADJECTIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::ADVERB": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PRONOUN": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PREPOSITION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::CONJUNCTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DETERMINER": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NUMBER": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::TENSE_PAST": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::TENSE_PRESENT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PLURAL": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEAR_MECHANICS": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::SPROCKET_SYSTEMS": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TORQUE_ENERGY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMICAL_WASH": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::OVEN_HEAT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::POLITICAL_SCIENCE": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEOGRAPHY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::BIOLOGY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TEXTILES": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMISTRY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GERUND": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PARTICIPLE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INFINITIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::COPULA": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NEGATION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INTERROGATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DECLARATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::IMPERATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_MASCULINE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_FEMININE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_INDEX": {
+                "weight": 0.5,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_REL": {
+                "weight": 0.24064117503879345,
                 "description": "Auto-calibrated"
             }
         }
@@ -177,8 +661,20 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "DOMAIN::SECURITY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::COOKING": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "DOMAIN::CAR_CLEANING": {
-                "weight": 2.0,
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::MECHANICAL": {
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "SYS::INTEGRITY": {
@@ -197,7 +693,27 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "SYNTAX::VERB": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "SYNTAX::SUBJECT": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::OBJECT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::IS_QUESTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_PERSON": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_PLACE": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
@@ -205,20 +721,152 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "SEMANTIC::IS_TIME": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_ACTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "SEMANTIC::IS_QUALITY": {
                 "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_ORGANIC": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_INORGANIC": {
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "SYNTAX::ADJECTIVE": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "CONCEPT::IDENTITY": {
+            "SYNTAX::ADVERB": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PRONOUN": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PREPOSITION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::CONJUNCTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DETERMINER": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NUMBER": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::TENSE_PAST": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::TENSE_PRESENT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PLURAL": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEAR_MECHANICS": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::SPROCKET_SYSTEMS": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TORQUE_ENERGY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMICAL_WASH": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::OVEN_HEAT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::POLITICAL_SCIENCE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEOGRAPHY": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "CONCEPT::DEFINITENESS": {
-                "weight": 2.0,
+            "DOMAIN::BIOLOGY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TEXTILES": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMISTRY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GERUND": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PARTICIPLE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INFINITIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::COPULA": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NEGATION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INTERROGATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DECLARATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::IMPERATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_MASCULINE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_FEMININE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_INDEX": {
+                "weight": 1.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_REL": {
+                "weight": 0.536563772313882,
                 "description": "Auto-calibrated"
             }
         }
@@ -228,22 +876,46 @@
         "intent_description": "Souffle baking temperature",
         "target_sliders": {
             "SYNTAX::PART_OF_SPEECH": {
-                "weight": 2.0,
+                "weight": -1.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::SECURITY": {
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "DOMAIN::COOKING": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "DOMAIN::CAR_CLEANING": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::MECHANICAL": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "SYS::INTEGRITY": {
-                "weight": 2.0,
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "SYS::CONFIDENCE": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "SYS::CONFLICT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::HISTORY_CANADA": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "SYNTAX::NOUN": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::VERB": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
@@ -251,37 +923,181 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SEMANTIC::IS_QUALITY": {
-                "weight": 2.0,
-                "description": "Temperature is a quality"
-            },
-            "DOMAIN::OVEN_HEAT": {
-                "weight": 2.0,
-                "description": "Baking temperature signal"
-            },
-            "SYNTAX::VERB": {
-                "weight": 2.0,
-                "description": "Bake is a verb action"
-            },
             "SYNTAX::OBJECT": {
                 "weight": 2.0,
-                "description": "Souffle is the object of baking"
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::IS_QUESTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_PERSON": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_PLACE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_THING": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_TIME": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
             },
             "SEMANTIC::IS_ACTION": {
                 "weight": 2.0,
-                "description": "Baking is an action"
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_QUALITY": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_ORGANIC": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_INORGANIC": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::ADJECTIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::ADVERB": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PRONOUN": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PREPOSITION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::CONJUNCTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DETERMINER": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
             },
             "SYNTAX::NUMBER": {
                 "weight": 2.0,
-                "description": "375 is a numeric temperature value"
+                "description": "Auto-calibrated"
             },
-            "SEMANTIC::IS_ORGANIC": {
+            "SYNTAX::TENSE_PAST": {
                 "weight": -2.0,
-                "description": "Souffle is not a raw organic ingredient — steak is"
+                "description": "Auto-calibrated"
             },
-            "SEMANTIC::IS_THING": {
+            "SYNTAX::TENSE_PRESENT": {
                 "weight": -2.0,
-                "description": "Souffle is a process/state, not a solid physical thing like steak"
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PLURAL": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEAR_MECHANICS": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::SPROCKET_SYSTEMS": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TORQUE_ENERGY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMICAL_WASH": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::OVEN_HEAT": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::POLITICAL_SCIENCE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEOGRAPHY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::BIOLOGY": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TEXTILES": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMISTRY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GERUND": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PARTICIPLE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INFINITIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::COPULA": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NEGATION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INTERROGATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DECLARATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::IMPERATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_MASCULINE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_FEMININE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_INDEX": {
+                "weight": 1.25,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_REL": {
+                "weight": 0.6866939273419741,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_FOOD": {
+                "weight": 0.5,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_PROCESS": {
+                "weight": 0.5,
+                "description": "Auto-calibrated"
             }
         }
     },
@@ -293,20 +1109,36 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "DOMAIN::SECURITY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "DOMAIN::COOKING": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "DOMAIN::CAR_CLEANING": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "DOMAIN::MECHANICAL": {
-                "weight": 2.0,
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "SYS::INTEGRITY": {
-                "weight": 2.0,
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "SYS::CONFIDENCE": {
                 "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYS::CONFLICT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::HISTORY_CANADA": {
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "SYNTAX::NOUN": {
@@ -325,36 +1157,176 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "SYNTAX::IS_QUESTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "SEMANTIC::IS_PERSON": {
-                "weight": 2.0,
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "SEMANTIC::IS_PLACE": {
-                "weight": 2.0,
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "SEMANTIC::IS_THING": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "SEMANTIC::IS_TIME": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "SEMANTIC::IS_ACTION": {
                 "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_QUALITY": {
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "SEMANTIC::IS_ORGANIC": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SEMANTIC::IS_MATERIAL": {
+            "SEMANTIC::IS_INORGANIC": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::ADJECTIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::ADVERB": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PRONOUN": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PREPOSITION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::CONJUNCTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DETERMINER": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NUMBER": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::TENSE_PAST": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::TENSE_PRESENT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PLURAL": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEAR_MECHANICS": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::SPROCKET_SYSTEMS": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TORQUE_ENERGY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMICAL_WASH": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::OVEN_HEAT": {
                 "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::POLITICAL_SCIENCE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEOGRAPHY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::BIOLOGY": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TEXTILES": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMISTRY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GERUND": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PARTICIPLE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INFINITIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::COPULA": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NEGATION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INTERROGATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DECLARATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::IMPERATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_MASCULINE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_FEMININE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_INDEX": {
+                "weight": 1.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_REL": {
+                "weight": 0.5151448356793901,
                 "description": "Auto-calibrated"
             },
             "SEMANTIC::IS_FOOD": {
-                "weight": 2.0,
+                "weight": 0.6666666666666666,
                 "description": "Auto-calibrated"
             },
             "SEMANTIC::IS_PROCESS": {
-                "weight": 2.0,
+                "weight": 0.6666666666666666,
                 "description": "Auto-calibrated"
             }
         }
@@ -367,16 +1339,36 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "DOMAIN::SECURITY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "DOMAIN::COOKING": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "DOMAIN::CAR_CLEANING": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::MECHANICAL": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "SYS::INTEGRITY": {
-                "weight": 2.0,
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "SYS::CONFIDENCE": {
                 "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYS::CONFLICT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::HISTORY_CANADA": {
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "SYNTAX::NOUN": {
@@ -387,21 +1379,165 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "SYNTAX::IS_QUESTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_PERSON": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_PLACE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "SEMANTIC::IS_THING": {
                 "weight": 2.0,
-                "description": "Steak is a solid physical thing"
+                "description": "Auto-calibrated"
             },
-            "SEMANTIC::IS_ORGANIC": {
-                "weight": 2.0,
-                "description": "Steak is an organic food item"
+            "SEMANTIC::IS_TIME": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
             },
             "SEMANTIC::IS_QUALITY": {
                 "weight": 2.0,
-                "description": "Medium rare is a quality descriptor"
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_ORGANIC": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_INORGANIC": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
             },
             "SYNTAX::ADJECTIVE": {
                 "weight": 2.0,
-                "description": "Medium rare is an adjective modifier"
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::ADVERB": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PRONOUN": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PREPOSITION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::CONJUNCTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DETERMINER": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::TENSE_PAST": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::TENSE_PRESENT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PLURAL": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEAR_MECHANICS": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::SPROCKET_SYSTEMS": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TORQUE_ENERGY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMICAL_WASH": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::OVEN_HEAT": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::POLITICAL_SCIENCE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEOGRAPHY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::BIOLOGY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TEXTILES": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMISTRY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GERUND": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PARTICIPLE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INFINITIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::COPULA": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NEGATION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INTERROGATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DECLARATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::IMPERATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_MASCULINE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_FEMININE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_INDEX": {
+                "weight": 1.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_REL": {
+                "weight": 0.5941407693429934,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_FOOD": {
+                "weight": 0.6666666666666666,
+                "description": "Auto-calibrated"
             }
         }
     },
@@ -413,8 +1549,20 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "DOMAIN::SECURITY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::COOKING": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "DOMAIN::CAR_CLEANING": {
                 "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::MECHANICAL": {
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "SYS::INTEGRITY": {
@@ -425,40 +1573,192 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "DOMAIN::HISTORY_CANADA": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "SYNTAX::NOUN": {
                 "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::VERB": {
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "SYNTAX::SUBJECT": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "SYNTAX::OBJECT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::IS_QUESTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_PERSON": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_PLACE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "SEMANTIC::IS_THING": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "DOMAIN::TEXTILES": {
-                "weight": 2.0,
+            "SEMANTIC::IS_TIME": {
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
-            "SEMANTIC::IS_MATERIAL": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SEMANTIC::IS_PROCESS": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "DOMAIN::SECURITY": {
-                "weight": 2.0,
+            "SEMANTIC::IS_ACTION": {
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "SEMANTIC::IS_QUALITY": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "SEMANTIC::IS_ORGANIC": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_INORGANIC": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
             "SYNTAX::ADJECTIVE": {
                 "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::ADVERB": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PRONOUN": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PREPOSITION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::CONJUNCTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DETERMINER": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NUMBER": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::TENSE_PAST": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::TENSE_PRESENT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PLURAL": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEAR_MECHANICS": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::SPROCKET_SYSTEMS": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TORQUE_ENERGY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMICAL_WASH": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::OVEN_HEAT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::POLITICAL_SCIENCE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEOGRAPHY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::BIOLOGY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TEXTILES": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMISTRY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GERUND": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PARTICIPLE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INFINITIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::COPULA": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NEGATION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INTERROGATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DECLARATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::IMPERATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_MASCULINE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_FEMININE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_INDEX": {
+                "weight": 0.5,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_REL": {
+                "weight": 0.2568791944035177,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_MATERIAL": {
+                "weight": 1.0,
                 "description": "Auto-calibrated"
             }
         }
@@ -467,14 +1767,6 @@
         "token_id": 3109,
         "intent_description": "UV protection wax",
         "target_sliders": {
-            "SYNTAX::PART_OF_SPEECH": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "DOMAIN::SECURITY": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
             "DOMAIN::CAR_CLEANING": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
@@ -503,16 +1795,24 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SEMANTIC::IS_THING": {
+            "SEMANTIC::IS_ACTION": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SEMANTIC::IS_ACTION": {
+            "SEMANTIC::IS_QUALITY": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
             "DOMAIN::CHEMISTRY": {
                 "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_INDEX": {
+                "weight": 0.5,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_REL": {
+                "weight": 0.2727607515286513,
                 "description": "Auto-calibrated"
             }
         }
@@ -522,38 +1822,42 @@
         "intent_description": "Leather seat cleaner",
         "target_sliders": {
             "SYNTAX::PART_OF_SPEECH": {
-                "weight": 2.0,
+                "weight": -0.6666666666666666,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::SECURITY": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::COOKING": {
+                "weight": -1.791300762118893,
                 "description": "Auto-calibrated"
             },
             "DOMAIN::CAR_CLEANING": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "DOMAIN::MECHANICAL": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
             "SYS::INTEGRITY": {
-                "weight": 2.0,
+                "weight": -2.0,
                 "description": "Auto-calibrated"
             },
             "SYS::CONFIDENCE": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "SYS::CONFLICT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::HISTORY_CANADA": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
             "SYNTAX::NOUN": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SYNTAX::SUBJECT": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SEMANTIC::IS_THING": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SEMANTIC::IS_MATERIAL": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SEMANTIC::IS_PROCESS": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
@@ -561,111 +1865,189 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "SYNTAX::SUBJECT": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
             "SYNTAX::OBJECT": {
                 "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::IS_QUESTION": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_PERSON": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_PLACE": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_THING": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_TIME": {
+                "weight": -1.791300762118893,
                 "description": "Auto-calibrated"
             },
             "SEMANTIC::IS_ACTION": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SEMANTIC::IS_INORGANIC": {
+            "SEMANTIC::IS_QUALITY": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_ORGANIC": {
                 "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_INORGANIC": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::ADJECTIVE": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::ADVERB": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PRONOUN": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PREPOSITION": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::CONJUNCTION": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DETERMINER": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NUMBER": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::TENSE_PAST": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::TENSE_PRESENT": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PLURAL": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEAR_MECHANICS": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::SPROCKET_SYSTEMS": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TORQUE_ENERGY": {
+                "weight": -1.791300762118893,
                 "description": "Auto-calibrated"
             },
             "DOMAIN::CHEMICAL_WASH": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
+            },
+            "DOMAIN::OVEN_HEAT": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::POLITICAL_SCIENCE": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEOGRAPHY": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::BIOLOGY": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TEXTILES": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMISTRY": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GERUND": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PARTICIPLE": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INFINITIVE": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::COPULA": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NEGATION": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INTERROGATIVE": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DECLARATIVE": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::IMPERATIVE": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_MASCULINE": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_FEMININE": {
+                "weight": -1.791300762118893,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_INDEX": {
+                "weight": 1.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_REL": {
+                "weight": 0.5411593203294219,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_MATERIAL": {
+                "weight": 0.6666666666666666,
+                "description": "Auto-calibrated"
             }
         }
     },
     "pos_winner": {
-        "target_sliders": {
-            "SYNTAX::PART_OF_SPEECH": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "DOMAIN::COOKING": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SYS::INTEGRITY": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SYS::CONFIDENCE": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SYNTAX::NOUN": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SYNTAX::SUBJECT": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SEMANTIC::IS_QUALITY": {
-                "weight": -0.57,
-                "description": "Auto-calibrated"
-            },
-            "DOMAIN::OVEN_HEAT": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "FACT::CRITICAL_ALARM": {
-                "weight": 2.0,
-                "description": "High A"
-            },
-            "META::RESERVED_B": {
-                "weight": 0.0,
-                "description": "Low B"
-            }
-        }
+        "target_sliders": {}
     },
     "neg_winner": {
-        "target_sliders": {
-            "SYNTAX::PART_OF_SPEECH": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "DOMAIN::COOKING": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SYS::INTEGRITY": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SYS::CONFIDENCE": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SYNTAX::NOUN": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SYNTAX::SUBJECT": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SEMANTIC::IS_QUALITY": {
-                "weight": -0.57,
-                "description": "Auto-calibrated"
-            },
-            "DOMAIN::OVEN_HEAT": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "FACT::CRITICAL_ALARM": {
-                "weight": 0.0,
-                "description": "Low A"
-            },
-            "META::RESERVED_B": {
-                "weight": 2.0,
-                "description": "High B"
-            }
-        }
+        "target_sliders": {}
     },
     "emergency_shutdown": {
         "token_id": 3113,
@@ -675,21 +2057,217 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SYNTAX::NOUN": {
+            "DOMAIN::SECURITY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::COOKING": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CAR_CLEANING": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::MECHANICAL": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
             "SYS::INTEGRITY": {
                 "weight": -2.0,
-                "description": "Critical integrity failure"
+                "description": "Auto-calibrated"
             },
             "SYS::CONFIDENCE": {
                 "weight": 2.0,
-                "description": "High decision confidence"
+                "description": "Auto-calibrated"
             },
-            "FACT::DECISION_SHUTDOWN": {
+            "SYS::CONFLICT": {
+                "weight": 1.3333333333333333,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::HISTORY_CANADA": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NOUN": {
                 "weight": 2.0,
-                "description": "Verify shutdown decision is triggered"
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::VERB": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::SUBJECT": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::OBJECT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::IS_QUESTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_PERSON": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_PLACE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_THING": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_TIME": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_ACTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_QUALITY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_ORGANIC": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_INORGANIC": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::ADJECTIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::ADVERB": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PRONOUN": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PREPOSITION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::CONJUNCTION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DETERMINER": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NUMBER": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::TENSE_PAST": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::TENSE_PRESENT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PLURAL": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEAR_MECHANICS": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::SPROCKET_SYSTEMS": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TORQUE_ENERGY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMICAL_WASH": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::OVEN_HEAT": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::POLITICAL_SCIENCE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::GEOGRAPHY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::BIOLOGY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::TEXTILES": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMISTRY": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GERUND": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::PARTICIPLE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INFINITIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::COPULA": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NEGATION": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::INTERROGATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::DECLARATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::IMPERATIVE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_MASCULINE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::GENDER_FEMININE": {
+                "weight": -2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_INDEX": {
+                "weight": 1.5,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::POSITION_REL": {
+                "weight": 1.199401898400291,
+                "description": "Auto-calibrated"
             }
         }
     }
