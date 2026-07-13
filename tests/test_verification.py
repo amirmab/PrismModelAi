@@ -240,19 +240,18 @@ def test_auto_complete_projections():
         valid_sliders = [s for s in manifest.tsr_map.keys() if s.startswith("DOMAIN::") or s.startswith("SEMANTIC::") or s.startswith("SYNTAX::") or s.startswith("SYS::")]
         
         for token_name, rule in manifest.output_data.items():
+            if not rule.get("token_id") or not rule.get("target_sliders"):
+                continue
             score = 0
-            count = len(valid_sliders)
             target_sliders = rule.get("target_sliders", {})
+            count = len(target_sliders)
             
-            for slider_name in valid_sliders:
+            for slider_name, slider_config in target_sliders.items():
+                if slider_name not in manifest.tsr_map:
+                    continue
                 start_offset = manifest.tsr_map[slider_name][0]
                 actual_val = final_state[start_offset]
-                
-                if slider_name in target_sliders:
-                    target_weight = target_sliders[slider_name]["weight"]
-                else:
-                    target_weight = 0.0  # Missing implies neutral (0.0)
-                    
+                target_weight = slider_config["weight"]
                 diff = actual_val - target_weight
                 score += diff * diff
                 
