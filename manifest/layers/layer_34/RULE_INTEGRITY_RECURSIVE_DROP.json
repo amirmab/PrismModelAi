@@ -1,0 +1,10 @@
+{
+  "rule_name": "Integrity Recursive Drop",
+  "rule_id": 409,
+  "trigger_slider_name": "SYS::INTEGRITY",
+  "result_slider_name": "SYS::INTEGRITY",
+  "gate_in_weight": -3.0,
+  "gate_out_weight": -2.0,
+  "intent_description": "If integrity has dropped below threshold, trigger recursive collapse to minimum value.",
+  "layer_index": 34
+}

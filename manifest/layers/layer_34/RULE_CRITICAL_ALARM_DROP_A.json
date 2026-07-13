@@ -1,0 +1,10 @@
+{
+  "rule_name": "Critical Alarm Drop A",
+  "rule_id": 406,
+  "trigger_slider_name": "SYS::CONFIDENCE",
+  "result_slider_name": "SYS::INTEGRITY",
+  "gate_in_weight": -2.0,
+  "gate_out_weight": -2.0,
+  "intent_description": "If confidence is lost, drop integrity (A).",
+  "layer_index": 34
+}

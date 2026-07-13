@@ -1,0 +1,10 @@
+{
+  "rule_name": "Temperature Scald Impact",
+  "rule_id": 404,
+  "trigger_slider_name": "FACT::TEMPERATURE_SCALD",
+  "result_slider_name": "SYS::CONFIDENCE",
+  "gate_in_weight": 1.0,
+  "gate_out_weight": -0.50,
+  "intent_description": "If boiler temperature is scald level, drop confidence.",
+  "layer_index": 26
+}

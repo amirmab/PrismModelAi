@@ -81,8 +81,8 @@ def test_locality_of_updates():
     )
     
     # Assert that the specific parameter changed
-    assert serg_orig["W_out"][rule_idx, get_register_offset("SYS::ENTROPY")] == -2.0
-    assert serg_mod["W_out"][rule_idx, get_register_offset("SYS::ENTROPY")] == -1.8
+    assert serg_orig["W_out"][rule_idx, get_register_offset("SYS::INTEGRITY")] == -2.0
+    assert serg_mod["W_out"][rule_idx, get_register_offset("SYS::INTEGRITY")] == -1.8
     
     # 4. Assert that running an unrelated input (e.g. audit_trigger)
     # which only fires RULE_AUDIT_VERIFY/RULE_CONFLICT_RESOLUTION results in
@@ -99,7 +99,7 @@ def test_cce_convergence():
     """
     Formally verifies the CONSTRAINT CONVERGENCE ENGINE (CCE):
     Under mechanical stress (sprocket + torque_pulse), RULE_GEAR_SHEAR fires,
-    driving SYS::ENTROPY negative. RULE_AUDIT_VERIFY then fires (triggered by
+    driving SYS::INTEGRITY negative. RULE_AUDIT_VERIFY then fires (triggered by
     negative entropy), registering the conflict. The CCE loop at layer 30
     executes, detects the conflict state (SYS::CONFLICT), and converges.
     """
@@ -107,10 +107,10 @@ def test_cce_convergence():
     compiled = compiler.compile()
     runtime = CNVMRuntime(compiled)
 
-    # sprocket: DOMAIN::MECHANICAL=0.85, SYS::ENTROPY=0.8
-    # torque_pulse: DOMAIN::MECHANICAL=1.5, SYS::ENTROPY=0.9
+    # sprocket: DOMAIN::MECHANICAL=0.85, SYS::INTEGRITY=0.8
+    # torque_pulse: DOMAIN::MECHANICAL=1.5, SYS::INTEGRITY=0.9
     # -> RULE_GEAR_SHEAR fires at layer 18 (DOMAIN::MECHANICAL >= 0.5 threshold)
-    # -> RULE_AUDIT_VERIFY fires at layer 26 (SYS::ENTROPY went negative)
+    # -> RULE_AUDIT_VERIFY fires at layer 26 (SYS::INTEGRITY went negative)
     # -> CCE loop executes at layer 30
     out_state, trace = runtime.run_forward(["sprocket", "torque_pulse"], cce_layers=[30, 31, 32, 33, 34], max_iter=10)
 
@@ -210,12 +210,14 @@ def test_auto_complete_projections():
         (["safest", "cloth"], "microfiber"),
         (["protects", "uv"], "carnauba_wax"),
         (["cleans", "leather", "seats"], "ph_neutral_cleaner"),
+        (["boiler", "low_water", "overpressure", "superheat", "valve_jam"], "emergency_shutdown"),
         # --- Permutation tests ---
         (["capital", "canada"], "ottawa"),
         (["first", "canada", "prime_minister"], "john_a_macdonald"),
         (["medium_rare", "steak"], "140f"),
         (["rise", "bread"], "yeast"),
         (["souffle", "bake", "temperature"], "375f"),
+        (["overpressure", "superheat", "valve_jam", "boiler", "low_water"], "emergency_shutdown"),
     ]
 
     # Longer conclusion sentences — verified for rank-1 correctness only,
@@ -230,6 +232,7 @@ def test_auto_complete_projections():
         (["canada", "national", "symbol"],              "maple_leaf"),    # "What is Canada's national symbol?"
         (["capital", "canada", "first"],                "ottawa"),        # "What is the capital of Canada first?"
         (["cleans", "protects", "leather"],             "ph_neutral_cleaner"),  # "What cleans and protects leather?"
+        (["gearset", "boiler", "low_water", "overpressure", "superheat", "valve_jam"], "emergency_shutdown"),
     ]
 
     def compute_similarities(final_state):
@@ -287,6 +290,66 @@ def test_auto_complete_projections():
             f"(scores: {sorted(similarities.items(), key=lambda x: -x[1])[:3]})"
         )
 
+def test_boiler_diagnostic_override():
+    """
+    Formally verifies the 5-fact boiler emergency override logic.
+    Checks rule firing properties and strict conditional isolation.
+    """
+    compiler = CNVMCompiler(DEFAULT_VOCAB, DEFAULT_ROUTING, DEFAULT_RULES, DEFAULT_ARCHITECTURE)
+    compiled = compiler.compile()
+    runtime = CNVMRuntime(compiled)
+
+    # Scenario 1: All 5 facts are present -> decision active & integrity drops to -2
+    tokens = ["boiler", "low_water", "overpressure", "superheat", "valve_jam"]
+    state, trace = runtime.run_forward(tokens)
+    
+    fired = set()
+    for step in trace:
+        if step["type"] == "STANDARD":
+            for tr in step.get("active_rules", []):
+                for r in tr:
+                    fired.add(r["rule_id"])
+        elif step["type"] == "CCE":
+            for iteration in step.get("cce_info", {}).get("history", []):
+                for tr in iteration.get("active_rules", []):
+                    for r in tr:
+                        fired.add(r["rule_id"])
+                    
+    # Verify all 6 safety rules fired
+    for r_id in [401, 402, 403, 404, 405, 406]:
+        assert r_id in fired, f"Boiler rule {r_id} did not fire when all 5 facts were present."
+
+    # Verify final state integrity is minimized and shutdown decision is high
+    final_state = np.mean(state, axis=0)
+    integrity_idx = manifest.tsr_map["SYS::INTEGRITY"][0]
+    decision_idx = manifest.tsr_map["FACT::DECISION_SHUTDOWN"][0]
+    
+    assert final_state[integrity_idx] <= -1.8
+    assert final_state[decision_idx] >= 1.8
+
+    # Scenario 2: Missing a critical fact -> integrity does not collapse
+    incomplete_tokens = ["boiler", "low_water", "overpressure", "superheat"] # valve_jam missing
+    state_inc, trace_inc = runtime.run_forward(incomplete_tokens)
+    
+    fired_inc = set()
+    for step in trace_inc:
+        if step["type"] == "STANDARD":
+            for tr in step.get("active_rules", []):
+                for r in tr:
+                    fired_inc.add(r["rule_id"])
+        elif step["type"] == "CCE":
+            for iteration in step.get("cce_info", {}).get("history", []):
+                for tr in iteration.get("active_rules", []):
+                    for r in tr:
+                        fired_inc.add(r["rule_id"])
+                    
+    # Valve stuck (405) and Integrity Drop (406) should not fire
+    assert 405 not in fired_inc
+    assert 406 not in fired_inc
+    
+    final_state_inc = np.mean(state_inc, axis=0)
+    assert final_state_inc[integrity_idx] > 0.0 # integrity remains high
+
 def test_grammar_parsing():
     """
     Formally verifies that the 10 grammar parsing rules correctly structure
@@ -307,7 +370,7 @@ def test_grammar_parsing():
                     fired_q.add(r["rule_id"])
                     
     assert 101 in fired_q, "RULE_QUESTION_SEEK (101) did not fire on 'what'"
-    assert 107 in fired_q, "RULE_QUESTION_MISSING_INFO_ENTROPY (107) did not fire on 'what'"
+    assert 107 in fired_q, "RULE_QUESTION_MISSING_INFO_INTEGRITY (107) did not fire on 'what'"
     assert 109 in fired_q, "RULE_QUESTION_CONFLICT_SPIKE (109) did not fire on 'what'"
 
     # Test 2: The Noun Cascade
@@ -323,7 +386,7 @@ def test_grammar_parsing():
     assert 102 in fired_n, "RULE_NOUN_DETECTION (102) did not fire on 'canada'"
     assert 104 in fired_n, "RULE_SUBJECT_ROLE_ASSIGNMENT (104) did not fire on 'canada'"
     assert 106 in fired_n, "RULE_SUBJECT_GROUNDING_CONFIDENCE (106) did not fire on 'canada'"
-    assert 110 in fired_n, "RULE_NOUN_ENTROPY_STABILIZATION (110) did not fire on 'canada'"
+    assert 110 in fired_n, "RULE_NOUN_INTEGRITY_STABILIZATION (110) did not fire on 'canada'"
 
     # Test 3: The Verb Cascade
     # "bake" should trigger VERB and OBJECT preparation rules
@@ -417,24 +480,24 @@ def test_pure_alibi_order_bias():
     
     vocab_data["order_pos"] = {
         "token_id": max([v["token_id"] for v in vocab_data.values()]) + 1,
-        "sliders": {**baseline, "META::RESERVED_A": 2.0, "META::RESERVED_B": 0.0}
+        "sliders": {**baseline, "FACT::CRITICAL_ALARM": 2.0, "META::RESERVED_B": 0.0}
     }
     vocab_data["order_neg"] = {
         "token_id": max([v["token_id"] for v in vocab_data.values()]) + 2,
-        "sliders": {**baseline, "META::RESERVED_A": 0.0, "META::RESERVED_B": 2.0}
+        "sliders": {**baseline, "FACT::CRITICAL_ALARM": 0.0, "META::RESERVED_B": 2.0}
     }
     
     baseline_out = vocab_data["sprocket"]["sliders"]
     out_data["pos_winner"] = {
         "target_sliders": {k: {"weight": v} for k, v in baseline_out.items()}
     }
-    out_data["pos_winner"]["target_sliders"]["META::RESERVED_A"] = {"weight": 2.0}
+    out_data["pos_winner"]["target_sliders"]["FACT::CRITICAL_ALARM"] = {"weight": 2.0}
     out_data["pos_winner"]["target_sliders"]["META::RESERVED_B"] = {"weight": 0.0}
     
     out_data["neg_winner"] = {
         "target_sliders": {k: {"weight": v} for k, v in baseline_out.items()}
     }
-    out_data["neg_winner"]["target_sliders"]["META::RESERVED_A"] = {"weight": 0.0}
+    out_data["neg_winner"]["target_sliders"]["FACT::CRITICAL_ALARM"] = {"weight": 0.0}
     out_data["neg_winner"]["target_sliders"]["META::RESERVED_B"] = {"weight": 2.0}
     
     compiler = CNVMCompiler(vocab_data, manifest.routing_data, manifest.rules_data, DEFAULT_ARCHITECTURE)

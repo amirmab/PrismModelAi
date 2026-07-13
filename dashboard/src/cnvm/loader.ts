@@ -82,7 +82,7 @@ export function parseManifest(modules: Record<string, any>): ManifestData {
     const stem = fileName.replace(".json", "");
 
     // Bridge filenames use '--' as the unambiguous separator between two domain names.
-    // e.g. "DOMAIN::CAR_CLEANING--SYS::ENTROPY.json"
+    // e.g. "DOMAIN::CAR_CLEANING--SYS::INTEGRITY.json"
     const separatorIdx = stem.indexOf("--");
     if (separatorIdx === -1) continue;
 

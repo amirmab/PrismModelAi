@@ -116,7 +116,7 @@ Use these existing registers before creating new ones. Ensure you match exact sp
 *   **0-15: Core & Syntactic Baselines**
     *   `SYNTAX::PART_OF_SPEECH` (0): Noun (+) vs Verb (-).
     *   `DOMAIN::SECURITY` (1), `DOMAIN::COOKING` (2), `DOMAIN::CAR_CLEANING` (3), `DOMAIN::MECHANICAL` (4)
-    *   `SYS::ENTROPY` (5), `SYS::CONFIDENCE` (6)
+    *   `SYS::INTEGRITY` (5), `SYS::CONFIDENCE` (6)
     *   `META::PROVENANCE` (7): Rule logging.
     *   `META::EVIDENCE` (8): Input (0) vs static fact (1) vs inference (2).
     *   `SYS::CONFLICT` (9): Spiked by logical contractions.

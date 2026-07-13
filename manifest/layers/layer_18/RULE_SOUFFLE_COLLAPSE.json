@@ -1,10 +1,10 @@
 {
   "rule_name": "Souffle Collapse Heat Threshold",
   "rule_id": 200,
-  "trigger_slider_name": "DOMAIN::COOKING",
-  "result_slider_name": "SYS::ENTROPY",
+  "trigger_slider_name": "DOMAIN::OVEN_HEAT",
+  "result_slider_name": "SYS::INTEGRITY",
   "gate_in_weight": 1.5,
   "gate_out_weight": -2.0,
-  "intent_description": "If cooking heat stress (DOMAIN::COOKING) spikes beyond threshold, this rule collapses the soufflé's structure, causing a massive decline in SYS::ENTROPY to -2.0.",
+  "intent_description": "If cooking heat stress (DOMAIN::COOKING) spikes beyond threshold, this rule collapses the soufflé's structure, causing a massive decline in SYS::INTEGRITY to -2.0.",
   "layer_index": 18
 }

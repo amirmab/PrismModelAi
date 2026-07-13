@@ -24,7 +24,7 @@ export function loadSliderMap(slidersConfig: SlidersConfig): TsrMapInfo {
   const tsrMap: Record<string, [number, number]> = {};
   let coord = 0;
 
-  for (const [name, entry] of Object.entries(slidersConfig)) {
+  for (const name of Object.keys(slidersConfig)) {
     // Single slot: start == end == coordinate
     tsrMap[name] = [coord, coord];
     coord++;
@@ -100,6 +100,37 @@ export function getSemanticIndices(
   dim: number
 ): number[] {
   const metaNames = new Set(["META::PROVENANCE", "META::EVIDENCE", "RESERVED"]);
+  const metaIndices = new Set<number>();
+
+  for (const [name, [start, end]] of Object.entries(tsrMap)) {
+    if (metaNames.has(name)) {
+      for (let i = start; i <= end; i++) {
+        metaIndices.add(i);
+      }
+    }
+  }
+
+  const result: number[] = [];
+  for (let i = 0; i < dim; i++) {
+    if (!metaIndices.has(i)) {
+      result.push(i);
+    }
+  }
+  return result;
+}
+
+export function getNormIndices(
+  tsrMap: Record<string, [number, number]>,
+  dim: number
+): number[] {
+  const metaNames = new Set([
+    "META::PROVENANCE",
+    "META::EVIDENCE",
+    "RESERVED",
+    "SYS::CONFIDENCE",
+    "SYS::INTEGRITY",
+    "SYS::CONFLICT"
+  ]);
   const metaIndices = new Set<number>();
 
   for (const [name, [start, end]] of Object.entries(tsrMap)) {

@@ -1,0 +1,10 @@
+{
+  "rule_name": "Shutdown Decision",
+  "rule_id": 408,
+  "trigger_slider_name": "FACT::SAFETY_VALVE_STUCK",
+  "result_slider_name": "FACT::DECISION_SHUTDOWN",
+  "gate_in_weight": 1.0,
+  "gate_out_weight": 2.0,
+  "intent_description": "If safety valve is stuck, trigger emergency shutdown decision state.",
+  "layer_index": 26
+}

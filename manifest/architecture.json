@@ -170,7 +170,7 @@
       "type": "SERG",
       "description": "Calculate wear-and-tear, friction heat, or resource depletion caused by active systems (e.g., high friction combined with low lubrication causes wear). FFN gates trigger a negative shift in the health or entropy sliders of the affected components.",
       "prompt": "*\"What causes this specific material or system to degrade or wear out?\"*",
-      "matrix_example": "Trigger: `FRICTION > 0.8` AND `LUBRICATION < 0.2` $\\to$ Gate Out: `SYSTEM_ENTROPY: -0.5` (Wear)."
+      "matrix_example": "Trigger: `FRICTION > 0.8` AND `LUBRICATION < 0.2` $\\to$ Gate Out: `SYSTEM_INTEGRITY: -0.5` (Wear)."
     },
     {
       "layer_id": 19,
@@ -179,7 +179,7 @@
       "type": "SERG",
       "description": "Evaluate whether component wear or resource depletion has crossed the threshold to become a complete component failure (e.g., if a bearing wear register exceeds 80%, the bearing fails).",
       "prompt": "*\"At what point does degradation become a catastrophic, systemic failure?\"*",
-      "matrix_example": "Trigger: `SYSTEM_ENTROPY < -0.8` $\\to$ Gate Out: `CATASTROPHIC_FAILURE: +1.0`."
+      "matrix_example": "Trigger: `SYSTEM_INTEGRITY < -0.8` $\\to$ Gate Out: `CATASTROPHIC_FAILURE: +1.0`."
     },
     {
       "layer_id": 20,
@@ -197,7 +197,7 @@
       "type": "DRF",
       "description": "Collect all symptoms or error states reported by the user or identified in the text into a diagnostic cluster. The diagnostic router projects a Query seeking any registers carrying negative states (e.g. high heat, warning flags, active errors), and the tokens broadcast their values. The Value payload aggregates them into a symptom vector.",
       "prompt": "*\"Group all user-reported symptoms into a single diagnostic cluster.\"*",
-      "matrix_example": "* **Q (Router):** Queries for warning or error states (`SEEK_ERRORS: 1.0`).\n  * **K (Any Word):** Broadcasts warning states (`SYSTEM_ENTROPY < 0.0`).\n  * **V (Payload):** Copies the active symptoms to the `SYMPTOM_CLUSTER` register."
+      "matrix_example": "* **Q (Router):** Queries for warning or error states (`SEEK_ERRORS: 1.0`).\n  * **K (Any Word):** Broadcasts warning states (`SYSTEM_INTEGRITY < 0.0`).\n  * **V (Payload):** Copies the active symptoms to the `SYMPTOM_CLUSTER` register."
     },
     {
       "layer_id": 22,

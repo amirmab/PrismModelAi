@@ -1,0 +1,10 @@
+{
+  "rule_name": "Steam Pressure High Impact",
+  "rule_id": 403,
+  "trigger_slider_name": "FACT::STEAM_PRESSURE_HIGH",
+  "result_slider_name": "SYS::CONFIDENCE",
+  "gate_in_weight": 1.0,
+  "gate_out_weight": -0.50,
+  "intent_description": "If boiler steam pressure is high, drop confidence.",
+  "layer_index": 26
+}

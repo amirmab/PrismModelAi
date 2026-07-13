@@ -5,13 +5,12 @@ from cnvm.tsr import get_dim, get_tsr_map, get_register_offset, format_state
 def _get_semantic_indices():
     """
     Dynamically computes which register indices are 'semantic' (i.e., should be
-    included in layer normalization and value clipping).
+    included in value clipping).
 
     Excludes META::PROVENANCE and META::EVIDENCE metadata registers.
-    This mirrors getSemanticIndices() in the TypeScript runtime.
     """
     tsr_map = get_tsr_map()
-    dim = 94  # Lock to baseline semantic dimension
+    dim = 107  # Lock to baseline semantic dimension
 
     metadata_names = {
         "META::PROVENANCE",
@@ -29,21 +28,47 @@ def _get_semantic_indices():
     return sorted(i for i in range(dim) if i not in metadata_indices)
 
 
+def _get_norm_indices():
+    """
+    Excludes metadata AND SYS:: registers from layer normalization.
+    """
+    tsr_map = get_tsr_map()
+    dim = 107
+
+    metadata_names = {
+        "META::PROVENANCE",
+        "META::EVIDENCE",
+        "RESERVED",
+        "SYS::CONFIDENCE",
+        "SYS::INTEGRITY",
+        "SYS::CONFLICT",
+    }
+    metadata_indices = set()
+    for name in metadata_names:
+        if name in tsr_map:
+            start, end = tsr_map[name]
+            for i in range(start, end + 1):
+                if i < dim:
+                    metadata_indices.add(i)
+
+    return sorted(i for i in range(dim) if i not in metadata_indices)
+
+
 def layer_norm(x, eps=1e-5):
-    """Applies Layer Normalization only over the semantic domains, ignoring metadata."""
+    """Applies Layer Normalization only over the non-control semantic domains, ignoring metadata."""
     res = x.copy()
-    semantic_indices = _get_semantic_indices()
+    norm_indices = _get_norm_indices()
     is_flat = res.ndim == 1
     if is_flat:
-        semantic_slice = res[semantic_indices]
+        semantic_slice = res[norm_indices]
         mean = np.mean(semantic_slice)
         var = np.var(semantic_slice)
-        res[semantic_indices] = (semantic_slice - mean) / np.sqrt(var + eps)
+        res[norm_indices] = (semantic_slice - mean) / np.sqrt(var + eps)
     else:
-        semantic_slice = res[:, semantic_indices]
+        semantic_slice = res[:, norm_indices]
         mean = np.mean(semantic_slice, axis=-1, keepdims=True)
         var = np.var(semantic_slice, axis=-1, keepdims=True)
-        res[:, semantic_indices] = (semantic_slice - mean) / np.sqrt(var + eps)
+        res[:, norm_indices] = (semantic_slice - mean) / np.sqrt(var + eps)
     return res
 
 

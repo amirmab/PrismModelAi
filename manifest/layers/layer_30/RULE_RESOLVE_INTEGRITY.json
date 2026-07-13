@@ -1,0 +1,10 @@
+{
+  "rule_name": "Conflict Restores System Integrity",
+  "rule_id": 162,
+  "trigger_slider_name": "SYS::CONFLICT",
+  "result_slider_name": "SYS::INTEGRITY",
+  "gate_in_weight": 0.5,
+  "gate_out_weight": 2.0,
+  "intent_description": "Feedback loop: When SYS::CONFLICT is active, restore SYS::INTEGRITY toward baseline. Once entropy is restored, RULE_AUDIT_VERIFY ceases to fire and conflict can decay.",
+  "layer_index": 30
+}

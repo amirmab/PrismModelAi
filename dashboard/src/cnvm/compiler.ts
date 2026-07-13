@@ -1,6 +1,5 @@
 import { clampWeight } from "./compiler_types";
 import type { CompiledCheckpoint, CompiledLayer, DomainRouting, RuleNir, VocabToken, LayerMetadata, ArchitectureConfig } from "./compiler_types";
-import { slidersToVector } from "./tsr";
 
 export { clampWeight };
 export type { RuleNir, VocabToken, DomainRouting, CompiledLayer, CompiledCheckpoint, LayerMetadata, ArchitectureConfig };
@@ -59,6 +58,36 @@ export class CNVMCompiler {
       () => new Array(this.dim).fill(0)
     );
 
+    // Set default value of safety facts to -2.0
+    const safetyFacts = [
+      "FACT::BOILER_ACTIVE",
+      "FACT::WATER_LEVEL_LOW",
+      "FACT::STEAM_PRESSURE_HIGH",
+      "FACT::TEMPERATURE_SCALD",
+      "FACT::SAFETY_VALVE_STUCK"
+    ];
+    for (const name of safetyFacts) {
+      if (this.tsrMap[name]) {
+        const idx = this.tsrMap[name][0];
+        for (let t = 0; t < embedding.length; t++) {
+          embedding[t][idx] = -2.0;
+        }
+      }
+    }
+
+    const systemDefaults = {
+      "SYS::CONFIDENCE": 2.0,
+      "SYS::INTEGRITY": 2.0,
+    };
+    for (const [name, val] of Object.entries(systemDefaults)) {
+      if (this.tsrMap[name]) {
+        const idx = this.tsrMap[name][0];
+        for (let t = 0; t < embedding.length; t++) {
+          embedding[t][idx] = val;
+        }
+      }
+    }
+
     for (const [token, data] of Object.entries(this.vocab_data)) {
       const tokenId = token_to_id[token];
       const sliders: Record<string, number> = {};
@@ -86,7 +115,12 @@ export class CNVMCompiler {
         clampedSliders[k] = clampWeight(Number(numVal));
       }
 
-      embedding[tokenId] = slidersToVector(clampedSliders, this.tsrMap, this.dim);
+      for (const [name, value] of Object.entries(clampedSliders)) {
+        if (this.tsrMap[name]) {
+          const idx = this.tsrMap[name][0];
+          embedding[tokenId][idx] = value;
+        }
+      }
     }
 
     return { embedding, token_to_id };
@@ -99,13 +133,13 @@ export class CNVMCompiler {
 
     // 1. Setup diagonal blocks (identity matrices) for domain isolation
     for (const [domain, [start, end]] of Object.entries(this.tsrMap)) {
-      if (domain === "SYNTAX::POSITION_INDEX" || domain === "SYNTAX::POSITION_REL" || domain === "RESERVED") {
+      if (domain === "SYNTAX::POSITION_INDEX" || domain === "SYNTAX::POSITION_REL" || domain === "RESERVED" || domain === "META::PROVENANCE" || domain === "META::EVIDENCE" || domain === "SYS::CONFLICT") {
         continue;
       }
       for (let i = start; i <= end; i++) {
-        W_q[i][i] = 1.0;
-        W_k[i][i] = 1.0;
-        if (i < 94) {
+        if (i < 94 || i === 106) {
+          W_q[i][i] = 1.0;
+          W_k[i][i] = 1.0;
           W_v[i][i] = 1.0;
         }
       }
@@ -179,7 +213,7 @@ export class CNVMCompiler {
           // Provenance Rule ID write-back to META::PROVENANCE (if it exists)
           if ("META::PROVENANCE" in this.tsrMap) {
             const provOffset = this.getRegisterOffset("META::PROVENANCE");
-            W_out[c][provOffset] = rule.rule_id;
+            W_out[c][provOffset] = 0.0;
           }
         } catch {
           // Skip missing registers to handle dirty editing states gracefully

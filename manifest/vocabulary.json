@@ -10,7 +10,7 @@
             "DOMAIN::MECHANICAL": {
                 "value": 2.0
             },
-            "SYS::ENTROPY": {
+            "SYS::INTEGRITY": {
                 "value": 0.8,
                 "description": "Baseline structural integrity set high."
             },
@@ -67,7 +67,7 @@
             "DOMAIN::MECHANICAL": {
                 "value": 2.0
             },
-            "SYS::ENTROPY": {
+            "SYS::INTEGRITY": {
                 "value": 0.9,
                 "description": "High baseline entropy \u2014 a torque pulse already implies strain."
             },
@@ -97,9 +97,6 @@
                 "value": 1.0,
                 "description": "Maximum epistemic confidence signal. Bootstraps the audit verification loop."
             },
-            "DOMAIN::MECHANICAL": {
-                "value": 2.0
-            },
             "SEMANTIC::IS_INORGANIC": {
                 "value": 2.0
             },
@@ -125,7 +122,7 @@
                 "value": 0.8,
                 "description": "High baked recipe coordinate activation value."
             },
-            "SYS::ENTROPY": {
+            "SYS::INTEGRITY": {
                 "value": 0.95,
                 "description": "Very high baseline structural integrity required to keep a souffl\u00e9 standing."
             }
@@ -143,7 +140,7 @@
                 "value": 1.8,
                 "description": "Spikes the thermal/culinary science coordinate to trigger heat-sensitivity rules."
             },
-            "SYS::ENTROPY": {
+            "SYS::INTEGRITY": {
                 "value": 0.9,
                 "description": "High baseline entropy load."
             },
@@ -175,7 +172,7 @@
             "DOMAIN::CAR_CLEANING": {
                 "value": 2.0
             },
-            "SYS::ENTROPY": {
+            "SYS::INTEGRITY": {
                 "value": 1.0,
                 "description": "Baseline pristine clearcoat condition."
             },
@@ -207,7 +204,7 @@
             "DOMAIN::CAR_CLEANING": {
                 "value": 2.0
             },
-            "SYS::ENTROPY": {
+            "SYS::INTEGRITY": {
                 "value": 0.8,
                 "description": "High baseline chemical stress value."
             },
@@ -314,7 +311,8 @@
         "concept_description": "",
         "sliders": {
             "SYS::CONFIDENCE": {
-                "value": 2.0
+                "value": 0.5,
+                "description": "Low initial confidence — ambiguous word, needs context to resolve."
             },
             "SEMANTIC::IS_PLACE": {
                 "value": 2.0
@@ -654,8 +652,9 @@
         "token_id": 3019,
         "concept_description": "Leather \u2014 animal hide material used for car seats and upholstery.",
         "sliders": {
-            "SYS::ENTROPY": {
-                "value": 2.0
+            "SYS::INTEGRITY": {
+                "value": 0.9,
+                "description": "Baseline structural integrity for natural material."
             },
             "SYNTAX::PART_OF_SPEECH": {
                 "value": 2.0
@@ -793,12 +792,12 @@
         "sliders": {
             "SYNTAX::PART_OF_SPEECH": 0.9,
             "DOMAIN::MECHANICAL": 2.0,
-            "SYS::ENTROPY": 0.8,
+            "SYS::INTEGRITY": 0.8,
             "DOMAIN::GEAR_MECHANICS": 2.0,
             "SEMANTIC::IS_INORGANIC": 2.0,
             "SEMANTIC::IS_THING": 2.0,
             "SYNTAX::NOUN": 2.0,
-            "META::RESERVED_A": 2.0,
+            "FACT::CRITICAL_ALARM": 2.0,
             "META::RESERVED_B": 0.0
         }
     },
@@ -807,12 +806,12 @@
         "sliders": {
             "SYNTAX::PART_OF_SPEECH": 0.9,
             "DOMAIN::MECHANICAL": 2.0,
-            "SYS::ENTROPY": 0.8,
+            "SYS::INTEGRITY": 0.8,
             "DOMAIN::GEAR_MECHANICS": 2.0,
             "SEMANTIC::IS_INORGANIC": 2.0,
             "SEMANTIC::IS_THING": 2.0,
             "SYNTAX::NOUN": 2.0,
-            "META::RESERVED_A": 0.0,
+            "FACT::CRITICAL_ALARM": 0.0,
             "META::RESERVED_B": 2.0
         }
     },
@@ -824,7 +823,7 @@
             "SEMANTIC::IS_INORGANIC": 2.0,
             "SEMANTIC::IS_THING": 2.0,
             "SYNTAX::NOUN": 2.0,
-            "META::RESERVED_A": 2.0,
+            "FACT::CRITICAL_ALARM": 2.0,
             "META::RESERVED_B": 0.0
         }
     },
@@ -836,8 +835,83 @@
             "SEMANTIC::IS_INORGANIC": 2.0,
             "SEMANTIC::IS_THING": 2.0,
             "SYNTAX::NOUN": 2.0,
-            "META::RESERVED_A": 0.0,
+            "FACT::CRITICAL_ALARM": 0.0,
             "META::RESERVED_B": 2.0
+        }
+    },
+    "boiler": {
+        "token_id": 10015,
+        "concept_description": "Industrial boiler active component",
+        "sliders": {
+            "SYNTAX::PART_OF_SPEECH": 2.0,
+            "SYNTAX::NOUN": 2.0,
+            "SYS::INTEGRITY": 2.0,
+            "SYS::CONFIDENCE": 2.0,
+            "FACT::BOILER_ACTIVE": 2.0,
+            "FACT::WATER_LEVEL_LOW": -2.0,
+            "FACT::STEAM_PRESSURE_HIGH": -2.0,
+            "FACT::TEMPERATURE_SCALD": -2.0,
+            "FACT::SAFETY_VALVE_STUCK": -2.0
+        }
+    },
+    "low_water": {
+        "token_id": 10016,
+        "concept_description": "Boiler low water condition sensor indicator",
+        "sliders": {
+            "SYNTAX::PART_OF_SPEECH": 2.0,
+            "SYNTAX::NOUN": 2.0,
+            "SYS::INTEGRITY": 2.0,
+            "SYS::CONFIDENCE": 2.0,
+            "FACT::BOILER_ACTIVE": -2.0,
+            "FACT::WATER_LEVEL_LOW": 2.0,
+            "FACT::STEAM_PRESSURE_HIGH": -2.0,
+            "FACT::TEMPERATURE_SCALD": -2.0,
+            "FACT::SAFETY_VALVE_STUCK": -2.0
+        }
+    },
+    "overpressure": {
+        "token_id": 10017,
+        "concept_description": "High steam pressure warning indicator",
+        "sliders": {
+            "SYNTAX::PART_OF_SPEECH": 2.0,
+            "SYNTAX::NOUN": 2.0,
+            "SYS::INTEGRITY": 2.0,
+            "SYS::CONFIDENCE": 2.0,
+            "FACT::BOILER_ACTIVE": -2.0,
+            "FACT::WATER_LEVEL_LOW": -2.0,
+            "FACT::STEAM_PRESSURE_HIGH": 2.0,
+            "FACT::TEMPERATURE_SCALD": -2.0,
+            "FACT::SAFETY_VALVE_STUCK": -2.0
+        }
+    },
+    "superheat": {
+        "token_id": 10018,
+        "concept_description": "Overheating superheated thermal sensor indicator",
+        "sliders": {
+            "SYNTAX::PART_OF_SPEECH": 2.0,
+            "SYNTAX::NOUN": 2.0,
+            "SYS::INTEGRITY": 2.0,
+            "SYS::CONFIDENCE": 2.0,
+            "FACT::BOILER_ACTIVE": -2.0,
+            "FACT::WATER_LEVEL_LOW": -2.0,
+            "FACT::STEAM_PRESSURE_HIGH": -2.0,
+            "FACT::TEMPERATURE_SCALD": 2.0,
+            "FACT::SAFETY_VALVE_STUCK": -2.0
+        }
+    },
+    "valve_jam": {
+        "token_id": 10019,
+        "concept_description": "Stuck safety release valve indicator",
+        "sliders": {
+            "SYNTAX::PART_OF_SPEECH": 2.0,
+            "SYNTAX::NOUN": 2.0,
+            "SYS::INTEGRITY": 2.0,
+            "SYS::CONFIDENCE": 2.0,
+            "FACT::BOILER_ACTIVE": -2.0,
+            "FACT::WATER_LEVEL_LOW": -2.0,
+            "FACT::STEAM_PRESSURE_HIGH": -2.0,
+            "FACT::TEMPERATURE_SCALD": -2.0,
+            "FACT::SAFETY_VALVE_STUCK": 2.0
         }
     }
 }

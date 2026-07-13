@@ -1,7 +1,7 @@
 {
   "rule_name": "First PM Rule",
   "rule_id": 301,
-  "trigger_slider_name": "SYS::CONFIDENCE",
+  "trigger_slider_name": "FACT::LEADER_PM",
   "result_slider_name": "SYS::CONFIDENCE",
   "gate_in_weight": 1.8,
   "gate_out_weight": 2.0,

@@ -1,0 +1,10 @@
+{
+  "rule_name": "Safety Valve Stuck Impact",
+  "rule_id": 405,
+  "trigger_slider_name": "FACT::SAFETY_VALVE_STUCK",
+  "result_slider_name": "SYS::CONFIDENCE",
+  "gate_in_weight": 1.0,
+  "gate_out_weight": -2.0,
+  "intent_description": "If safety valve is stuck, drop confidence in system status.",
+  "layer_index": 26
+}

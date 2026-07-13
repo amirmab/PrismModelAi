@@ -1,0 +1,10 @@
+{
+  "rule_name": "Shutdown CCE Conflict Activation",
+  "rule_id": 407,
+  "trigger_slider_name": "FACT::BOILER_ACTIVE",
+  "result_slider_name": "SYS::CONFLICT",
+  "gate_in_weight": 1.0,
+  "gate_out_weight": 2.0,
+  "intent_description": "If boiler safety override diagnostics are active, bootstrap the conflict register during Layer 34 CCE to prevent premature convergence and force full resolution.",
+  "layer_index": 34
+}

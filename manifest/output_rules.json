@@ -11,6 +11,10 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "SYS::INTEGRITY": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
             "DOMAIN::HISTORY_CANADA": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
@@ -46,10 +50,6 @@
             "DOMAIN::GEOGRAPHY": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
-            },
-            "SEMANTIC::IS_FOOD": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
             }
         }
     },
@@ -65,6 +65,10 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
+            "SYS::INTEGRITY": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
             "DOMAIN::HISTORY_CANADA": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
@@ -77,29 +81,41 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SEMANTIC::IS_PLACE": {
+            "SEMANTIC::IS_PERSON": {
+                "weight": 2.0,
+                "description": "Macdonald is a human person"
+            },
+            "CONCEPT::IDENTITY": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
+            },
+            "DOMAIN::POLITICAL_SCIENCE": {
+                "weight": 2.0,
+                "description": "Prime Minister is a political role"
+            },
+            "SEMANTIC::IS_QUALITY": {
+                "weight": 2.0,
+                "description": "First is a quality/ordinal"
+            },
+            "SYNTAX::ADJECTIVE": {
+                "weight": 2.0,
+                "description": "First is an adjective"
+            },
+            "SYNTAX::NUMBER": {
+                "weight": 2.0,
+                "description": "First represents first number index"
+            },
+            "SEMANTIC::IS_PLACE": {
+                "weight": 0.0,
+                "description": "Associated with Canada as place"
             },
             "SEMANTIC::IS_THING": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "CONCEPT::LOCATION": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "FACT::COUNTRY_CANADA": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
+                "weight": 0.0,
+                "description": "Associated with Canada as thing"
             },
             "DOMAIN::GEOGRAPHY": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SEMANTIC::IS_FOOD": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
+                "weight": 0.0,
+                "description": "Associated with Canada geography"
             }
         }
     },
@@ -165,7 +181,7 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SYS::ENTROPY": {
+            "SYS::INTEGRITY": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
@@ -219,7 +235,7 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SYS::ENTROPY": {
+            "SYS::INTEGRITY": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
@@ -236,12 +252,36 @@
                 "description": "Auto-calibrated"
             },
             "SEMANTIC::IS_QUALITY": {
-                "weight": -0.57,
-                "description": "Auto-calibrated"
+                "weight": 2.0,
+                "description": "Temperature is a quality"
             },
             "DOMAIN::OVEN_HEAT": {
                 "weight": 2.0,
-                "description": "Auto-calibrated"
+                "description": "Baking temperature signal"
+            },
+            "SYNTAX::VERB": {
+                "weight": 2.0,
+                "description": "Bake is a verb action"
+            },
+            "SYNTAX::OBJECT": {
+                "weight": 2.0,
+                "description": "Souffle is the object of baking"
+            },
+            "SEMANTIC::IS_ACTION": {
+                "weight": 2.0,
+                "description": "Baking is an action"
+            },
+            "SYNTAX::NUMBER": {
+                "weight": 2.0,
+                "description": "375 is a numeric temperature value"
+            },
+            "SEMANTIC::IS_ORGANIC": {
+                "weight": -2.0,
+                "description": "Souffle is not a raw organic ingredient — steak is"
+            },
+            "SEMANTIC::IS_THING": {
+                "weight": -2.0,
+                "description": "Souffle is a process/state, not a solid physical thing like steak"
             }
         }
     },
@@ -261,7 +301,7 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SYS::ENTROPY": {
+            "SYS::INTEGRITY": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
@@ -331,7 +371,7 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SYS::ENTROPY": {
+            "SYS::INTEGRITY": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
@@ -347,25 +387,21 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SEMANTIC::IS_PLACE": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
             "SEMANTIC::IS_THING": {
                 "weight": 2.0,
-                "description": "Auto-calibrated"
+                "description": "Steak is a solid physical thing"
             },
             "SEMANTIC::IS_ORGANIC": {
                 "weight": 2.0,
-                "description": "Auto-calibrated"
+                "description": "Steak is an organic food item"
             },
-            "FACT::MEAT_STEAK": {
+            "SEMANTIC::IS_QUALITY": {
                 "weight": 2.0,
-                "description": "Auto-calibrated"
+                "description": "Medium rare is a quality descriptor"
             },
-            "SEMANTIC::IS_FOOD": {
+            "SYNTAX::ADJECTIVE": {
                 "weight": 2.0,
-                "description": "Auto-calibrated"
+                "description": "Medium rare is an adjective modifier"
             }
         }
     },
@@ -381,7 +417,7 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SYS::ENTROPY": {
+            "SYS::INTEGRITY": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
@@ -394,10 +430,6 @@
                 "description": "Auto-calibrated"
             },
             "SYNTAX::SUBJECT": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "SEMANTIC::IS_PERSON": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
@@ -414,6 +446,18 @@
                 "description": "Auto-calibrated"
             },
             "SEMANTIC::IS_PROCESS": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::SECURITY": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_QUALITY": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::ADJECTIVE": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             }
@@ -435,7 +479,7 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SYS::ENTROPY": {
+            "SYS::INTEGRITY": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
@@ -485,7 +529,7 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SYS::ENTROPY": {
+            "SYS::INTEGRITY": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
@@ -501,15 +545,7 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SEMANTIC::IS_PERSON": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
             "SEMANTIC::IS_THING": {
-                "weight": 2.0,
-                "description": "Auto-calibrated"
-            },
-            "DOMAIN::TEXTILES": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
@@ -518,6 +554,26 @@
                 "description": "Auto-calibrated"
             },
             "SEMANTIC::IS_PROCESS": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::VERB": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::OBJECT": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_ACTION": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SEMANTIC::IS_INORGANIC": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "DOMAIN::CHEMICAL_WASH": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             }
@@ -533,7 +589,7 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SYS::ENTROPY": {
+            "SYS::INTEGRITY": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
@@ -557,7 +613,7 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "META::RESERVED_A": {
+            "FACT::CRITICAL_ALARM": {
                 "weight": 2.0,
                 "description": "High A"
             },
@@ -577,7 +633,7 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "SYS::ENTROPY": {
+            "SYS::INTEGRITY": {
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
@@ -601,13 +657,39 @@
                 "weight": 2.0,
                 "description": "Auto-calibrated"
             },
-            "META::RESERVED_A": {
+            "FACT::CRITICAL_ALARM": {
                 "weight": 0.0,
                 "description": "Low A"
             },
             "META::RESERVED_B": {
                 "weight": 2.0,
                 "description": "High B"
+            }
+        }
+    },
+    "emergency_shutdown": {
+        "token_id": 3113,
+        "intent_description": "Critical Boiler emergency shutdown override decision",
+        "target_sliders": {
+            "SYNTAX::PART_OF_SPEECH": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYNTAX::NOUN": {
+                "weight": 2.0,
+                "description": "Auto-calibrated"
+            },
+            "SYS::INTEGRITY": {
+                "weight": -2.0,
+                "description": "Critical integrity failure"
+            },
+            "SYS::CONFIDENCE": {
+                "weight": 2.0,
+                "description": "High decision confidence"
+            },
+            "FACT::DECISION_SHUTDOWN": {
+                "weight": 2.0,
+                "description": "Verify shutdown decision is triggered"
             }
         }
     }

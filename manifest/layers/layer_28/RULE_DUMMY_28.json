@@ -1,0 +1,10 @@
+{
+  "rule_name": "Dummy Rule 28",
+  "rule_id": 928,
+  "trigger_slider_name": "CONCEPT::POSSESSION",
+  "result_slider_name": "SYS::INTEGRITY",
+  "gate_in_weight": 1.0,
+  "gate_out_weight": 0.0,
+  "intent_description": "Dummy rule to force standard Layer 28 attention activation.",
+  "layer_index": 28
+}

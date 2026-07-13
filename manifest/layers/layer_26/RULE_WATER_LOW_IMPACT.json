@@ -1,0 +1,10 @@
+{
+  "rule_name": "Water Level Low Impact",
+  "rule_id": 402,
+  "trigger_slider_name": "FACT::WATER_LEVEL_LOW",
+  "result_slider_name": "SYS::CONFIDENCE",
+  "gate_in_weight": 1.0,
+  "gate_out_weight": -0.50,
+  "intent_description": "If boiler water level is low, drop confidence.",
+  "layer_index": 26
+}

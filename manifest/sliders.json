@@ -19,8 +19,8 @@
     "name": "Mechanical Engineering",
     "description": "Tracks physical mechanical systems, gear ratios, torque, friction, and kinetic forces."
   },
-  "SYS::ENTROPY": {
-    "name": "System Entropy and Resilience",
+  "SYS::INTEGRITY": {
+    "name": "System Structural Integrity",
     "description": "Universal health metric. 1.0 = perfect structural integrity. -1.0 = catastrophic failure or collapse."
   },
   "SYS::CONFIDENCE": {
@@ -272,8 +272,8 @@
     "description": "Active cleaning agents, UV-protection waxes."
   },
   "META::CONFIDENCE_SPIKE": {
-    "name": "Confidence Spike Tracker",
-    "description": "Transients in Reasoning Confidence."
+    "name": "[DEPRECATED] Confidence Spike Tracker",
+    "description": "DEPRECATED — Reserved slot. No rules read or write this register."
   },
   "META::CONFLICT_MONITOR": {
     "name": "Conflict Monitor Register",
@@ -287,9 +287,9 @@
     "name": "Attention Mask Register",
     "description": "Masking configurations for self-attention maps."
   },
-  "META::RESERVED_A": {
-    "name": "Reserved Register A",
-    "description": "Reserved register slot."
+  "FACT::CRITICAL_ALARM": {
+    "name": "Boiler Critical Alarm",
+    "description": "Master alarm state representing absolute danger."
   },
   "META::RESERVED_B": {
     "name": "Reserved Register B",
@@ -394,5 +394,37 @@
   "SEMANTIC::IS_PROCESS": {
     "name": "Semantic Process",
     "description": "Flag for evolving dynamic systems/processes."
+  },
+  "FACT::BOILER_ACTIVE": {
+    "name": "Boiler System Active",
+    "description": "Boiler system is turned on and active."
+  },
+  "FACT::WATER_LEVEL_LOW": {
+    "name": "Boiler Water Level Low",
+    "description": "Boiler water level is critical/dry."
+  },
+  "FACT::STEAM_PRESSURE_HIGH": {
+    "name": "Boiler Steam Pressure High",
+    "description": "Boiler steam pressure has crossed threshold."
+  },
+  "FACT::TEMPERATURE_SCALD": {
+    "name": "Boiler Temperature Scald",
+    "description": "Internal thermal temperature is overheating."
+  },
+  "FACT::SAFETY_VALVE_STUCK": {
+    "name": "Boiler Safety Valve Stuck",
+    "description": "Release valve is physically stuck shut."
+  },
+  "FACT::THERMAL_RUNAWAY": {
+    "name": "Boiler Thermal Runaway",
+    "description": "Runaway state where heating occurs without water cooling."
+  },
+  "FACT::PRESSURE_EXPLOSION": {
+    "name": "Boiler Pressure Explosion",
+    "description": "Pressure is increasing uncontrollably without valve release."
+  },
+  "FACT::DECISION_SHUTDOWN": {
+    "name": "Boiler Decision Shutdown",
+    "description": "The non-obvious diagnostic decision to force emergency shutdown."
   }
 }

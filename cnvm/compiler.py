@@ -39,6 +39,29 @@ class CNVMCompiler:
 
         # Zero-initialise the full embedding matrix
         embedding_matrix = np.zeros((max_id + 1, DIM), dtype=np.float32)
+        
+        # Set default value of safety facts to -2.0
+        safety_facts = {
+            "FACT::BOILER_ACTIVE",
+            "FACT::WATER_LEVEL_LOW",
+            "FACT::STEAM_PRESSURE_HIGH",
+            "FACT::TEMPERATURE_SCALD",
+            "FACT::SAFETY_VALVE_STUCK"
+        }
+        tsr_map = get_tsr_map()
+        for name in safety_facts:
+            if name in tsr_map:
+                idx = tsr_map[name][0]
+                embedding_matrix[:, idx] = -2.0
+
+        system_defaults = {
+            "SYS::CONFIDENCE": 2.0,
+            "SYS::INTEGRITY": 2.0,
+        }
+        for name, val in system_defaults.items():
+            if name in tsr_map:
+                idx = tsr_map[name][0]
+                embedding_matrix[:, idx] = val
 
         for token, data in self.vocab_data.items():
             token_id = token_to_id[token]
@@ -58,7 +81,13 @@ class CNVMCompiler:
 
             # Clamp all values before writing
             clamped = {k: clamp_weight(v) for k, v in sliders.items()}
-            embedding_matrix[token_id] = sliders_to_vector(clamped)
+            
+            token_vector = embedding_matrix[token_id].copy()
+            for name, value in clamped.items():
+                if name in tsr_map:
+                    idx = tsr_map[name][0]
+                    token_vector[idx] = float(value)
+            embedding_matrix[token_id] = token_vector
 
         return embedding_matrix, token_to_id
 
@@ -82,12 +111,12 @@ class CNVMCompiler:
 
         # 1. Identity blocks for intra-domain routing isolation
         for domain, (start, end) in tsr_map.items():
-            if domain in {"SYNTAX::POSITION_INDEX", "SYNTAX::POSITION_REL", "RESERVED"}:
+            if domain in {"SYNTAX::POSITION_INDEX", "SYNTAX::POSITION_REL", "RESERVED", "META::PROVENANCE", "META::EVIDENCE", "SYS::CONFLICT"}:
                 continue
             for i in range(start, end + 1):
-                W_q[i, i] = 1.0
-                W_k[i, i] = 1.0
-                if i < 94:
+                if i < 94 or i == 106:
+                    W_q[i, i] = 1.0
+                    W_k[i, i] = 1.0
                     W_v[i, i] = 1.0
 
         # 2. Compile Sparse Inter-Domain Bridges (SIDBs)
@@ -148,7 +177,7 @@ class CNVMCompiler:
 
                 # Provenance: write rule_id into PROVENANCE_ID register
                 prov_offset = get_register_offset("META::PROVENANCE")
-                W_out[c, prov_offset] = float(rule_id)
+                W_out[c, prov_offset] = 0.0
 
             compiled_layers[l_idx] = {
                 "W_in": W_in,

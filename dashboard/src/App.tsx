@@ -205,19 +205,22 @@ export default function App() {
     const finalTokenIdx = Math.max(0, selectedTokens.length - 1);
     const tokenState = finalStateVector[finalTokenIdx];
 
+    const validSliders = Object.keys(manifest.tsrMap).filter(s =>
+      s.startsWith("DOMAIN::") || s.startsWith("SEMANTIC::") || s.startsWith("SYNTAX::") || s.startsWith("SYS::")
+    );
+
     const results = Object.entries(manifest.outputData).map(([tokenName, rule]) => {
       let score = 0;
-      let count = 0;
+      const count = validSliders.length;
       const targetSliders = rule.target_sliders || {};
 
-      for (const [sliderName, sliderConfig] of Object.entries(targetSliders)) {
-        const targetWeight = (sliderConfig as any).weight;
+      for (const sliderName of validSliders) {
         const startOffset = manifest.tsrMap[sliderName]?.[0];
         if (startOffset !== undefined) {
           const actualVal = tokenState[startOffset];
+          const targetWeight = sliderName in targetSliders ? (targetSliders[sliderName] as any).weight : -2.0;
           const diff = actualVal - targetWeight;
           score += diff * diff;
-          count++;
         }
       }
 

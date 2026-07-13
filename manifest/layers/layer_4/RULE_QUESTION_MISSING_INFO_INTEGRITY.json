@@ -1,0 +1,10 @@
+{
+  "rule_name": "Question Missing Info Integrity",
+  "rule_id": 107,
+  "trigger_slider_name": "SYNTAX::IS_QUESTION",
+  "result_slider_name": "SYS::INTEGRITY",
+  "gate_in_weight": 1.0,
+  "gate_out_weight": -1.0,
+  "intent_description": "An open question represents structural missing info, decaying entropy.",
+  "layer_index": 4
+}

@@ -57,13 +57,13 @@ export function matrixMatrixMul(a: Matrix, b: Matrix): Matrix {
   return a.map(row => vectorMatrixMul(row, b));
 }
 
-export function getSemanticIndices(tsrMap: Record<string, [number, number]>, dim: number): number[] {
+export function getSemanticIndices(tsrMap: Record<string, [number, number]>): number[] {
   const indices: number[] = [];
   const provRange = tsrMap["META::PROVENANCE"];
   const evRange = tsrMap["META::EVIDENCE"];
   const resRange = tsrMap["RESERVED"];
 
-  const targetDim = 94; // Lock to baseline semantic dimension
+  const targetDim = 107; // Lock to baseline semantic dimension
 
   const isProv = (idx: number) => provRange && idx >= provRange[0] && idx <= provRange[1];
   const isEv = (idx: number) => evRange && idx >= evRange[0] && idx <= evRange[1];
@@ -71,6 +71,32 @@ export function getSemanticIndices(tsrMap: Record<string, [number, number]>, dim
 
   for (let i = 0; i < targetDim; i++) {
     if (!isProv(i) && !isEv(i) && !isRes(i)) {
+      indices.push(i);
+    }
+  }
+  return indices;
+}
+
+export function getNormIndices(tsrMap: Record<string, [number, number]>): number[] {
+  const indices: number[] = [];
+  const provRange = tsrMap["META::PROVENANCE"];
+  const evRange = tsrMap["META::EVIDENCE"];
+  const resRange = tsrMap["RESERVED"];
+  const confRange = tsrMap["SYS::CONFIDENCE"];
+  const intRange = tsrMap["SYS::INTEGRITY"];
+  const conflictRange = tsrMap["SYS::CONFLICT"];
+
+  const targetDim = 107;
+
+  const isProv = (idx: number) => provRange && idx >= provRange[0] && idx <= provRange[1];
+  const isEv = (idx: number) => evRange && idx >= evRange[0] && idx <= evRange[1];
+  const isRes = (idx: number) => resRange && idx >= resRange[0] && idx <= resRange[1];
+  const isConf = (idx: number) => confRange && idx >= confRange[0] && idx <= confRange[1];
+  const isInt = (idx: number) => intRange && idx >= intRange[0] && idx <= intRange[1];
+  const isConflict = (idx: number) => conflictRange && idx >= conflictRange[0] && idx <= conflictRange[1];
+
+  for (let i = 0; i < targetDim; i++) {
+    if (!isProv(i) && !isEv(i) && !isRes(i) && !isConf(i) && !isInt(i) && !isConflict(i)) {
       indices.push(i);
     }
   }
@@ -126,6 +152,7 @@ export class CNVMRuntime {
   serg: Record<number, CompiledLayer>;
   gamma = 1.0;
   semanticIndices: number[];
+  normIndices: number[];
   conflictOffset: number;
   tsrMap: Record<string, [number, number]>;
   dim: number;
@@ -152,7 +179,8 @@ export class CNVMRuntime {
     this.tsrMap = tsrMap;
     this.dim = dim;
 
-    this.semanticIndices = getSemanticIndices(tsrMap, dim);
+    this.semanticIndices = getSemanticIndices(tsrMap);
+    this.normIndices = getNormIndices(tsrMap);
     this.conflictOffset = tsrMap["SYS::CONFLICT"] ? tsrMap["SYS::CONFLICT"][0] : 9;
   }
 
@@ -304,7 +332,7 @@ export class CNVMRuntime {
     let converged = false;
 
     while (iteration < maxIter) {
-      const hNorm = layerNorm(hLayer, this.semanticIndices);
+      const hNorm = layerNorm(hLayer, this.normIndices);
       const { O: attnOut } = this.executeAttention(hNorm);
       
       let routed: Matrix = Array.from({ length: hLayer.length }, () => new Array(this.dim).fill(0));
@@ -315,7 +343,7 @@ export class CNVMRuntime {
       }
       routed = clipState(routed, this.semanticIndices);
 
-      const routedNorm = layerNorm(routed, this.semanticIndices);
+      const routedNorm = layerNorm(routed, this.normIndices);
       const { nextH: sergOut, activeRules } = this.executeSergLayer(routedNorm, layerIndex);
 
       let nextState: Matrix = Array.from({ length: hLayer.length }, () => new Array(this.dim).fill(0));
@@ -413,7 +441,7 @@ export class CNVMRuntime {
           continue;
         }
 
-        const hNorm = layerNorm(H, this.semanticIndices);
+        const hNorm = layerNorm(H, this.normIndices);
         const { O: attnOut, attnWeights } = this.executeAttention(hNorm);
         
         let routed: Matrix = Array.from({ length: H.length }, () => new Array(this.dim).fill(0));
@@ -424,7 +452,7 @@ export class CNVMRuntime {
         }
         routed = clipState(routed, this.semanticIndices);
 
-        const routedNorm = layerNorm(routed, this.semanticIndices);
+        const routedNorm = layerNorm(routed, this.normIndices);
         const { nextH: sergOut, activeRules } = this.executeSergLayer(routedNorm, l);
 
         const nextState: Matrix = Array.from({ length: H.length }, () => new Array(this.dim).fill(0));
